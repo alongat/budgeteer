@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# typed: strict
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
