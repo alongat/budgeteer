@@ -1683,9 +1683,6 @@ class ActionView::Template::Inline
   Finalizer = ::T.let(nil, ::T.untyped)
 end
 
-class ActionView::Template::LegacyTemplate
-end
-
 class ActionView::Template::Sources::File
   def initialize(filename); end
 end
@@ -3268,6 +3265,148 @@ end
 
 class Array
   def self.try_convert(_); end
+end
+
+class AwesomePrint::Formatter
+  CORE = ::T.let(nil, ::T.untyped)
+end
+
+class AwesomePrint::Formatters::BaseFormatter
+  DEFAULT_LIMIT_SIZE = ::T.let(nil, ::T.untyped)
+end
+
+class AwesomePrint::Inspector
+  AP = ::T.let(nil, ::T.untyped)
+end
+
+module Backport
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Backport::Adapter
+  def close(); end
+
+  def closed?(); end
+
+  def closing(); end
+
+  def initialize(output, remote=T.unsafe(nil)); end
+
+  def opening(); end
+
+  def receiving(data); end
+
+  def remote(); end
+
+  def write(data); end
+
+  def write_line(data); end
+end
+
+class Backport::Adapter
+end
+
+class Backport::Client
+  include ::Observable
+  def adapter(); end
+
+  def initialize(input, output, adapter, remote=T.unsafe(nil)); end
+
+  def run(); end
+
+  def start(); end
+
+  def stop(); end
+
+  def stopped?(); end
+
+  def tick(); end
+end
+
+class Backport::Client
+end
+
+class Backport::Machine
+  def prepare(server); end
+
+  def run(); end
+
+  def servers(); end
+
+  def stop(); end
+
+  def stopped?(); end
+
+  def update(server); end
+end
+
+class Backport::Machine
+end
+
+module Backport::Server
+end
+
+class Backport::Server::Base
+  include ::Observable
+  def start(); end
+
+  def started?(); end
+
+  def starting(); end
+
+  def stop(); end
+
+  def stopped?(); end
+
+  def stopping(); end
+
+  def tick(); end
+end
+
+class Backport::Server::Base
+end
+
+module Backport::Server::Connectable
+  def clients(); end
+
+  def starting(); end
+
+  def stopping(); end
+end
+
+module Backport::Server::Connectable
+end
+
+class Backport::Server::Interval
+  def initialize(period, &block); end
+end
+
+class Backport::Server::Interval
+end
+
+class Backport::Server::Stdio
+  include ::Backport::Server::Connectable
+  def initialize(input: T.unsafe(nil), output: T.unsafe(nil), adapter: T.unsafe(nil)); end
+
+  def update(client); end
+end
+
+class Backport::Server::Stdio
+end
+
+class Backport::Server::Tcpip
+  include ::Backport::Server::Connectable
+  def accept(); end
+
+  def initialize(host: T.unsafe(nil), port: T.unsafe(nil), adapter: T.unsafe(nil), socket_class: T.unsafe(nil)); end
+
+  def update(client); end
+end
+
+class Backport::Server::Tcpip
+end
+
+module Backport::Server
 end
 
 BasicObject::BasicObject = BasicObject
@@ -6128,46 +6267,6 @@ class Etc::Passwd
   def self.members(); end
 end
 
-module Etc
-  def self.confstr(_); end
-
-  def self.endgrent(); end
-
-  def self.endpwent(); end
-
-  def self.getgrent(); end
-
-  def self.getgrgid(*_); end
-
-  def self.getgrnam(_); end
-
-  def self.getlogin(); end
-
-  def self.getpwent(); end
-
-  def self.getpwnam(_); end
-
-  def self.getpwuid(*_); end
-
-  def self.group(); end
-
-  def self.nprocessors(); end
-
-  def self.passwd(); end
-
-  def self.setgrent(); end
-
-  def self.setpwent(); end
-
-  def self.sysconf(_); end
-
-  def self.sysconfdir(); end
-
-  def self.systmpdir(); end
-
-  def self.uname(); end
-end
-
 class ExcelParserManager
   extend ::T::Private::Methods::MethodHooks
   extend ::T::Private::Methods::SingletonMethodHooks
@@ -6302,6 +6401,8 @@ class Fiber
 end
 
 class File
+  RELATIVE_PARENTDIR = ::T.let(nil, ::T.untyped)
+  RELATIVE_SAMEDIR = ::T.let(nil, ::T.untyped)
   Separator = ::T.let(nil, ::T.untyped)
 end
 
@@ -6310,13 +6411,15 @@ class File::Stat
 end
 
 class File
-  def self.atomic_write(file_name, temp_dir=T.unsafe(nil)); end
-
   def self.exists?(_); end
 
   def self.lutime(*_); end
 
   def self.mkfifo(*_); end
+
+  def self.read_binary(file); end
+
+  def self.relative_path(from, to); end
 end
 
 module FileUtils
@@ -6427,6 +6530,8 @@ module GC
 
   def self.verify_transient_heap_internal_consistency(); end
 end
+
+Gem::Cache = Gem::SourceIndex
 
 class Gem::RemoteFetcher
   def s3_uri_signer(uri); end
@@ -7108,6 +7213,8 @@ class IO
   def self.default_console_size(); end
 
   def self.foreach(*_); end
+
+  def self.open(*_); end
 
   def self.pipe(*_); end
 end
@@ -8030,13 +8137,7 @@ module Loofah::Elements
   STRICT_BLOCK_LEVEL_HTML5 = ::T.let(nil, ::T.untyped)
 end
 
-module Loofah::HTML5::Scrub
-  CONTROL_CHARACTERS = ::T.let(nil, ::T.untyped)
-  CRASS_SEMICOLON = ::T.let(nil, ::T.untyped)
-  CSS_KEYWORDISH = ::T.let(nil, ::T.untyped)
-end
-
-module Loofah::HTML5::WhiteList
+module Loofah::HTML5::SafeList
   ACCEPTABLE_ATTRIBUTES = ::T.let(nil, ::T.untyped)
   ACCEPTABLE_CSS_FUNCTIONS = ::T.let(nil, ::T.untyped)
   ACCEPTABLE_CSS_KEYWORDS = ::T.let(nil, ::T.untyped)
@@ -8066,6 +8167,14 @@ module Loofah::HTML5::WhiteList
   TAGS_SAFE_WITH_LIBXML2 = ::T.let(nil, ::T.untyped)
   VOID_ELEMENTS = ::T.let(nil, ::T.untyped)
 end
+
+module Loofah::HTML5::Scrub
+  CONTROL_CHARACTERS = ::T.let(nil, ::T.untyped)
+  CRASS_SEMICOLON = ::T.let(nil, ::T.untyped)
+  CSS_KEYWORDISH = ::T.let(nil, ::T.untyped)
+end
+
+Loofah::HTML5::WhiteList = Loofah::HTML5::SafeList
 
 module Loofah::LibxmlWorkarounds
   BROKEN_ESCAPING_ATTRIBUTES = ::T.let(nil, ::T.untyped)
@@ -8283,9 +8392,6 @@ end
 
 class Mail::Multibyte::Unicode::UnicodeDatabase
   ATTRIBUTES = ::T.let(nil, ::T.untyped)
-end
-
-class Mail::PartsList
 end
 
 class Mail::ReceivedField
@@ -8778,21 +8884,7 @@ class MiniMime::Info
   BINARY_ENCODINGS = ::T.let(nil, ::T.untyped)
 end
 
-module Minitest
-end
-
-MiniTest::Assertions = Minitest::Assertions
-
-MiniTest::Guard = Minitest::Guard
-
-MiniTest::Reportable = Minitest::Reportable
-
-MiniTest::Runnable = Minitest::Runnable
-
-MiniTest::Test = Minitest::Test
-
-module Minitest
-end
+MiniTest = Minitest
 
 module Minitest
   ENCS = ::T.let(nil, ::T.untyped)
@@ -9572,6 +9664,8 @@ class Object
   ARGV = ::T.let(nil, ::T.untyped)
   CROSS_COMPILING = ::T.let(nil, ::T.untyped)
   ENV = ::T.let(nil, ::T.untyped)
+  RUBY18 = ::T.let(nil, ::T.untyped)
+  RUBY19 = ::T.let(nil, ::T.untyped)
   RUBY_COPYRIGHT = ::T.let(nil, ::T.untyped)
   RUBY_DESCRIPTION = ::T.let(nil, ::T.untyped)
   RUBY_ENGINE = ::T.let(nil, ::T.untyped)
@@ -9623,6 +9717,25 @@ module ObjectSpace
   def self.garbage_collect(*_); end
 
   def self.undefine_finalizer(_); end
+end
+
+module Observable
+  def add_observer(observer, func=T.unsafe(nil)); end
+
+  def changed(state=T.unsafe(nil)); end
+
+  def changed?(); end
+
+  def count_observers(); end
+
+  def delete_observer(observer); end
+
+  def delete_observers(); end
+
+  def notify_observers(*arg); end
+end
+
+module Observable
 end
 
 class OpenSSL::ASN1::ASN1Data
@@ -9736,6 +9849,256 @@ module OpenSSL
 end
 
 ParseError = Racc::ParseError
+
+class Parser::Builders::Default
+  def __ENCODING__(__ENCODING__t); end
+
+  def __FILE__(__FILE__t); end
+
+  def __LINE__(__LINE__t); end
+
+  def accessible(node); end
+
+  def alias(alias_t, to, from); end
+
+  def arg(name_t); end
+
+  def arg_expr(expr); end
+
+  def args(begin_t, args, end_t, check_args=T.unsafe(nil)); end
+
+  def array(begin_t, elements, end_t); end
+
+  def assign(lhs, eql_t, rhs); end
+
+  def assignable(node); end
+
+  def associate(begin_t, pairs, end_t); end
+
+  def attr_asgn(receiver, dot_t, selector_t); end
+
+  def back_ref(token); end
+
+  def begin(begin_t, body, end_t); end
+
+  def begin_body(compound_stmt, rescue_bodies=T.unsafe(nil), else_t=T.unsafe(nil), else_=T.unsafe(nil), ensure_t=T.unsafe(nil), ensure_=T.unsafe(nil)); end
+
+  def begin_keyword(begin_t, body, end_t); end
+
+  def binary_op(receiver, operator_t, arg); end
+
+  def block(method_call, begin_t, args, body, end_t); end
+
+  def block_pass(amper_t, arg); end
+
+  def blockarg(amper_t, name_t); end
+
+  def blockarg_expr(amper_t, expr); end
+
+  def call_lambda(lambda_t); end
+
+  def call_method(receiver, dot_t, selector_t, lparen_t=T.unsafe(nil), args=T.unsafe(nil), rparen_t=T.unsafe(nil)); end
+
+  def call_type_for_dot(dot_t); end
+
+  def case(case_t, expr, when_bodies, else_t, else_body, end_t); end
+
+  def character(char_t); end
+
+  def complex(complex_t); end
+
+  def compstmt(statements); end
+
+  def condition(cond_t, cond, then_t, if_true, else_t, if_false, end_t); end
+
+  def condition_mod(if_true, if_false, cond_t, cond); end
+
+  def const(name_t); end
+
+  def const_fetch(scope, t_colon2, name_t); end
+
+  def const_global(t_colon3, name_t); end
+
+  def const_op_assignable(node); end
+
+  def cvar(token); end
+
+  def dedent_string(node, dedent_level); end
+
+  def def_class(class_t, name, lt_t, superclass, body, end_t); end
+
+  def def_method(def_t, name_t, args, body, end_t); end
+
+  def def_module(module_t, name, body, end_t); end
+
+  def def_sclass(class_t, lshft_t, expr, body, end_t); end
+
+  def def_singleton(def_t, definee, dot_t, name_t, args, body, end_t); end
+
+  def emit_file_line_as_literals(); end
+
+  def emit_file_line_as_literals=(emit_file_line_as_literals); end
+
+  def false(false_t); end
+
+  def float(float_t); end
+
+  def for(for_t, iterator, in_t, iteratee, do_t, body, end_t); end
+
+  def gvar(token); end
+
+  def ident(token); end
+
+  def index(receiver, lbrack_t, indexes, rbrack_t); end
+
+  def index_asgn(receiver, lbrack_t, indexes, rbrack_t); end
+
+  def integer(integer_t); end
+
+  def ivar(token); end
+
+  def keyword_cmd(type, keyword_t, lparen_t=T.unsafe(nil), args=T.unsafe(nil), rparen_t=T.unsafe(nil)); end
+
+  def kwarg(name_t); end
+
+  def kwnilarg(dstar_t, nil_t); end
+
+  def kwoptarg(name_t, value); end
+
+  def kwrestarg(dstar_t, name_t=T.unsafe(nil)); end
+
+  def kwsplat(dstar_t, arg); end
+
+  def logical_op(type, lhs, op_t, rhs); end
+
+  def loop(type, keyword_t, cond, do_t, body, end_t); end
+
+  def loop_mod(type, body, keyword_t, cond); end
+
+  def match_op(receiver, match_t, arg); end
+
+  def method_ref(receiver, dot_t, selector_t); end
+
+  def multi_assign(lhs, eql_t, rhs); end
+
+  def multi_lhs(begin_t, items, end_t); end
+
+  def nil(nil_t); end
+
+  def not_op(not_t, begin_t=T.unsafe(nil), receiver=T.unsafe(nil), end_t=T.unsafe(nil)); end
+
+  def nth_ref(token); end
+
+  def numargs(max_numparam); end
+
+  def numparam(token); end
+
+  def objc_kwarg(kwname_t, assoc_t, name_t); end
+
+  def objc_restarg(star_t, name=T.unsafe(nil)); end
+
+  def objc_varargs(pair, rest_of_varargs); end
+
+  def op_assign(lhs, op_t, rhs); end
+
+  def optarg(name_t, eql_t, value); end
+
+  def pair(key, assoc_t, value); end
+
+  def pair_keyword(key_t, value); end
+
+  def pair_list_18(list); end
+
+  def pair_quoted(begin_t, parts, end_t, value); end
+
+  def parser(); end
+
+  def parser=(parser); end
+
+  def postexe(postexe_t, lbrace_t, compstmt, rbrace_t); end
+
+  def preexe(preexe_t, lbrace_t, compstmt, rbrace_t); end
+
+  def procarg0(arg); end
+
+  def range_exclusive(lhs, dot3_t, rhs); end
+
+  def range_inclusive(lhs, dot2_t, rhs); end
+
+  def rational(rational_t); end
+
+  def regexp_compose(begin_t, parts, end_t, options); end
+
+  def regexp_options(regopt_t); end
+
+  def rescue_body(rescue_t, exc_list, assoc_t, exc_var, then_t, compound_stmt); end
+
+  def restarg(star_t, name_t=T.unsafe(nil)); end
+
+  def restarg_expr(star_t, expr=T.unsafe(nil)); end
+
+  def self(token); end
+
+  def shadowarg(name_t); end
+
+  def splat(star_t, arg=T.unsafe(nil)); end
+
+  def string(string_t); end
+
+  def string_compose(begin_t, parts, end_t); end
+
+  def string_internal(string_t); end
+
+  def symbol(symbol_t); end
+
+  def symbol_compose(begin_t, parts, end_t); end
+
+  def symbol_internal(symbol_t); end
+
+  def symbols_compose(begin_t, parts, end_t); end
+
+  def ternary(cond, question_t, if_true, colon_t, if_false); end
+
+  def true(true_t); end
+
+  def unary_num(unary_t, numeric); end
+
+  def unary_op(op_t, receiver); end
+
+  def undef_method(undef_t, names); end
+
+  def when(when_t, patterns, then_t, body); end
+
+  def word(parts); end
+
+  def words_compose(begin_t, parts, end_t); end
+
+  def xstring_compose(begin_t, parts, end_t); end
+end
+
+class Parser::Builders::Default
+  def self.emit_arg_inside_procarg0(); end
+
+  def self.emit_arg_inside_procarg0=(emit_arg_inside_procarg0); end
+
+  def self.emit_encoding(); end
+
+  def self.emit_encoding=(emit_encoding); end
+
+  def self.emit_index(); end
+
+  def self.emit_index=(emit_index); end
+
+  def self.emit_lambda(); end
+
+  def self.emit_lambda=(emit_lambda); end
+
+  def self.emit_procarg0(); end
+
+  def self.emit_procarg0=(emit_procarg0); end
+
+  def self.modernize(); end
+end
 
 class Parsers::ExcelParser
   extend ::T::Private::Methods::MethodHooks
@@ -10760,6 +11123,36 @@ end
 
 module Puma::Util
   DEFAULT_SEP = ::T.let(nil, ::T.untyped)
+end
+
+module RDoc::Text
+  def expand_tabs(text); end
+
+  def flush_left(text); end
+
+  def markup(text); end
+
+  def normalize_comment(text); end
+
+  def parse(text, format=T.unsafe(nil)); end
+
+  def snippet(text, limit=T.unsafe(nil)); end
+
+  def strip_hashes(text); end
+
+  def strip_newlines(text); end
+
+  def strip_stars(text); end
+
+  def to_html(text); end
+
+  def wrap(txt, line_len=T.unsafe(nil)); end
+  MARKUP_FORMAT = ::T.let(nil, ::T.untyped)
+  TO_HTML_CHARACTERS = ::T.let(nil, ::T.untyped)
+end
+
+module RDoc::Text
+  def self.encode_fallback(character, encoding, fallback); end
 end
 
 module REXML
@@ -12674,6 +13067,11 @@ class Rack::Reloader
 end
 
 class Rack::Request
+  def query(); end
+
+  def version_supplied(); end
+
+  def version_supplied=(version_supplied); end
   SCHEME_WHITELIST = ::T.let(nil, ::T.untyped)
 end
 
@@ -13250,6 +13648,17 @@ module Rake::FileUtilsExt
   extend ::FileUtils::StreamUtils_
 end
 
+class Rake::TaskLib
+  include ::Rake::Cloneable
+  include ::Rake::DSL
+  include ::Rake::FileUtilsExt
+  include ::FileUtils
+  include ::FileUtils::StreamUtils_
+end
+
+class Rake::TaskLib
+end
+
 module Rake
   extend ::Rake::FileUtilsExt
   extend ::FileUtils
@@ -13303,6 +13712,28 @@ module RbConfig
   def self.fire_update!(key, val, mkconf=T.unsafe(nil), conf=T.unsafe(nil)); end
 
   def self.ruby(); end
+end
+
+module Readapt
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Readapt::Debugger
+  include ::Observable
+end
+
+class Readapt::Frame
+  NULL_FRAME = ::T.let(nil, ::T.untyped)
+end
+
+class Readapt::Shell
+  def serve(); end
+
+  def version(); end
+end
+
+class Readapt::Thread
+  NULL_THREAD = ::T.let(nil, ::T.untyped)
 end
 
 module Readline
@@ -17094,6 +17525,2388 @@ module Socket::Constants
   TCP_NOPUSH = ::T.let(nil, ::T.untyped)
 end
 
+module Solargraph
+  VERSION = ::T.let(nil, ::T.untyped)
+  VIEWS_PATH = ::T.let(nil, ::T.untyped)
+  YARDOC_PATH = ::T.let(nil, ::T.untyped)
+  YARD_EXTENSION_FILE = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::ApiMap
+  include ::Solargraph::ApiMap::SourceToYard
+  include ::Solargraph::ApiMap::BundlerMethods
+  def bundled?(filename); end
+
+  def catalog(bundle); end
+
+  def clip(cursor); end
+
+  def clip_at(filename, position); end
+
+  def cursor_at(filename, position); end
+
+  def document(path); end
+
+  def document_symbols(filename); end
+
+  def get_class_variable_pins(namespace); end
+
+  def get_complex_type_methods(type, context=T.unsafe(nil), internal=T.unsafe(nil)); end
+
+  def get_constants(namespace, *contexts); end
+
+  def get_global_variable_pins(); end
+
+  def get_instance_variable_pins(namespace, scope=T.unsafe(nil)); end
+
+  def get_method_stack(fqns, name, scope: T.unsafe(nil)); end
+
+  def get_methods(fqns, scope: T.unsafe(nil), visibility: T.unsafe(nil), deep: T.unsafe(nil)); end
+
+  def get_path_pins(path); end
+
+  def get_path_suggestions(path); end
+
+  def get_symbols(); end
+
+  def implicit(); end
+
+  def index(pins); end
+
+  def initialize(pins: T.unsafe(nil)); end
+
+  def local_path_hash(); end
+
+  def locate_pins(location); end
+
+  def map(source); end
+
+  def named_macro(name); end
+
+  def namespace_exists?(name, context=T.unsafe(nil)); end
+
+  def namespaces(); end
+
+  def pins(); end
+
+  def qualify(namespace, context=T.unsafe(nil)); end
+
+  def query_symbols(query); end
+
+  def require_reference_at(location); end
+
+  def search(query); end
+
+  def source_map(filename); end
+
+  def source_maps(); end
+
+  def super_and_sub?(sup, sub); end
+
+  def unresolved_requires(); end
+
+  def workspaced?(filename); end
+end
+
+module Solargraph::ApiMap::BundlerMethods
+end
+
+module Solargraph::ApiMap::BundlerMethods
+  def self.require_from_bundle(directory); end
+
+  def self.reset_require_from_bundle(); end
+end
+
+class Solargraph::ApiMap::Cache
+  def clear(); end
+
+  def empty?(); end
+
+  def get_constants(namespace, context); end
+
+  def get_methods(fqns, scope, visibility, deep); end
+
+  def get_qualified_namespace(name, context); end
+
+  def get_receiver_definition(path); end
+
+  def receiver_defined?(path); end
+
+  def set_constants(namespace, context, value); end
+
+  def set_methods(fqns, scope, visibility, deep, value); end
+
+  def set_qualified_namespace(name, context, value); end
+
+  def set_receiver_definition(path, pin); end
+end
+
+class Solargraph::ApiMap::Cache
+end
+
+module Solargraph::ApiMap::SourceToYard
+  def code_object_at(path); end
+
+  def code_object_paths(); end
+
+  def rake_yard(store); end
+end
+
+module Solargraph::ApiMap::SourceToYard
+end
+
+class Solargraph::ApiMap::Store
+  def block_pins(); end
+
+  def domains(fqns); end
+
+  def get_class_variables(fqns); end
+
+  def get_constants(fqns, visibility=T.unsafe(nil)); end
+
+  def get_extends(fqns); end
+
+  def get_includes(fqns); end
+
+  def get_instance_variables(fqns, scope=T.unsafe(nil)); end
+
+  def get_methods(fqns, scope: T.unsafe(nil), visibility: T.unsafe(nil)); end
+
+  def get_path_pins(path); end
+
+  def get_superclass(fqns); end
+
+  def get_symbols(); end
+
+  def initialize(pins=T.unsafe(nil)); end
+
+  def method_pins(); end
+
+  def named_macros(); end
+
+  def namespace_exists?(fqns); end
+
+  def namespace_pins(); end
+
+  def namespaces(); end
+
+  def pins(); end
+end
+
+class Solargraph::ApiMap::Store
+end
+
+class Solargraph::ApiMap
+  def self.keywords(); end
+
+  def self.load(directory); end
+end
+
+class Solargraph::Bundle
+  def initialize(workspace: T.unsafe(nil), opened: T.unsafe(nil)); end
+
+  def opened(); end
+
+  def sources(); end
+
+  def workspace(); end
+end
+
+class Solargraph::Bundle
+end
+
+class Solargraph::ComplexType
+  def [](index); end
+
+  def all?(&block); end
+
+  def each(&block); end
+
+  def first(); end
+
+  def initialize(types=T.unsafe(nil)); end
+
+  def length(); end
+
+  def map(&block); end
+
+  def method_missing(name, *args, &block); end
+
+  def qualify(api_map, context=T.unsafe(nil)); end
+
+  def select(&block); end
+
+  def self_to(dst); end
+
+  def selfy?(); end
+  BOOLEAN = ::T.let(nil, ::T.untyped)
+  NIL = ::T.let(nil, ::T.untyped)
+  ROOT = ::T.let(nil, ::T.untyped)
+  SELF = ::T.let(nil, ::T.untyped)
+  SYMBOL = ::T.let(nil, ::T.untyped)
+  UNDEFINED = ::T.let(nil, ::T.untyped)
+  VOID = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::ComplexType::TypeMethods
+  def ==(other); end
+
+  def defined?(); end
+
+  def duck_type?(); end
+
+  def fixed_parameters?(); end
+
+  def hash_parameters?(); end
+
+  def key_types(); end
+
+  def list_parameters?(); end
+
+  def name(); end
+
+  def namespace(); end
+
+  def nil_type?(); end
+
+  def parameters?(); end
+
+  def qualify(api_map, context=T.unsafe(nil)); end
+
+  def rooted?(); end
+
+  def scope(); end
+
+  def substring(); end
+
+  def subtypes(); end
+
+  def tag(); end
+
+  def undefined?(); end
+
+  def value_types(); end
+
+  def void?(); end
+end
+
+module Solargraph::ComplexType::TypeMethods
+end
+
+class Solargraph::ComplexType::UniqueType
+  include ::Solargraph::ComplexType::TypeMethods
+  def initialize(name, substring=T.unsafe(nil)); end
+
+  def self_to(dst); end
+
+  def selfy?(); end
+  BOOLEAN = ::T.let(nil, ::T.untyped)
+  UNDEFINED = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::ComplexType::UniqueType
+end
+
+class Solargraph::ComplexType
+  def self.parse(*strings, partial: T.unsafe(nil)); end
+
+  def self.try_parse(*strings); end
+end
+
+module Solargraph::Convention
+end
+
+class Solargraph::Convention::Base
+  def environ(); end
+
+  def match?(source); end
+
+  def process(); end
+  EMPTY_ENVIRON = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::Convention::Base
+end
+
+class Solargraph::Convention::Gemfile
+end
+
+class Solargraph::Convention::Gemfile
+end
+
+class Solargraph::Convention::Gemspec
+end
+
+class Solargraph::Convention::Gemspec
+end
+
+class Solargraph::Convention::Rspec
+end
+
+class Solargraph::Convention::Rspec
+end
+
+module Solargraph::Convention
+  def self.for(source); end
+
+  def self.register(convention); end
+end
+
+module Solargraph::CoreFills
+  KEYWORDS = ::T.let(nil, ::T.untyped)
+  OVERRIDES = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::CoreFills::Override
+  def delete(); end
+
+  def initialize(location, name, tags, delete=T.unsafe(nil)); end
+
+  def tags(); end
+end
+
+class Solargraph::CoreFills::Override
+  def self.from_comment(name, comment); end
+
+  def self.method_return(name, *tags, delete: T.unsafe(nil)); end
+end
+
+module Solargraph::CoreFills
+end
+
+module Solargraph::Diagnostics
+end
+
+class Solargraph::Diagnostics::Base
+  def args(); end
+
+  def diagnose(source, api_map); end
+
+  def initialize(*args); end
+end
+
+class Solargraph::Diagnostics::Base
+end
+
+class Solargraph::Diagnostics::RequireNotFound
+end
+
+class Solargraph::Diagnostics::RequireNotFound
+end
+
+class Solargraph::Diagnostics::Rubocop
+  include ::Solargraph::Diagnostics::RubocopHelpers
+  def diagnose(source, _api_map); end
+  SEVERITIES = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::Diagnostics::Rubocop
+end
+
+module Solargraph::Diagnostics::RubocopHelpers
+end
+
+module Solargraph::Diagnostics::RubocopHelpers
+  def self.find_rubocop_file(filename); end
+
+  def self.fix_drive_letter(path); end
+
+  def self.generate_options(filename, code); end
+end
+
+module Solargraph::Diagnostics::Severities
+  ERROR = ::T.let(nil, ::T.untyped)
+  HINT = ::T.let(nil, ::T.untyped)
+  INFORMATION = ::T.let(nil, ::T.untyped)
+  WARNING = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::Diagnostics::Severities
+end
+
+class Solargraph::Diagnostics::TypeCheck
+end
+
+class Solargraph::Diagnostics::TypeCheck
+end
+
+class Solargraph::Diagnostics::UpdateErrors
+end
+
+class Solargraph::Diagnostics::UpdateErrors
+end
+
+module Solargraph::Diagnostics
+  def self.register(name, klass); end
+
+  def self.reporter(name); end
+
+  def self.reporters(); end
+end
+
+class Solargraph::Documentor
+  def document(); end
+
+  def initialize(directory, rebuild: T.unsafe(nil), out: T.unsafe(nil)); end
+  RDOC_GEMS = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::Documentor
+  def self.specs_from_bundle(directory); end
+end
+
+class Solargraph::Environ
+  def clear(); end
+
+  def domains(); end
+
+  def initialize(requires: T.unsafe(nil), domains: T.unsafe(nil), overrides: T.unsafe(nil)); end
+
+  def merge(other); end
+
+  def overrides(); end
+
+  def requires(); end
+end
+
+class Solargraph::Environ
+end
+
+module Solargraph::LanguageServer
+end
+
+module Solargraph::LanguageServer::CompletionItemKinds
+  CLASS = ::T.let(nil, ::T.untyped)
+  COLOR = ::T.let(nil, ::T.untyped)
+  CONSTANT = ::T.let(nil, ::T.untyped)
+  CONSTRUCTOR = ::T.let(nil, ::T.untyped)
+  ENUM = ::T.let(nil, ::T.untyped)
+  ENUM_MEMBER = ::T.let(nil, ::T.untyped)
+  EVENT = ::T.let(nil, ::T.untyped)
+  FIELD = ::T.let(nil, ::T.untyped)
+  FILE = ::T.let(nil, ::T.untyped)
+  FOLDER = ::T.let(nil, ::T.untyped)
+  FUNCTION = ::T.let(nil, ::T.untyped)
+  INTERFACE = ::T.let(nil, ::T.untyped)
+  KEYWORD = ::T.let(nil, ::T.untyped)
+  METHOD = ::T.let(nil, ::T.untyped)
+  MODULE = ::T.let(nil, ::T.untyped)
+  OPERATOR = ::T.let(nil, ::T.untyped)
+  PROPERTY = ::T.let(nil, ::T.untyped)
+  REFERENCE = ::T.let(nil, ::T.untyped)
+  SNIPPET = ::T.let(nil, ::T.untyped)
+  STRUCT = ::T.let(nil, ::T.untyped)
+  TEXT = ::T.let(nil, ::T.untyped)
+  TYPE_PARAMETER = ::T.let(nil, ::T.untyped)
+  UNIT = ::T.let(nil, ::T.untyped)
+  VALUE = ::T.let(nil, ::T.untyped)
+  VARIABLE = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::LanguageServer::CompletionItemKinds
+end
+
+module Solargraph::LanguageServer::ErrorCodes
+  INTERNAL_ERROR = ::T.let(nil, ::T.untyped)
+  INVALID_PARAMS = ::T.let(nil, ::T.untyped)
+  INVALID_REQUEST = ::T.let(nil, ::T.untyped)
+  METHOD_NOT_FOUND = ::T.let(nil, ::T.untyped)
+  PARSE_ERROR = ::T.let(nil, ::T.untyped)
+  REQUEST_CANCELLED = ::T.let(nil, ::T.untyped)
+  SERVER_ERROR_END = ::T.let(nil, ::T.untyped)
+  SERVER_ERROR_START = ::T.let(nil, ::T.untyped)
+  SERVER_NOT_INITIALIZED = ::T.let(nil, ::T.untyped)
+  UNKNOWN_ERROR_CODE = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::LanguageServer::ErrorCodes
+end
+
+class Solargraph::LanguageServer::Host
+  include ::Solargraph::LanguageServer::UriHelpers
+  include ::Solargraph::Logging
+  include ::Solargraph::LanguageServer::Host::Dispatch
+  include ::Observable
+  def allow_registration(method); end
+
+  def can_register?(method); end
+
+  def cancel(id); end
+
+  def cancel?(id); end
+
+  def catalog(); end
+
+  def change(params); end
+
+  def clear(id); end
+
+  def client_capabilities(); end
+
+  def client_capabilities=(client_capabilities); end
+
+  def close(uri); end
+
+  def completions_at(uri, line, column); end
+
+  def configure(update); end
+
+  def create(uri); end
+
+  def default_configuration(); end
+
+  def definitions_at(uri, line, column); end
+
+  def delete(uri); end
+
+  def diagnose(uri); end
+
+  def document(query); end
+
+  def document_symbols(uri); end
+
+  def flush(); end
+
+  def folders(); end
+
+  def folding_ranges(uri); end
+
+  def locate_pins(params); end
+
+  def open(uri, text, version); end
+
+  def open?(uri); end
+
+  def open_from_disk(uri); end
+
+  def options(); end
+
+  def pending_requests(); end
+
+  def prepare(directory, name=T.unsafe(nil)); end
+
+  def prepare_folders(array); end
+
+  def query_symbols(query); end
+
+  def queue(message); end
+
+  def read_text(uri); end
+
+  def receive(request); end
+
+  def references_from(uri, line, column, strip: T.unsafe(nil)); end
+
+  def register_capabilities(methods); end
+
+  def registered?(method); end
+
+  def remove(directory); end
+
+  def remove_folders(array); end
+
+  def search(query); end
+
+  def send_notification(method, params); end
+
+  def send_request(method, params, &block); end
+
+  def show_message(text, type=T.unsafe(nil)); end
+
+  def show_message_request(text, type, actions, &block); end
+
+  def signatures_at(uri, line, column); end
+
+  def start(); end
+
+  def stop(); end
+
+  def stopped?(); end
+
+  def synchronizing?(); end
+
+  def unregister_capabilities(methods); end
+end
+
+class Solargraph::LanguageServer::Host::Cataloger
+  def initialize(host); end
+
+  def start(); end
+
+  def stop(); end
+
+  def stopped?(); end
+
+  def tick(); end
+end
+
+class Solargraph::LanguageServer::Host::Cataloger
+end
+
+class Solargraph::LanguageServer::Host::Diagnoser
+  def initialize(host); end
+
+  def schedule(uri); end
+
+  def start(); end
+
+  def stop(); end
+
+  def stopped?(); end
+
+  def tick(); end
+end
+
+class Solargraph::LanguageServer::Host::Diagnoser
+end
+
+module Solargraph::LanguageServer::Host::Dispatch
+  def explicit_library_for(uri); end
+
+  def generic_library(); end
+
+  def generic_library_for(uri); end
+
+  def implicit_library_for(uri); end
+
+  def libraries(); end
+
+  def library_for(uri); end
+
+  def sources(); end
+
+  def update_libraries(uri); end
+end
+
+module Solargraph::LanguageServer::Host::Dispatch
+end
+
+class Solargraph::LanguageServer::Host::Sources
+  include ::Observable
+  include ::Solargraph::LanguageServer::UriHelpers
+  def async_update(uri, updater); end
+
+  def clear(); end
+
+  def close(uri); end
+
+  def find(uri); end
+
+  def include?(uri); end
+
+  def open(uri, text, version); end
+
+  def open_from_disk(uri); end
+
+  def start(); end
+
+  def stop(); end
+
+  def stopped?(); end
+
+  def tick(); end
+
+  def update(uri, updater); end
+end
+
+class Solargraph::LanguageServer::Host::Sources
+end
+
+class Solargraph::LanguageServer::Host
+end
+
+module Solargraph::LanguageServer::Message
+end
+
+class Solargraph::LanguageServer::Message::Base
+  def error(); end
+
+  def host(); end
+
+  def id(); end
+
+  def initialize(host, request); end
+
+  def method(); end
+
+  def params(); end
+
+  def post_initialize(); end
+
+  def process(); end
+
+  def request(); end
+
+  def result(); end
+
+  def send_response(); end
+
+  def set_error(code, message); end
+
+  def set_result(data); end
+end
+
+class Solargraph::LanguageServer::Message::Base
+end
+
+class Solargraph::LanguageServer::Message::CancelRequest
+end
+
+class Solargraph::LanguageServer::Message::CancelRequest
+end
+
+module Solargraph::LanguageServer::Message::CompletionItem
+end
+
+class Solargraph::LanguageServer::Message::CompletionItem::Resolve
+end
+
+class Solargraph::LanguageServer::Message::CompletionItem::Resolve
+end
+
+module Solargraph::LanguageServer::Message::CompletionItem
+end
+
+class Solargraph::LanguageServer::Message::ExitNotification
+end
+
+class Solargraph::LanguageServer::Message::ExitNotification
+end
+
+module Solargraph::LanguageServer::Message::Extended
+end
+
+class Solargraph::LanguageServer::Message::Extended::CheckGemVersion
+  def initialize(host, request, current: T.unsafe(nil), available: T.unsafe(nil)); end
+  GEM_ZERO = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::LanguageServer::Message::Extended::CheckGemVersion
+  def self.fetcher(); end
+
+  def self.fetcher=(obj); end
+end
+
+class Solargraph::LanguageServer::Message::Extended::Document
+end
+
+class Solargraph::LanguageServer::Message::Extended::Document
+end
+
+class Solargraph::LanguageServer::Message::Extended::DocumentGems
+end
+
+class Solargraph::LanguageServer::Message::Extended::DocumentGems
+end
+
+class Solargraph::LanguageServer::Message::Extended::DownloadCore
+end
+
+class Solargraph::LanguageServer::Message::Extended::DownloadCore
+end
+
+class Solargraph::LanguageServer::Message::Extended::Environment
+end
+
+class Solargraph::LanguageServer::Message::Extended::Environment
+end
+
+class Solargraph::LanguageServer::Message::Extended::Search
+end
+
+class Solargraph::LanguageServer::Message::Extended::Search
+end
+
+module Solargraph::LanguageServer::Message::Extended
+end
+
+class Solargraph::LanguageServer::Message::Initialize
+end
+
+class Solargraph::LanguageServer::Message::Initialize
+end
+
+class Solargraph::LanguageServer::Message::Initialized
+end
+
+class Solargraph::LanguageServer::Message::Initialized
+end
+
+class Solargraph::LanguageServer::Message::MethodNotFound
+end
+
+class Solargraph::LanguageServer::Message::MethodNotFound
+end
+
+class Solargraph::LanguageServer::Message::MethodNotImplemented
+end
+
+class Solargraph::LanguageServer::Message::MethodNotImplemented
+end
+
+class Solargraph::LanguageServer::Message::Shutdown
+end
+
+class Solargraph::LanguageServer::Message::Shutdown
+end
+
+module Solargraph::LanguageServer::Message::TextDocument
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Base
+  include ::Solargraph::LanguageServer::UriHelpers
+  def filename(); end
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Base
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::CodeAction
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::CodeAction
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Completion
+  def empty_result(incomplete=T.unsafe(nil)); end
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Completion
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Definition
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Definition
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DidChange
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DidChange
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DidClose
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DidClose
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DidOpen
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DidOpen
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DidSave
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DidSave
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DocumentSymbol
+  include ::Solargraph::LanguageServer::UriHelpers
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::DocumentSymbol
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::FoldingRange
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::FoldingRange
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Formatting
+  def format(original, result); end
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Formatting
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Hover
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Hover
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::OnTypeFormatting
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::OnTypeFormatting
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::PrepareRename
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::PrepareRename
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::References
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::References
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Rename
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::Rename
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::SignatureHelp
+end
+
+class Solargraph::LanguageServer::Message::TextDocument::SignatureHelp
+end
+
+module Solargraph::LanguageServer::Message::TextDocument
+end
+
+module Solargraph::LanguageServer::Message::Workspace
+end
+
+class Solargraph::LanguageServer::Message::Workspace::DidChangeConfiguration
+end
+
+class Solargraph::LanguageServer::Message::Workspace::DidChangeConfiguration
+end
+
+class Solargraph::LanguageServer::Message::Workspace::DidChangeWatchedFiles
+  include ::Solargraph::LanguageServer::UriHelpers
+  CHANGED = ::T.let(nil, ::T.untyped)
+  CREATED = ::T.let(nil, ::T.untyped)
+  DELETED = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::LanguageServer::Message::Workspace::DidChangeWatchedFiles
+end
+
+class Solargraph::LanguageServer::Message::Workspace::DidChangeWorkspaceFolders
+end
+
+class Solargraph::LanguageServer::Message::Workspace::DidChangeWorkspaceFolders
+end
+
+class Solargraph::LanguageServer::Message::Workspace::WorkspaceSymbol
+  include ::Solargraph::LanguageServer::UriHelpers
+end
+
+class Solargraph::LanguageServer::Message::Workspace::WorkspaceSymbol
+end
+
+module Solargraph::LanguageServer::Message::Workspace
+end
+
+module Solargraph::LanguageServer::Message
+  def self.register(path, message_class); end
+
+  def self.select(path); end
+end
+
+module Solargraph::LanguageServer::MessageTypes
+  ERROR = ::T.let(nil, ::T.untyped)
+  INFO = ::T.let(nil, ::T.untyped)
+  LOG = ::T.let(nil, ::T.untyped)
+  WARNING = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::LanguageServer::MessageTypes
+end
+
+class Solargraph::LanguageServer::Request
+  def initialize(id, &block); end
+
+  def process(result); end
+
+  def send_response(); end
+end
+
+class Solargraph::LanguageServer::Request
+end
+
+module Solargraph::LanguageServer::SymbolKinds
+  ARRAY = ::T.let(nil, ::T.untyped)
+  BOOLEAN = ::T.let(nil, ::T.untyped)
+  CLASS = ::T.let(nil, ::T.untyped)
+  CONSTANT = ::T.let(nil, ::T.untyped)
+  CONSTRUCTOR = ::T.let(nil, ::T.untyped)
+  ENUM = ::T.let(nil, ::T.untyped)
+  ENUM_MEMBER = ::T.let(nil, ::T.untyped)
+  EVENT = ::T.let(nil, ::T.untyped)
+  FIELD = ::T.let(nil, ::T.untyped)
+  FILE = ::T.let(nil, ::T.untyped)
+  FUNCTION = ::T.let(nil, ::T.untyped)
+  INTERFACE = ::T.let(nil, ::T.untyped)
+  KEY = ::T.let(nil, ::T.untyped)
+  METHOD = ::T.let(nil, ::T.untyped)
+  MODULE = ::T.let(nil, ::T.untyped)
+  NAMESPACE = ::T.let(nil, ::T.untyped)
+  NULL = ::T.let(nil, ::T.untyped)
+  NUMBER = ::T.let(nil, ::T.untyped)
+  OBJECT = ::T.let(nil, ::T.untyped)
+  OPERATOR = ::T.let(nil, ::T.untyped)
+  PACKAGE = ::T.let(nil, ::T.untyped)
+  PROPERTY = ::T.let(nil, ::T.untyped)
+  STRING = ::T.let(nil, ::T.untyped)
+  STRUCT = ::T.let(nil, ::T.untyped)
+  TYPE_PARAMETER = ::T.let(nil, ::T.untyped)
+  VARIABLE = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::LanguageServer::SymbolKinds
+end
+
+module Solargraph::LanguageServer::Transport
+end
+
+module Solargraph::LanguageServer::Transport::Adapter
+  def closing(); end
+
+  def opening(); end
+
+  def receiving(data); end
+
+  def sending(data); end
+
+  def update(); end
+end
+
+module Solargraph::LanguageServer::Transport::Adapter
+end
+
+class Solargraph::LanguageServer::Transport::DataReader
+  def receive(data); end
+
+  def set_message_handler(&block); end
+end
+
+class Solargraph::LanguageServer::Transport::DataReader
+end
+
+module Solargraph::LanguageServer::Transport
+end
+
+module Solargraph::LanguageServer::UriHelpers
+end
+
+module Solargraph::LanguageServer::UriHelpers
+  def self.file_to_uri(file); end
+
+  def self.uri_to_file(uri); end
+end
+
+module Solargraph::LanguageServer
+end
+
+class Solargraph::Library
+  include ::Solargraph::Logging
+  def attach(source); end
+
+  def attached?(filename); end
+
+  def catalog(); end
+
+  def close(filename); end
+
+  def completions_at(filename, line, column); end
+
+  def contain?(filename); end
+
+  def create(filename, text); end
+
+  def create_from_disk(filename); end
+
+  def current(); end
+
+  def definitions_at(filename, line, column); end
+
+  def delete(filename); end
+
+  def detach(filename); end
+
+  def diagnose(filename); end
+
+  def document(query); end
+
+  def document_symbols(filename); end
+
+  def folding_ranges(filename); end
+
+  def get_path_pins(path); end
+
+  def initialize(workspace=T.unsafe(nil), name=T.unsafe(nil)); end
+
+  def locate_pins(location); end
+
+  def locate_ref(location); end
+
+  def merge(source); end
+
+  def name(); end
+
+  def open?(filename); end
+
+  def path_pins(path); end
+
+  def query_symbols(query); end
+
+  def read_text(filename); end
+
+  def references_from(filename, line, column, strip: T.unsafe(nil)); end
+
+  def search(query); end
+
+  def signatures_at(filename, line, column); end
+
+  def synchronized?(); end
+
+  def workspace(); end
+end
+
+class Solargraph::Library
+  def self.load(directory=T.unsafe(nil), name=T.unsafe(nil)); end
+end
+
+class Solargraph::Location
+  def ==(other); end
+
+  def filename(); end
+
+  def initialize(filename, range); end
+
+  def range(); end
+
+  def to_hash(); end
+end
+
+class Solargraph::Location
+end
+
+module Solargraph::Logging
+  DEFAULT_LOG_LEVEL = ::T.let(nil, ::T.untyped)
+  LOG_LEVELS = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::Logging
+  def self.logger(); end
+end
+
+class Solargraph::Page
+  def initialize(directory=T.unsafe(nil)); end
+
+  def render(template, layout: T.unsafe(nil), locals: T.unsafe(nil)); end
+end
+
+class Solargraph::Page
+  def self.select_template(directories, name); end
+end
+
+module Solargraph::Pin
+  ROOT_PIN = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::Pin::Attribute
+  def access(); end
+
+  def initialize(access: T.unsafe(nil), **splat); end
+end
+
+class Solargraph::Pin::Attribute
+end
+
+class Solargraph::Pin::Base
+  include ::Solargraph::Pin::Common
+  include ::Solargraph::Pin::Conversions
+  include ::Solargraph::Pin::Documenting
+  def ==(other); end
+
+  def code_object(); end
+
+  def completion_item_kind(); end
+
+  def deprecated?(); end
+
+  def directives(); end
+
+  def docstring(); end
+
+  def filename(); end
+
+  def identity(); end
+
+  def infer(api_map); end
+
+  def initialize(location: T.unsafe(nil), closure: T.unsafe(nil), name: T.unsafe(nil), comments: T.unsafe(nil)); end
+
+  def macros(); end
+
+  def maybe_directives?(); end
+
+  def nearly?(other); end
+
+  def probe(api_map); end
+
+  def probed=(probed); end
+
+  def probed?(); end
+
+  def proxied=(proxied); end
+
+  def proxied?(); end
+
+  def proxy(return_type); end
+
+  def realize(api_map); end
+
+  def return_type=(return_type); end
+
+  def symbol_kind(); end
+
+  def try_merge!(pin); end
+
+  def typify(api_map); end
+
+  def variable?(); end
+end
+
+class Solargraph::Pin::Base
+end
+
+class Solargraph::Pin::BaseMethod
+  def initialize(visibility: T.unsafe(nil), **splat); end
+
+  def parameter_names(); end
+
+  def parameters(); end
+
+  def visibility(); end
+end
+
+class Solargraph::Pin::BaseMethod
+end
+
+class Solargraph::Pin::BaseVariable
+  include ::Solargraph::Source::NodeMethods
+  def assignment(); end
+
+  def initialize(assignment: T.unsafe(nil), **splat); end
+
+  def nil_assignment?(); end
+
+  def signature(); end
+end
+
+class Solargraph::Pin::BaseVariable
+end
+
+class Solargraph::Pin::Block
+  def initialize(receiver: T.unsafe(nil), args: T.unsafe(nil), **splat); end
+
+  def parameter_names(); end
+
+  def parameters(); end
+
+  def rebind(context); end
+
+  def rebound?(); end
+
+  def receiver(); end
+end
+
+class Solargraph::Pin::Block
+end
+
+class Solargraph::Pin::ClassVariable
+end
+
+class Solargraph::Pin::ClassVariable
+end
+
+class Solargraph::Pin::Closure
+  def gates(); end
+
+  def initialize(scope: T.unsafe(nil), **splat); end
+
+  def scope(); end
+end
+
+class Solargraph::Pin::Closure
+end
+
+module Solargraph::Pin::Common
+  def binder(); end
+
+  def closure(); end
+
+  def comments(); end
+
+  def context(); end
+
+  def full_context(); end
+
+  def location(); end
+
+  def name(); end
+
+  def namespace(); end
+
+  def path(); end
+
+  def return_type(); end
+end
+
+module Solargraph::Pin::Common
+end
+
+class Solargraph::Pin::Constant
+  def initialize(visibility: T.unsafe(nil), **splat); end
+
+  def visibility(); end
+end
+
+class Solargraph::Pin::Constant
+end
+
+module Solargraph::Pin::Conversions
+  def completion_item(); end
+
+  def detail(); end
+
+  def link_documentation(); end
+
+  def reset_conversions(); end
+
+  def resolve_completion_item(); end
+
+  def signature_help(); end
+
+  def text_documentation(); end
+end
+
+module Solargraph::Pin::Conversions
+end
+
+module Solargraph::Pin::Documenting
+  def documentation(); end
+end
+
+module Solargraph::Pin::Documenting
+end
+
+class Solargraph::Pin::DuckMethod
+end
+
+class Solargraph::Pin::DuckMethod
+end
+
+class Solargraph::Pin::GlobalVariable
+end
+
+class Solargraph::Pin::GlobalVariable
+end
+
+class Solargraph::Pin::InstanceVariable
+  def scope(); end
+end
+
+class Solargraph::Pin::InstanceVariable
+end
+
+class Solargraph::Pin::Keyword
+  def initialize(name); end
+end
+
+class Solargraph::Pin::Keyword
+end
+
+class Solargraph::Pin::KeywordParam
+end
+
+class Solargraph::Pin::KeywordParam
+end
+
+class Solargraph::Pin::LocalVariable
+  include ::Solargraph::Pin::Localized
+  def initialize(assignment: T.unsafe(nil), presence: T.unsafe(nil), **splat); end
+end
+
+class Solargraph::Pin::LocalVariable
+end
+
+module Solargraph::Pin::Localized
+  def presence(); end
+
+  def visible_at?(other_loc); end
+
+  def visible_from?(other, position); end
+end
+
+module Solargraph::Pin::Localized
+end
+
+class Solargraph::Pin::Method
+  include ::Solargraph::Source::NodeMethods
+  def initialize(args: T.unsafe(nil), node: T.unsafe(nil), **splat); end
+
+  def node(); end
+
+  def overloads(); end
+end
+
+class Solargraph::Pin::Method
+end
+
+class Solargraph::Pin::MethodAlias
+  def initialize(scope: T.unsafe(nil), original: T.unsafe(nil), **splat); end
+
+  def original(); end
+end
+
+class Solargraph::Pin::MethodAlias
+end
+
+class Solargraph::Pin::Namespace
+  def domains(); end
+
+  def initialize(type: T.unsafe(nil), visibility: T.unsafe(nil), gates: T.unsafe(nil), **splat); end
+
+  def type(); end
+
+  def visibility(); end
+end
+
+class Solargraph::Pin::Namespace
+end
+
+class Solargraph::Pin::Parameter
+  def index(); end
+end
+
+class Solargraph::Pin::Parameter
+end
+
+class Solargraph::Pin::ProxyType
+  def initialize(return_type: T.unsafe(nil), **splat); end
+end
+
+class Solargraph::Pin::ProxyType
+  def self.anonymous(return_type); end
+end
+
+class Solargraph::Pin::Reference
+end
+
+class Solargraph::Pin::Reference
+end
+
+class Solargraph::Pin::Singleton
+  def initialize(name: T.unsafe(nil), location: T.unsafe(nil), closure: T.unsafe(nil)); end
+end
+
+class Solargraph::Pin::Singleton
+end
+
+class Solargraph::Pin::Symbol
+  def initialize(location, name); end
+
+  def visibility(); end
+end
+
+class Solargraph::Pin::Symbol
+end
+
+module Solargraph::Pin::YardPin
+end
+
+class Solargraph::Pin::YardPin::Constant
+  include ::Solargraph::Pin::YardPin::YardMixin
+  def initialize(code_object, closure=T.unsafe(nil), spec=T.unsafe(nil)); end
+end
+
+class Solargraph::Pin::YardPin::Constant
+end
+
+class Solargraph::Pin::YardPin::Method
+  include ::Solargraph::Pin::YardPin::YardMixin
+  def initialize(code_object, name=T.unsafe(nil), scope=T.unsafe(nil), visibility=T.unsafe(nil), closure=T.unsafe(nil), spec=T.unsafe(nil)); end
+end
+
+class Solargraph::Pin::YardPin::Method
+end
+
+class Solargraph::Pin::YardPin::Namespace
+  include ::Solargraph::Pin::YardPin::YardMixin
+  def initialize(code_object, spec); end
+end
+
+class Solargraph::Pin::YardPin::Namespace
+end
+
+module Solargraph::Pin::YardPin::YardMixin
+  def code_object(); end
+
+  def comments(); end
+
+  def location(); end
+
+  def spec(); end
+end
+
+module Solargraph::Pin::YardPin::YardMixin
+end
+
+module Solargraph::Pin::YardPin
+end
+
+module Solargraph::Pin
+end
+
+class Solargraph::Position
+  def ==(other); end
+
+  def character(); end
+
+  def column(); end
+
+  def initialize(line, character); end
+
+  def line(); end
+
+  def to_hash(); end
+end
+
+class Solargraph::Position
+  def self.from_offset(text, offset); end
+
+  def self.line_char_to_offset(text, line, character); end
+
+  def self.normalize(object); end
+
+  def self.to_offset(text, position); end
+end
+
+class Solargraph::Range
+  def ==(other); end
+
+  def contain?(position); end
+
+  def ending(); end
+
+  def include?(position); end
+
+  def initialize(start, ending); end
+
+  def start(); end
+
+  def to_hash(); end
+end
+
+class Solargraph::Range
+  def self.from_expr(expr); end
+
+  def self.from_node(node); end
+
+  def self.from_to(l1, c1, l2, c2); end
+end
+
+module Solargraph::ServerMethods
+  def available_port(); end
+end
+
+module Solargraph::ServerMethods
+end
+
+class Solargraph::Shell
+  include ::Solargraph::ServerMethods
+  def available_cores(); end
+
+  def bundle(); end
+
+  def clear(); end
+
+  def config(directory=T.unsafe(nil)); end
+
+  def download_core(version=T.unsafe(nil)); end
+
+  def list_cores(); end
+
+  def rdoc(gem, version=T.unsafe(nil)); end
+
+  def reporters(); end
+
+  def scan(); end
+
+  def socket(); end
+
+  def stdio(); end
+
+  def typecheck(*files); end
+
+  def uncache(*gems); end
+
+  def version(); end
+end
+
+class Solargraph::Shell
+end
+
+class Solargraph::Source
+  include ::Solargraph::Source::EncodingFixes
+  include ::Solargraph::Source::NodeMethods
+  def associated_comments(); end
+
+  def at(range); end
+
+  def code(); end
+
+  def code=(code); end
+
+  def code_for(node); end
+
+  def comment_at?(position); end
+
+  def comments(); end
+
+  def comments=(comments); end
+
+  def comments_for(node); end
+
+  def cursor_at(position); end
+
+  def error_ranges(); end
+
+  def error_ranges=(error_ranges); end
+
+  def filename(); end
+
+  def filename=(filename); end
+
+  def finish_synchronize(); end
+
+  def folding_ranges(); end
+
+  def from_to(l1, c1, l2, c2); end
+
+  def initialize(code, filename=T.unsafe(nil), version=T.unsafe(nil)); end
+
+  def last_updater(); end
+
+  def last_updater=(last_updater); end
+
+  def location(); end
+
+  def node(); end
+
+  def node=(node); end
+
+  def node_at(line, column); end
+
+  def parsed=(parsed); end
+
+  def parsed?(); end
+
+  def references(name); end
+
+  def repaired(); end
+
+  def repaired=(repaired); end
+
+  def repaired?(); end
+
+  def start_synchronize(updater); end
+
+  def string_at?(position); end
+
+  def synchronize(updater); end
+
+  def synchronized=(synchronized); end
+
+  def synchronized?(); end
+
+  def tree_at(line, column); end
+
+  def version(); end
+
+  def version=(version); end
+  FOLDING_NODE_TYPES = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::Source::Chain
+  def base(); end
+
+  def constant?(); end
+
+  def define(api_map, name_pin, locals); end
+
+  def defined?(); end
+
+  def infer(api_map, name_pin, locals); end
+
+  def initialize(links); end
+
+  def links(); end
+
+  def literal?(); end
+
+  def undefined?(); end
+  UNDEFINED_CALL = ::T.let(nil, ::T.untyped)
+  UNDEFINED_CONSTANT = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::Source::Chain::BlockVariable
+end
+
+class Solargraph::Source::Chain::BlockVariable
+end
+
+class Solargraph::Source::Chain::Call
+  def arguments(); end
+
+  def initialize(word, arguments=T.unsafe(nil), with_block=T.unsafe(nil)); end
+
+  def with_block?(); end
+end
+
+class Solargraph::Source::Chain::Call
+end
+
+class Solargraph::Source::Chain::ClassVariable
+end
+
+class Solargraph::Source::Chain::ClassVariable
+end
+
+class Solargraph::Source::Chain::Constant
+  def initialize(word); end
+end
+
+class Solargraph::Source::Chain::Constant
+end
+
+class Solargraph::Source::Chain::GlobalVariable
+end
+
+class Solargraph::Source::Chain::GlobalVariable
+end
+
+class Solargraph::Source::Chain::Head
+end
+
+class Solargraph::Source::Chain::Head
+end
+
+class Solargraph::Source::Chain::InstanceVariable
+end
+
+class Solargraph::Source::Chain::InstanceVariable
+end
+
+class Solargraph::Source::Chain::Link
+  def ==(other); end
+
+  def constant?(); end
+
+  def initialize(word=T.unsafe(nil)); end
+
+  def last_context(); end
+
+  def last_context=(last_context); end
+
+  def resolve(api_map, name_pin, locals); end
+
+  def undefined?(); end
+
+  def word(); end
+end
+
+class Solargraph::Source::Chain::Link
+end
+
+class Solargraph::Source::Chain::Literal
+  def initialize(type); end
+end
+
+class Solargraph::Source::Chain::Literal
+end
+
+class Solargraph::Source::Chain::Or
+  def initialize(links); end
+end
+
+class Solargraph::Source::Chain::Or
+end
+
+class Solargraph::Source::Chain::Variable
+end
+
+class Solargraph::Source::Chain::Variable
+end
+
+class Solargraph::Source::Chain
+end
+
+class Solargraph::Source::Change
+  include ::Solargraph::Source::EncodingFixes
+  def initialize(range, new_text); end
+
+  def new_text(); end
+
+  def range(); end
+
+  def repair(text); end
+
+  def write(text, nullable=T.unsafe(nil)); end
+end
+
+class Solargraph::Source::Change
+end
+
+class Solargraph::Source::Cursor
+  def argument?(); end
+
+  def chain(); end
+
+  def comment?(); end
+
+  def end_of_word(); end
+
+  def filename(); end
+
+  def initialize(source, position); end
+
+  def node(); end
+
+  def node_position(); end
+
+  def position(); end
+
+  def range(); end
+
+  def receiver(); end
+
+  def recipient(); end
+
+  def recipient_node(); end
+
+  def source(); end
+
+  def start_of_constant?(); end
+
+  def start_of_word(); end
+
+  def string?(); end
+
+  def word(); end
+end
+
+class Solargraph::Source::Cursor
+end
+
+module Solargraph::Source::EncodingFixes
+end
+
+module Solargraph::Source::EncodingFixes
+  def self.normalize(string); end
+end
+
+class Solargraph::Source::FlawedBuilder
+end
+
+class Solargraph::Source::FlawedBuilder
+end
+
+class Solargraph::Source::NodeChainer
+  include ::Solargraph::Source::NodeMethods
+  def chain(); end
+
+  def initialize(node, filename=T.unsafe(nil), in_block=T.unsafe(nil)); end
+end
+
+class Solargraph::Source::NodeChainer
+  def self.chain(node, filename=T.unsafe(nil), in_block=T.unsafe(nil)); end
+
+  def self.load_string(code); end
+end
+
+module Solargraph::Source::NodeMethods
+  NIL_NODE = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::Source::NodeMethods
+  def self.const_from(node); end
+
+  def self.drill_signature(node, signature); end
+
+  def self.get_node_end_position(node); end
+
+  def self.get_node_start_position(node); end
+
+  def self.infer_literal_node_type(node); end
+
+  def self.pack_name(node); end
+
+  def self.resolve_node_signature(node); end
+
+  def self.returns_from(node); end
+
+  def self.unpack_name(node); end
+end
+
+class Solargraph::Source::SourceChainer
+  include ::Solargraph::Source::NodeMethods
+  def chain(); end
+
+  def initialize(source, position); end
+end
+
+class Solargraph::Source::SourceChainer
+  def self.chain(source, position); end
+end
+
+class Solargraph::Source::Updater
+  def changes(); end
+
+  def filename(); end
+
+  def initialize(filename, version, changes); end
+
+  def repair(text); end
+
+  def version(); end
+
+  def write(text, nullable=T.unsafe(nil)); end
+end
+
+class Solargraph::Source::Updater
+end
+
+class Solargraph::Source
+  def self.load(filename); end
+
+  def self.load_string(code, filename=T.unsafe(nil), version=T.unsafe(nil)); end
+
+  def self.parse(code, filename=T.unsafe(nil), line=T.unsafe(nil)); end
+
+  def self.parse_docstring(comments); end
+
+  def self.parse_with_comments(code, filename=T.unsafe(nil)); end
+
+  def self.parser(); end
+end
+
+class Solargraph::SourceMap
+  def code(); end
+
+  def cursor_at(position); end
+
+  def document_symbols(); end
+
+  def environ(); end
+
+  def filename(); end
+
+  def first_pin(path); end
+
+  def initialize(source, pins, locals); end
+
+  def locals(); end
+
+  def locals_at(location); end
+
+  def locate_block_pin(line, character); end
+
+  def locate_named_path_pin(line, character); end
+
+  def locate_pins(location); end
+
+  def pins(); end
+
+  def query_symbols(query); end
+
+  def references(name); end
+
+  def requires(); end
+
+  def source(); end
+
+  def try_merge!(other_map); end
+end
+
+class Solargraph::SourceMap::Clip
+  def complete(); end
+
+  def define(); end
+
+  def gates(); end
+
+  def in_block?(); end
+
+  def infer(); end
+
+  def initialize(api_map, cursor); end
+
+  def locals(); end
+
+  def signify(); end
+end
+
+class Solargraph::SourceMap::Clip
+end
+
+class Solargraph::SourceMap::Completion
+  def initialize(pins, range); end
+
+  def pins(); end
+
+  def range(); end
+end
+
+class Solargraph::SourceMap::Completion
+end
+
+class Solargraph::SourceMap::Mapper
+  include ::Solargraph::Source::NodeMethods
+  def closure_at(position); end
+
+  def find_directive_line_number(comment, tag, start); end
+
+  def map(source); end
+
+  def pins(); end
+
+  def process_comment(source_position, comment_position, comment); end
+
+  def process_comment_directives(); end
+
+  def process_directive(source_position, comment_position, directive); end
+
+  def remove_inline_comment_hashes(comment); end
+
+  def unmap(filename, code); end
+  MACRO_REGEXP = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::SourceMap::Mapper
+  def self.map(source); end
+end
+
+module Solargraph::SourceMap::NodeProcessor
+end
+
+class Solargraph::SourceMap::NodeProcessor::AliasNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::AliasNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::ArgsNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::ArgsNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::Base
+  include ::Solargraph::Source::NodeMethods
+  def initialize(node, region, pins, locals); end
+
+  def locals(); end
+
+  def node(); end
+
+  def pins(); end
+
+  def process(); end
+
+  def region(); end
+end
+
+class Solargraph::SourceMap::NodeProcessor::Base
+end
+
+class Solargraph::SourceMap::NodeProcessor::BeginNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::BeginNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::BlockNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::BlockNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::CasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::CasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::CvasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::CvasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::DefNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::DefNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::DefsNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::DefsNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::GvasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::GvasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::IvasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::IvasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::LvasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::LvasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::NamespaceNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::NamespaceNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::OrasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::OrasgnNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::ResbodyNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::ResbodyNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::SclassNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::SclassNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::SendNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::SendNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::SymNode
+end
+
+class Solargraph::SourceMap::NodeProcessor::SymNode
+end
+
+module Solargraph::SourceMap::NodeProcessor
+  def self.process(node, region=T.unsafe(nil), pins=T.unsafe(nil), locals=T.unsafe(nil)); end
+end
+
+class Solargraph::SourceMap::Region
+  def closure(); end
+
+  def code_for(node); end
+
+  def filename(); end
+
+  def initialize(source: T.unsafe(nil), closure: T.unsafe(nil), scope: T.unsafe(nil), visibility: T.unsafe(nil)); end
+
+  def scope(); end
+
+  def source(); end
+
+  def update(closure: T.unsafe(nil), scope: T.unsafe(nil), visibility: T.unsafe(nil)); end
+
+  def visibility(); end
+end
+
+class Solargraph::SourceMap::Region
+end
+
+class Solargraph::SourceMap
+  def self.load(filename); end
+
+  def self.load_string(code, filename=T.unsafe(nil)); end
+
+  def self.map(source); end
+end
+
+class Solargraph::TypeChecker
+  def filename(); end
+
+  def initialize(filename, api_map: T.unsafe(nil)); end
+
+  def param_type_problems(); end
+
+  def return_type_problems(); end
+
+  def strict_type_problems(); end
+end
+
+class Solargraph::TypeChecker::ParamDef
+  def initialize(name, type); end
+
+  def name(); end
+
+  def type(); end
+end
+
+class Solargraph::TypeChecker::ParamDef
+  def self.from(pin); end
+end
+
+class Solargraph::TypeChecker::Problem
+  def initialize(location, message, pin: T.unsafe(nil), suggestion: T.unsafe(nil)); end
+
+  def location(); end
+
+  def message(); end
+
+  def pin(); end
+
+  def suggestion(); end
+end
+
+class Solargraph::TypeChecker::Problem
+end
+
+class Solargraph::TypeChecker
+  def self.load(filename); end
+
+  def self.load_string(code, filename=T.unsafe(nil)); end
+end
+
+class Solargraph::Workspace
+  def config(); end
+
+  def directory(); end
+
+  def filenames(); end
+
+  def gemspec?(); end
+
+  def gemspecs(); end
+
+  def has_file?(filename); end
+
+  def initialize(directory=T.unsafe(nil), config=T.unsafe(nil)); end
+
+  def merge(source); end
+
+  def remove(filename); end
+
+  def require_paths(); end
+
+  def source(filename); end
+
+  def sources(); end
+
+  def synchronize!(updater); end
+
+  def would_merge?(filename); end
+
+  def would_require?(path); end
+end
+
+class Solargraph::Workspace::Config
+  def allow?(filename); end
+
+  def calculated(); end
+
+  def directory(); end
+
+  def domains(); end
+
+  def excluded(); end
+
+  def included(); end
+
+  def initialize(directory=T.unsafe(nil)); end
+
+  def max_files(); end
+
+  def raw_data(); end
+
+  def reporters(); end
+
+  def require_paths(); end
+
+  def required(); end
+  MAX_FILES = ::T.let(nil, ::T.untyped)
+end
+
+class Solargraph::Workspace::Config
+end
+
+class Solargraph::Workspace
+end
+
+class Solargraph::YardMap::Cache
+  def get_path_pins(path); end
+
+  def set_path_pins(path, pins); end
+end
+
+class Solargraph::YardMap::Cache
+end
+
+module Solargraph::YardMap::CoreDocs
+  DEFAULT = ::T.let(nil, ::T.untyped)
+  SOURCE = ::T.let(nil, ::T.untyped)
+end
+
+module Solargraph::YardMap::CoreGen
+end
+
+module Solargraph::YardMap::CoreGen
+  def self.generate_docs(ruby_dir, dest_dir); end
+
+  def self.generate_gzip(ruby_dir, ver_name=T.unsafe(nil), dest_dir=T.unsafe(nil)); end
+end
+
+class Solargraph::YardMap::Mapper
+  def generate_pins(code_object); end
+
+  def initialize(code_objects, spec=T.unsafe(nil)); end
+
+  def map(); end
+end
+
+class Solargraph::YardMap::Mapper
+end
+
+module Solargraph::YardMap::RdocToYard
+end
+
+module Solargraph::YardMap::RdocToYard
+  extend ::Solargraph::ApiMap::SourceToYard
+  def self.base_name(mod); end
+
+  def self.commentary(cmnt); end
+
+  def self.find_file(obj); end
+
+  def self.locate(obj); end
+
+  def self.run(spec); end
+end
+
 class Sorbet::Private::ConstantLookupCache
   def all_module_aliases(); end
 
@@ -17781,17 +20594,11 @@ end
 
 class String
   include ::JSON::Ext::Generator::GeneratorMethods::String
-  def +@(); end
-
-  def -@(); end
-
   def []=(*_); end
 
   def casecmp?(_); end
 
   def each_grapheme_cluster(); end
-
-  def encode(*_); end
 
   def encode!(*_); end
 
@@ -17804,6 +20611,8 @@ class String
   def shellescape(); end
 
   def shellsplit(); end
+
+  def strip_indent(); end
 
   def succ!(); end
 
@@ -18002,8 +20811,6 @@ end
 
 class Tempfile::Remover
 end
-
-Test = Minitest::Parallel::Test
 
 class Thor
   def help(command=T.unsafe(nil), subcommand=T.unsafe(nil)); end
@@ -18642,6 +21449,8 @@ module URI::Escape
 end
 
 class URI::FTP
+  def buffer_open(buf, proxy, options); end
+
   def set_typecode(v); end
 
   def typecode(); end
@@ -18674,6 +21483,8 @@ class URI::GID
 end
 
 class URI::HTTP
+  def buffer_open(buf, proxy, options); end
+
   def request_uri(); end
 end
 
@@ -19094,6 +21905,2985 @@ YAML = Psych
 
 YAMLTree = Psych::Visitors::YAMLTree
 
+module YARD
+  CONFIG_DIR = ::T.let(nil, ::T.untyped)
+  ROOT = ::T.let(nil, ::T.untyped)
+  TEMPLATE_ROOT = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::CLI::CommandParser
+  def run(*args); end
+end
+
+class YARD::CLI::CommandParser
+  def self.commands(); end
+
+  def self.commands=(commands); end
+
+  def self.default_command(); end
+
+  def self.default_command=(default_command); end
+
+  def self.run(*args); end
+end
+
+class YARD::CLI::Config
+  def append(); end
+
+  def append=(append); end
+
+  def as_list(); end
+
+  def as_list=(as_list); end
+
+  def gem_install_cmd(); end
+
+  def gem_install_cmd=(gem_install_cmd); end
+
+  def key(); end
+
+  def key=(key); end
+
+  def reset(); end
+
+  def reset=(reset); end
+
+  def run(*args); end
+
+  def values(); end
+
+  def values=(values); end
+end
+
+class YARD::CLI::Config
+end
+
+class YARD::CLI::Diff
+  def run(*args); end
+end
+
+class YARD::CLI::Diff
+end
+
+class YARD::CLI::Display
+  def format_objects(); end
+
+  def initialize(*args); end
+
+  def wrap_layout(contents); end
+end
+
+class YARD::CLI::Display
+end
+
+class YARD::CLI::Gems
+  def run(*args); end
+end
+
+class YARD::CLI::Gems
+end
+
+class YARD::CLI::Graph
+  def objects(); end
+
+  def options(); end
+
+  def run(*args); end
+end
+
+class YARD::CLI::Graph
+end
+
+class YARD::CLI::Help
+  def run(*args); end
+end
+
+class YARD::CLI::Help
+end
+
+class YARD::CLI::I18n
+end
+
+class YARD::CLI::I18n
+end
+
+class YARD::CLI::List
+  def run(*args); end
+end
+
+class YARD::CLI::List
+end
+
+class YARD::CLI::MarkupTypes
+  def run(*args); end
+end
+
+class YARD::CLI::MarkupTypes
+end
+
+class YARD::CLI::Server
+  def adapter(); end
+
+  def adapter=(adapter); end
+
+  def libraries(); end
+
+  def libraries=(libraries); end
+
+  def options(); end
+
+  def options=(options); end
+
+  def run(*args); end
+
+  def scripts(); end
+
+  def scripts=(scripts); end
+
+  def server_options(); end
+
+  def server_options=(server_options); end
+
+  def template_paths(); end
+
+  def template_paths=(template_paths); end
+end
+
+class YARD::CLI::Server
+end
+
+class YARD::CLI::Stats
+  include ::YARD::Templates::Helpers::BaseHelper
+  def initialize(parse=T.unsafe(nil)); end
+
+  def output(name, data, undoc=T.unsafe(nil)); end
+
+  def parse(); end
+
+  def parse=(parse); end
+
+  def print_statistics(); end
+
+  def print_undocumented_objects(); end
+
+  def stats_for_attributes(); end
+
+  def stats_for_classes(); end
+
+  def stats_for_constants(); end
+
+  def stats_for_files(); end
+
+  def stats_for_methods(); end
+
+  def stats_for_modules(); end
+  STATS_ORDER = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::CLI::Stats
+end
+
+class YARD::CLI::YRI
+  def cache_object(name, path); end
+
+  def find_object(name); end
+
+  def print_object(object); end
+
+  def print_usage(); end
+
+  def run(*args); end
+  CACHE_FILE = ::T.let(nil, ::T.untyped)
+  DEFAULT_SEARCH_PATHS = ::T.let(nil, ::T.untyped)
+  SEARCH_PATHS_FILE = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::CLI::YRI
+end
+
+class YARD::CLI::YardoptsCommand
+  DEFAULT_YARDOPTS_FILE = ::T.let(nil, ::T.untyped)
+end
+
+module YARD::CodeObjects
+  BUILTIN_ALL = ::T.let(nil, ::T.untyped)
+  BUILTIN_CLASSES = ::T.let(nil, ::T.untyped)
+  BUILTIN_EXCEPTIONS = ::T.let(nil, ::T.untyped)
+  BUILTIN_EXCEPTIONS_HASH = ::T.let(nil, ::T.untyped)
+  BUILTIN_MODULES = ::T.let(nil, ::T.untyped)
+  CONSTANTMATCH = ::T.let(nil, ::T.untyped)
+  CONSTANTSTART = ::T.let(nil, ::T.untyped)
+  CSEP = ::T.let(nil, ::T.untyped)
+  CSEPQ = ::T.let(nil, ::T.untyped)
+  ISEP = ::T.let(nil, ::T.untyped)
+  ISEPQ = ::T.let(nil, ::T.untyped)
+  METHODMATCH = ::T.let(nil, ::T.untyped)
+  METHODNAMEMATCH = ::T.let(nil, ::T.untyped)
+  NAMESPACEMATCH = ::T.let(nil, ::T.untyped)
+  NSEP = ::T.let(nil, ::T.untyped)
+  NSEPQ = ::T.let(nil, ::T.untyped)
+  PROXY_MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::CodeObjects::ExtendedMethodObject
+  def initialize(obj); end
+
+  def method_missing(sym, *args, &block); end
+
+  def scope(); end
+end
+
+class YARD::CodeObjects::ExtendedMethodObject
+end
+
+class YARD::CodeObjects::ExtraFileObject
+  def ==(other); end
+
+  def attributes(); end
+
+  def attributes=(attributes); end
+
+  def contents(); end
+
+  def contents=(contents); end
+
+  def eql?(other); end
+
+  def equal?(other); end
+
+  def filename(); end
+
+  def filename=(filename); end
+
+  def initialize(filename, contents=T.unsafe(nil)); end
+
+  def locale(); end
+
+  def locale=(locale); end
+
+  def name(); end
+
+  def name=(name); end
+
+  def path(); end
+
+  def title(); end
+
+  def type(); end
+end
+
+class YARD::CodeObjects::ExtraFileObject
+end
+
+class YARD::CodeObjects::MacroObject
+  MACRO_MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Config
+  CONFIG_DIR = ::T.let(nil, ::T.untyped)
+  CONFIG_FILE = ::T.let(nil, ::T.untyped)
+  DEFAULT_CONFIG_OPTIONS = ::T.let(nil, ::T.untyped)
+  IGNORED_PLUGINS = ::T.let(nil, ::T.untyped)
+  YARD_PLUGIN_PREFIX = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Docstring
+  META_MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::DocstringParser
+  META_MATCH = ::T.let(nil, ::T.untyped)
+end
+
+module YARD::GemIndex
+end
+
+module YARD::GemIndex
+  def self.all(); end
+
+  def self.each(&block); end
+
+  def self.find_all_by_name(*args); end
+end
+
+class YARD::Handlers::Base
+  include ::YARD::CodeObjects
+  include ::YARD::Parser
+  def abort!(); end
+
+  def call_params(); end
+
+  def caller_method(); end
+
+  def ensure_loaded!(object, max_retries=T.unsafe(nil)); end
+
+  def extra_state(); end
+
+  def globals(); end
+
+  def initialize(source_parser, stmt); end
+
+  def namespace(); end
+
+  def namespace=(v); end
+
+  def owner(); end
+
+  def owner=(v); end
+
+  def parse_block(*_); end
+
+  def parser(); end
+
+  def process(); end
+
+  def push_state(opts=T.unsafe(nil)); end
+
+  def register(*objects); end
+
+  def register_docstring(object, docstring=T.unsafe(nil), stmt=T.unsafe(nil)); end
+
+  def register_dynamic(object); end
+
+  def register_ensure_loaded(object); end
+
+  def register_file_info(object, file=T.unsafe(nil), line=T.unsafe(nil), comments=T.unsafe(nil)); end
+
+  def register_group(object, group=T.unsafe(nil)); end
+
+  def register_module_function(object); end
+
+  def register_source(object, source=T.unsafe(nil), type=T.unsafe(nil)); end
+
+  def register_transitive_tags(object); end
+
+  def register_visibility(object, visibility=T.unsafe(nil)); end
+
+  def scope(); end
+
+  def scope=(v); end
+
+  def statement(); end
+
+  def visibility(); end
+
+  def visibility=(v); end
+end
+
+class YARD::Handlers::Base
+  def self.clear_subclasses(); end
+
+  def self.handlers(); end
+
+  def self.handles(*matches); end
+
+  def self.handles?(statement); end
+
+  def self.in_file(filename); end
+
+  def self.inherited(subclass); end
+
+  def self.matches_file?(filename); end
+
+  def self.namespace_only(); end
+
+  def self.namespace_only?(); end
+
+  def self.process(&block); end
+end
+
+class YARD::Handlers::C::AliasHandler
+  MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::AliasHandler
+end
+
+class YARD::Handlers::C::AttributeHandler
+  MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::AttributeHandler
+end
+
+class YARD::Handlers::C::Base
+  include ::YARD::Handlers::C::HandlerMethods
+  include ::YARD::Parser::C
+  include ::YARD::Handlers::Common::MethodHandler
+  def ensure_variable_defined!(var, max_retries=T.unsafe(nil)); end
+
+  def namespace_for_variable(var); end
+
+  def namespaces(); end
+
+  def override_comments(); end
+
+  def parse_block(opts=T.unsafe(nil)); end
+
+  def process_file(file, object); end
+
+  def processed_files(); end
+
+  def symbols(); end
+end
+
+class YARD::Handlers::C::Base
+  def self.handles?(statement, processor); end
+
+  def self.statement_class(type=T.unsafe(nil)); end
+end
+
+class YARD::Handlers::C::ClassHandler
+  MATCH1 = ::T.let(nil, ::T.untyped)
+  MATCH2 = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::ClassHandler
+end
+
+class YARD::Handlers::C::ConstantHandler
+  MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::ConstantHandler
+end
+
+module YARD::Handlers::C::HandlerMethods
+  include ::YARD::Parser::C
+  include ::YARD::CodeObjects
+  include ::YARD::Handlers::Common::MethodHandler
+  def handle_alias(var_name, new_name, old_name); end
+
+  def handle_attribute(var_name, name, read, write); end
+
+  def handle_class(var_name, class_name, parent, in_module=T.unsafe(nil)); end
+
+  def handle_constants(type, var_name, const_name, value); end
+
+  def handle_method(scope, var_name, name, func_name, _source_file=T.unsafe(nil)); end
+
+  def handle_module(var_name, module_name, in_module=T.unsafe(nil)); end
+end
+
+module YARD::Handlers::C::HandlerMethods
+end
+
+class YARD::Handlers::C::InitHandler
+  MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::InitHandler
+end
+
+class YARD::Handlers::C::MethodHandler
+  MATCH1 = ::T.let(nil, ::T.untyped)
+  MATCH2 = ::T.let(nil, ::T.untyped)
+  MATCH3 = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::MethodHandler
+end
+
+class YARD::Handlers::C::MixinHandler
+  MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::MixinHandler
+end
+
+class YARD::Handlers::C::ModuleHandler
+  MATCH1 = ::T.let(nil, ::T.untyped)
+  MATCH2 = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::ModuleHandler
+end
+
+class YARD::Handlers::C::OverrideCommentHandler
+end
+
+class YARD::Handlers::C::OverrideCommentHandler
+end
+
+class YARD::Handlers::C::PathHandler
+  MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::PathHandler
+end
+
+class YARD::Handlers::C::StructHandler
+  MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::StructHandler
+end
+
+class YARD::Handlers::C::SymbolHandler
+  MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::C::SymbolHandler
+end
+
+module YARD::Handlers::Common::MethodHandler
+  def add_predicate_return_tag(obj); end
+end
+
+module YARD::Handlers::Common::MethodHandler
+end
+
+class YARD::Handlers::HandlerAborted
+end
+
+class YARD::Handlers::HandlerAborted
+end
+
+class YARD::Handlers::NamespaceMissingError
+  def initialize(object); end
+
+  def object(); end
+
+  def object=(object); end
+end
+
+class YARD::Handlers::NamespaceMissingError
+end
+
+class YARD::Handlers::Processor
+  def extra_state(); end
+
+  def extra_state=(extra_state); end
+
+  def file(); end
+
+  def file=(file); end
+
+  def find_handlers(statement); end
+
+  def globals(); end
+
+  def globals=(globals); end
+
+  def initialize(parser); end
+
+  def namespace(); end
+
+  def namespace=(namespace); end
+
+  def owner(); end
+
+  def owner=(owner); end
+
+  def parse_remaining_files(); end
+
+  def parser_type(); end
+
+  def parser_type=(parser_type); end
+
+  def process(statements); end
+
+  def scope(); end
+
+  def scope=(scope); end
+
+  def visibility(); end
+
+  def visibility=(visibility); end
+end
+
+class YARD::Handlers::Processor
+  def self.namespace_for_handler(); end
+
+  def self.register_handler_namespace(type, ns); end
+end
+
+class YARD::Handlers::Ruby::AliasHandler
+end
+
+class YARD::Handlers::Ruby::AliasHandler
+end
+
+class YARD::Handlers::Ruby::AttributeHandler
+  def validated_attribute_names(params); end
+end
+
+class YARD::Handlers::Ruby::AttributeHandler
+end
+
+class YARD::Handlers::Ruby::Base
+  include ::YARD::Parser::Ruby
+  def parse_block(inner_node, opts=T.unsafe(nil)); end
+end
+
+class YARD::Handlers::Ruby::Base
+  extend ::YARD::Parser::Ruby
+  def self.handles?(node); end
+
+  def self.meta_type(type); end
+
+  def self.method_call(name=T.unsafe(nil)); end
+end
+
+class YARD::Handlers::Ruby::ClassConditionHandler
+  def parse_condition(); end
+
+  def parse_else_block(); end
+
+  def parse_then_block(); end
+end
+
+class YARD::Handlers::Ruby::ClassConditionHandler
+end
+
+class YARD::Handlers::Ruby::ClassHandler
+  include ::YARD::Handlers::Ruby::StructHandlerMethods
+end
+
+class YARD::Handlers::Ruby::ClassHandler
+end
+
+class YARD::Handlers::Ruby::ClassVariableHandler
+end
+
+class YARD::Handlers::Ruby::ClassVariableHandler
+end
+
+class YARD::Handlers::Ruby::CommentHandler
+end
+
+class YARD::Handlers::Ruby::CommentHandler
+end
+
+class YARD::Handlers::Ruby::ConstantHandler
+  include ::YARD::Handlers::Ruby::StructHandlerMethods
+end
+
+class YARD::Handlers::Ruby::ConstantHandler
+end
+
+class YARD::Handlers::Ruby::DSLHandler
+  include ::YARD::Handlers::Ruby::DSLHandlerMethods
+end
+
+class YARD::Handlers::Ruby::DSLHandler
+end
+
+module YARD::Handlers::Ruby::DSLHandlerMethods
+  include ::YARD::CodeObjects
+  include ::YARD::Parser
+  def handle_comments(); end
+
+  def register_docstring(object, docstring=T.unsafe(nil), stmt=T.unsafe(nil)); end
+  IGNORE_METHODS = ::T.let(nil, ::T.untyped)
+end
+
+module YARD::Handlers::Ruby::DSLHandlerMethods
+end
+
+module YARD::Handlers::Ruby::DecoratorHandlerMethods
+  def process_decorator(*nodes, &block); end
+end
+
+module YARD::Handlers::Ruby::DecoratorHandlerMethods
+end
+
+class YARD::Handlers::Ruby::ExceptionHandler
+end
+
+class YARD::Handlers::Ruby::ExceptionHandler
+end
+
+class YARD::Handlers::Ruby::ExtendHandler
+end
+
+class YARD::Handlers::Ruby::ExtendHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::AliasHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::AliasHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::AttributeHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::AttributeHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::Base
+  include ::YARD::Parser::Ruby::Legacy::RubyToken
+  def parse_block(opts=T.unsafe(nil)); end
+end
+
+class YARD::Handlers::Ruby::Legacy::Base
+  def self.handles?(stmt); end
+end
+
+class YARD::Handlers::Ruby::Legacy::ClassConditionHandler
+  def parse_condition(); end
+
+  def parse_else_block(); end
+
+  def parse_then_block(); end
+end
+
+class YARD::Handlers::Ruby::Legacy::ClassConditionHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ClassHandler
+  include ::YARD::Handlers::Ruby::StructHandlerMethods
+end
+
+class YARD::Handlers::Ruby::Legacy::ClassHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ClassVariableHandler
+  HANDLER_MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::Ruby::Legacy::ClassVariableHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::CommentHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::CommentHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ConstantHandler
+  include ::YARD::Handlers::Ruby::StructHandlerMethods
+  HANDLER_MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Handlers::Ruby::Legacy::ConstantHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::DSLHandler
+  include ::YARD::Handlers::Ruby::DSLHandlerMethods
+end
+
+class YARD::Handlers::Ruby::Legacy::DSLHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ExceptionHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ExceptionHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ExtendHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ExtendHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::MethodHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::MethodHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::MixinHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::MixinHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ModuleFunctionHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ModuleFunctionHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ModuleHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::ModuleHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::PrivateClassMethodHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::PrivateClassMethodHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::PrivateConstantHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::PrivateConstantHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::VisibilityHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::VisibilityHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::YieldHandler
+end
+
+class YARD::Handlers::Ruby::Legacy::YieldHandler
+end
+
+class YARD::Handlers::Ruby::MethodConditionHandler
+end
+
+class YARD::Handlers::Ruby::MethodConditionHandler
+end
+
+class YARD::Handlers::Ruby::MethodHandler
+  include ::YARD::Handlers::Common::MethodHandler
+  def format_args(); end
+
+  def method_signature(); end
+end
+
+class YARD::Handlers::Ruby::MethodHandler
+end
+
+class YARD::Handlers::Ruby::MixinHandler
+  def process_mixin(mixin); end
+end
+
+class YARD::Handlers::Ruby::MixinHandler
+end
+
+class YARD::Handlers::Ruby::ModuleFunctionHandler
+end
+
+class YARD::Handlers::Ruby::ModuleFunctionHandler
+end
+
+class YARD::Handlers::Ruby::ModuleHandler
+end
+
+class YARD::Handlers::Ruby::ModuleHandler
+end
+
+class YARD::Handlers::Ruby::PrivateClassMethodHandler
+  include ::YARD::Handlers::Ruby::DecoratorHandlerMethods
+end
+
+class YARD::Handlers::Ruby::PrivateClassMethodHandler
+end
+
+class YARD::Handlers::Ruby::PrivateConstantHandler
+end
+
+class YARD::Handlers::Ruby::PrivateConstantHandler
+end
+
+class YARD::Handlers::Ruby::PublicClassMethodHandler
+  include ::YARD::Handlers::Ruby::DecoratorHandlerMethods
+end
+
+class YARD::Handlers::Ruby::PublicClassMethodHandler
+end
+
+module YARD::Handlers::Ruby::StructHandlerMethods
+  include ::YARD::CodeObjects
+  def add_reader_tags(klass, new_method, member); end
+
+  def add_writer_tags(klass, new_method, member); end
+
+  def create_attributes(klass, members); end
+
+  def create_class(classname, superclass); end
+
+  def create_member_method?(klass, member, type=T.unsafe(nil)); end
+
+  def create_reader(klass, member); end
+
+  def create_writer(klass, member); end
+
+  def member_tag_for_member(klass, member, type=T.unsafe(nil)); end
+
+  def members_from_tags(klass); end
+
+  def return_type_from_tag(member_tag); end
+end
+
+module YARD::Handlers::Ruby::StructHandlerMethods
+end
+
+class YARD::Handlers::Ruby::VisibilityHandler
+  include ::YARD::Handlers::Ruby::DecoratorHandlerMethods
+end
+
+class YARD::Handlers::Ruby::VisibilityHandler
+end
+
+class YARD::Handlers::Ruby::YieldHandler
+end
+
+class YARD::Handlers::Ruby::YieldHandler
+end
+
+class YARD::I18n::Locale
+  def initialize(name); end
+
+  def load(locale_directory); end
+
+  def name(); end
+
+  def translate(message); end
+end
+
+class YARD::I18n::Locale
+  def self.default(); end
+
+  def self.default=(locale); end
+end
+
+class YARD::I18n::Message
+  def ==(other); end
+
+  def add_comment(comment); end
+
+  def add_location(path, line); end
+
+  def comments(); end
+
+  def id(); end
+
+  def initialize(id); end
+
+  def locations(); end
+end
+
+class YARD::I18n::Message
+end
+
+class YARD::I18n::Messages
+  include ::Enumerable
+  def ==(other); end
+
+  def [](id); end
+
+  def each(&block); end
+
+  def messages(); end
+
+  def register(id); end
+end
+
+class YARD::I18n::Messages
+end
+
+class YARD::I18n::PotGenerator
+  def generate(); end
+
+  def initialize(relative_base_path); end
+
+  def messages(); end
+
+  def parse_files(files); end
+
+  def parse_objects(objects); end
+end
+
+class YARD::I18n::PotGenerator
+end
+
+class YARD::I18n::Text
+  def extract_messages(); end
+
+  def initialize(input, options=T.unsafe(nil)); end
+
+  def translate(locale); end
+end
+
+class YARD::I18n::Text
+end
+
+class YARD::Logger
+  PROGRESS_INDICATORS = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Parser::Base
+  def enumerator(); end
+
+  def initialize(source, filename); end
+
+  def parse(); end
+
+  def tokenize(); end
+end
+
+class YARD::Parser::Base
+  def self.parse(source, filename=T.unsafe(nil)); end
+end
+
+class YARD::Parser::OrderedParser
+  def files(); end
+
+  def files=(files); end
+
+  def initialize(global_state, files); end
+
+  def parse(); end
+end
+
+class YARD::Parser::OrderedParser
+end
+
+class YARD::Parser::ParserSyntaxError
+end
+
+class YARD::Parser::ParserSyntaxError
+end
+
+module YARD::Parser::Ruby
+  def s(*args); end
+end
+
+module YARD::Parser::Ruby::Legacy::RubyToken
+  def Token(token, value=T.unsafe(nil)); end
+
+  def set_token_position(line, char); end
+  EXPR_ARG = ::T.let(nil, ::T.untyped)
+  EXPR_BEG = ::T.let(nil, ::T.untyped)
+  EXPR_CLASS = ::T.let(nil, ::T.untyped)
+  EXPR_DOT = ::T.let(nil, ::T.untyped)
+  EXPR_END = ::T.let(nil, ::T.untyped)
+  EXPR_FNAME = ::T.let(nil, ::T.untyped)
+  EXPR_MID = ::T.let(nil, ::T.untyped)
+  NEWLINE_TOKEN = ::T.let(nil, ::T.untyped)
+  TkReading2Token = ::T.let(nil, ::T.untyped)
+  TkSymbol2Token = ::T.let(nil, ::T.untyped)
+  TokenDefinitions = ::T.let(nil, ::T.untyped)
+end
+
+module YARD::Parser::Ruby::Legacy::RubyToken
+  def self.def_token(token_n, super_token=T.unsafe(nil), reading=T.unsafe(nil), *opts); end
+end
+
+class YARD::Parser::SourceParser
+  def contents(); end
+
+  def file(); end
+
+  def file=(file); end
+
+  def globals(); end
+
+  def initialize(parser_type=T.unsafe(nil), globals1=T.unsafe(nil), globals2=T.unsafe(nil)); end
+
+  def parse(content=T.unsafe(nil)); end
+
+  def parser_type(); end
+
+  def tokenize(content); end
+  DEFAULT_PATH_GLOB = ::T.let(nil, ::T.untyped)
+  ENCODING_BYTE_ORDER_MARKS = ::T.let(nil, ::T.untyped)
+  ENCODING_LINE = ::T.let(nil, ::T.untyped)
+  FROZEN_STRING_LINE = ::T.let(nil, ::T.untyped)
+  SHEBANG_LINE = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Parser::SourceParser
+  def self.after_parse_file(&block); end
+
+  def self.after_parse_file_callbacks(); end
+
+  def self.after_parse_list(&block); end
+
+  def self.after_parse_list_callbacks(); end
+
+  def self.before_parse_file(&block); end
+
+  def self.before_parse_file_callbacks(); end
+
+  def self.before_parse_list(&block); end
+
+  def self.before_parse_list_callbacks(); end
+
+  def self.parse(paths=T.unsafe(nil), excluded=T.unsafe(nil), level=T.unsafe(nil)); end
+
+  def self.parse_string(content, ptype=T.unsafe(nil)); end
+
+  def self.parser_type(); end
+
+  def self.parser_type=(value); end
+
+  def self.parser_type_extensions(); end
+
+  def self.parser_type_extensions=(value); end
+
+  def self.parser_type_for_extension(extension); end
+
+  def self.parser_types(); end
+
+  def self.parser_types=(value); end
+
+  def self.register_parser_type(type, parser_klass, extensions=T.unsafe(nil)); end
+
+  def self.tokenize(content, ptype=T.unsafe(nil)); end
+
+  def self.validated_parser_type(type); end
+end
+
+class YARD::Parser::UndocumentableError
+end
+
+class YARD::Parser::UndocumentableError
+end
+
+class YARD::Rake::YardocTask
+  def after(); end
+
+  def after=(after); end
+
+  def before(); end
+
+  def before=(before); end
+
+  def define(); end
+
+  def files(); end
+
+  def files=(files); end
+
+  def initialize(name=T.unsafe(nil)); end
+
+  def name(); end
+
+  def name=(name); end
+
+  def options(); end
+
+  def options=(options); end
+
+  def stats_options(); end
+
+  def stats_options=(stats_options); end
+
+  def verifier(); end
+
+  def verifier=(verifier); end
+end
+
+class YARD::Rake::YardocTask
+end
+
+module YARD::Registry
+  DEFAULT_PO_DIR = ::T.let(nil, ::T.untyped)
+  DEFAULT_YARDOC_FILE = ::T.let(nil, ::T.untyped)
+  LOCAL_YARDOC_INDEX = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::RegistryResolver
+  include ::YARD::CodeObjects::NamespaceMapper
+  def initialize(registry=T.unsafe(nil)); end
+
+  def lookup_by_path(path, opts=T.unsafe(nil)); end
+end
+
+class YARD::RegistryResolver
+end
+
+class YARD::Serializers::ProcessSerializer
+  def initialize(cmd); end
+
+  def serialize(_object, data); end
+end
+
+class YARD::Serializers::ProcessSerializer
+end
+
+class YARD::Serializers::StdoutSerializer
+  def initialize(wrap=T.unsafe(nil)); end
+
+  def serialize(_object, data); end
+end
+
+class YARD::Serializers::StdoutSerializer
+end
+
+class YARD::Server::Adapter
+  def add_library(library); end
+
+  def document_root(); end
+
+  def document_root=(document_root); end
+
+  def initialize(libs, opts=T.unsafe(nil), server_opts=T.unsafe(nil)); end
+
+  def libraries(); end
+
+  def libraries=(libraries); end
+
+  def options(); end
+
+  def options=(options); end
+
+  def router(); end
+
+  def router=(router); end
+
+  def server_options(); end
+
+  def server_options=(server_options); end
+
+  def start(); end
+end
+
+class YARD::Server::Adapter
+  def self.setup(); end
+
+  def self.shutdown(); end
+end
+
+class YARD::Server::Commands::Base
+  def adapter(); end
+
+  def adapter=(adapter); end
+
+  def body(); end
+
+  def body=(body); end
+
+  def cache(data); end
+
+  def caching(); end
+
+  def caching=(caching); end
+
+  def call(request); end
+
+  def command_options(); end
+
+  def command_options=(command_options); end
+
+  def headers(); end
+
+  def headers=(headers); end
+
+  def initialize(opts=T.unsafe(nil)); end
+
+  def not_found(); end
+
+  def path(); end
+
+  def path=(path); end
+
+  def redirect(url); end
+
+  def render(object=T.unsafe(nil)); end
+
+  def request(); end
+
+  def request=(request); end
+
+  def run(); end
+
+  def status(); end
+
+  def status=(status); end
+end
+
+class YARD::Server::Commands::Base
+end
+
+class YARD::Server::Commands::DisplayFileCommand
+  def index(); end
+
+  def index=(index); end
+end
+
+class YARD::Server::Commands::DisplayFileCommand
+end
+
+class YARD::Server::Commands::DisplayObjectCommand
+  include ::YARD::Server::DocServerHelper
+  def index(); end
+end
+
+class YARD::Server::Commands::DisplayObjectCommand
+end
+
+class YARD::Server::Commands::FramesCommand
+end
+
+class YARD::Server::Commands::FramesCommand
+end
+
+class YARD::Server::Commands::LibraryCommand
+  def incremental(); end
+
+  def incremental=(incremental); end
+
+  def library(); end
+
+  def library=(library); end
+
+  def options(); end
+
+  def options=(options); end
+
+  def serializer(); end
+
+  def serializer=(serializer); end
+
+  def single_library(); end
+
+  def single_library=(single_library); end
+
+  def use_fork(); end
+
+  def use_fork=(use_fork); end
+  CAN_FORK = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Server::Commands::LibraryCommand
+end
+
+class YARD::Server::Commands::LibraryIndexCommand
+  def options(); end
+
+  def options=(options); end
+end
+
+class YARD::Server::Commands::LibraryIndexCommand
+end
+
+class YARD::Server::Commands::ListCommand
+  include ::YARD::Templates::Helpers::BaseHelper
+end
+
+class YARD::Server::Commands::ListCommand
+end
+
+class YARD::Server::Commands::RootRequestCommand
+  include ::YARD::Server::Commands::StaticFileHelpers
+  include ::WEBrick::HTTPUtils
+end
+
+class YARD::Server::Commands::RootRequestCommand
+end
+
+class YARD::Server::Commands::SearchCommand
+  include ::YARD::Templates::Helpers::BaseHelper
+  include ::YARD::Templates::Helpers::ModuleHelper
+  include ::YARD::Server::DocServerHelper
+  def query(); end
+
+  def query=(query); end
+
+  def results(); end
+
+  def results=(results); end
+
+  def visible_results(); end
+end
+
+class YARD::Server::Commands::SearchCommand
+end
+
+class YARD::Server::Commands::StaticFileCommand
+  include ::YARD::Server::Commands::StaticFileHelpers
+  include ::WEBrick::HTTPUtils
+  STATIC_PATHS = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Server::Commands::StaticFileCommand
+end
+
+module YARD::Server::Commands::StaticFileHelpers
+  include ::WEBrick::HTTPUtils
+  def favicon?(); end
+
+  def static_template_file?(); end
+end
+
+module YARD::Server::Commands::StaticFileHelpers
+  def self.find_file(adapter, url); end
+end
+
+module YARD::Server::DocServerHelper
+  def abs_url(*path_components); end
+
+  def base_path(path); end
+
+  def mtime(file); end
+
+  def mtime_url(file); end
+
+  def router(); end
+
+  def url_for(obj, anchor=T.unsafe(nil), relative=T.unsafe(nil)); end
+
+  def url_for_file(filename, anchor=T.unsafe(nil)); end
+
+  def url_for_frameset(); end
+
+  def url_for_index(); end
+
+  def url_for_list(type); end
+
+  def url_for_main(); end
+end
+
+module YARD::Server::DocServerHelper
+end
+
+class YARD::Server::DocServerSerializer
+  def initialize(_command=T.unsafe(nil)); end
+end
+
+class YARD::Server::DocServerSerializer
+end
+
+class YARD::Server::FinishRequest
+end
+
+class YARD::Server::FinishRequest
+end
+
+class YARD::Server::LibraryVersion
+  def ==(other); end
+
+  def eql?(other); end
+
+  def equal?(other); end
+
+  def gemspec(); end
+
+  def initialize(name, version=T.unsafe(nil), yardoc=T.unsafe(nil), source=T.unsafe(nil)); end
+
+  def load_yardoc_from_disk(); end
+
+  def load_yardoc_from_gem(); end
+
+  def name(); end
+
+  def name=(name); end
+
+  def prepare!(); end
+
+  def ready?(); end
+
+  def source(); end
+
+  def source=(source); end
+
+  def source_path(); end
+
+  def source_path=(source_path); end
+
+  def source_path_for_disk(); end
+
+  def source_path_for_gem(); end
+
+  def to_s(url_format=T.unsafe(nil)); end
+
+  def version(); end
+
+  def version=(version); end
+
+  def yardoc_file(); end
+
+  def yardoc_file=(yardoc_file); end
+
+  def yardoc_file_for_gem(); end
+end
+
+class YARD::Server::LibraryVersion
+end
+
+class YARD::Server::NotFoundError
+end
+
+class YARD::Server::NotFoundError
+end
+
+class YARD::Server::RackAdapter
+  include ::WEBrick::HTTPUtils
+  def call(env); end
+end
+
+class YARD::Server::RackAdapter
+end
+
+class YARD::Server::RackMiddleware
+  def call(env); end
+
+  def initialize(app, opts=T.unsafe(nil)); end
+end
+
+class YARD::Server::RackMiddleware
+end
+
+class YARD::Server::Router
+  include ::YARD::Server::StaticCaching
+  include ::YARD::Server::Commands
+  def adapter(); end
+
+  def adapter=(adapter); end
+
+  def call(request); end
+
+  def docs_prefix(); end
+
+  def final_options(library, paths); end
+
+  def initialize(adapter); end
+
+  def list_prefix(); end
+
+  def parse_library_from_path(paths); end
+
+  def request(); end
+
+  def request=(request); end
+
+  def route(path=T.unsafe(nil)); end
+
+  def route_docs(library, paths); end
+
+  def route_index(); end
+
+  def route_list(library, paths); end
+
+  def route_search(library, paths); end
+
+  def route_static(library, paths); end
+
+  def search_prefix(); end
+
+  def static_prefix(); end
+end
+
+class YARD::Server::Router
+end
+
+module YARD::Server::StaticCaching
+  def check_static_cache(); end
+end
+
+module YARD::Server::StaticCaching
+end
+
+class YARD::Server::WebrickAdapter
+end
+
+class YARD::Server::WebrickAdapter
+end
+
+class YARD::Server::WebrickServlet
+  def adapter(); end
+
+  def adapter=(adapter); end
+
+  def do_GET(request, response); end
+
+  def initialize(server, adapter); end
+end
+
+class YARD::Server::WebrickServlet
+end
+
+class YARD::StubProxy
+  FILELEN = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Tags::DefaultFactory
+  def parse_tag(tag_name, text); end
+
+  def parse_tag_with_name(tag_name, text); end
+
+  def parse_tag_with_options(tag_name, text); end
+
+  def parse_tag_with_title_and_text(tag_name, text); end
+
+  def parse_tag_with_types(tag_name, text); end
+
+  def parse_tag_with_types_and_name(tag_name, text); end
+
+  def parse_tag_with_types_and_title(tag_name, text); end
+
+  def parse_tag_with_types_name_and_default(tag_name, text); end
+  TYPELIST_CLOSING_CHARS = ::T.let(nil, ::T.untyped)
+  TYPELIST_OPENING_CHARS = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Tags::DefaultFactory
+end
+
+class YARD::Tags::MethodDirective
+  SCOPE_MATCH = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Tags::TagFormatError
+end
+
+class YARD::Tags::TagFormatError
+end
+
+class YARD::Tags::TypesExplainer
+end
+
+class YARD::Tags::TypesExplainer::CollectionType
+  def initialize(name, types); end
+
+  def to_s(_singular=T.unsafe(nil)); end
+
+  def types(); end
+
+  def types=(types); end
+end
+
+class YARD::Tags::TypesExplainer::CollectionType
+end
+
+class YARD::Tags::TypesExplainer::FixedCollectionType
+end
+
+class YARD::Tags::TypesExplainer::FixedCollectionType
+end
+
+class YARD::Tags::TypesExplainer::HashCollectionType
+  def initialize(name, key_types, value_types); end
+
+  def key_types(); end
+
+  def key_types=(key_types); end
+
+  def to_s(_singular=T.unsafe(nil)); end
+
+  def value_types(); end
+
+  def value_types=(value_types); end
+end
+
+class YARD::Tags::TypesExplainer::HashCollectionType
+end
+
+class YARD::Tags::TypesExplainer::Parser
+  include ::YARD::CodeObjects
+  def initialize(string); end
+
+  def parse(); end
+  TOKENS = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Tags::TypesExplainer::Parser
+  def self.parse(string); end
+end
+
+class YARD::Tags::TypesExplainer::Type
+  def initialize(name); end
+
+  def name(); end
+
+  def name=(name); end
+
+  def to_s(singular=T.unsafe(nil)); end
+end
+
+class YARD::Tags::TypesExplainer::Type
+end
+
+class YARD::Tags::TypesExplainer
+  def self.explain(*types); end
+
+  def self.explain!(*types); end
+end
+
+module YARD::Templates::Engine
+end
+
+module YARD::Templates::Engine
+  def self.generate(objects, options=T.unsafe(nil)); end
+
+  def self.register_template_path(path); end
+
+  def self.render(options=T.unsafe(nil)); end
+
+  def self.template(*path); end
+
+  def self.template!(path, full_paths=T.unsafe(nil)); end
+
+  def self.template_paths(); end
+
+  def self.template_paths=(template_paths); end
+
+  def self.with_serializer(object, serializer); end
+end
+
+module YARD::Templates::ErbCache
+end
+
+module YARD::Templates::ErbCache
+  def self.clear!(); end
+
+  def self.method_for(filename); end
+end
+
+module YARD::Templates::Helpers::BaseHelper
+  def format_object_title(object); end
+
+  def format_object_type(object); end
+
+  def format_source(value); end
+
+  def format_types(list, brackets=T.unsafe(nil)); end
+
+  def globals(); end
+
+  def h(text); end
+
+  def link_file(filename, title=T.unsafe(nil), anchor=T.unsafe(nil)); end
+
+  def link_include_file(file); end
+
+  def link_include_object(obj); end
+
+  def link_object(obj, title=T.unsafe(nil)); end
+
+  def link_url(url, title=T.unsafe(nil), params=T.unsafe(nil)); end
+
+  def linkify(*args); end
+
+  def object(); end
+
+  def object=(object); end
+
+  def owner(); end
+
+  def run_verifier(list); end
+
+  def serializer(); end
+
+  def serializer=(serializer); end
+end
+
+module YARD::Templates::Helpers::BaseHelper
+end
+
+module YARD::Templates::Helpers::FilterHelper
+  def is_class?(object); end
+
+  def is_method?(object); end
+
+  def is_module?(object); end
+
+  def is_namespace?(object); end
+end
+
+module YARD::Templates::Helpers::FilterHelper
+end
+
+module YARD::Templates::Helpers::HtmlHelper
+  include ::YARD::Templates::Helpers::MarkupHelper
+  include ::YARD::Templates::Helpers::HtmlSyntaxHighlightHelper
+  include ::YARD::Templates::Helpers::ModuleHelper
+  def anchor_for(object); end
+
+  def charset(); end
+
+  def format_object_name_list(objects); end
+
+  def format_types(typelist, brackets=T.unsafe(nil)); end
+
+  def h(text); end
+
+  def html_markup_asciidoc(text); end
+
+  def html_markup_html(text); end
+
+  def html_markup_markdown(text); end
+
+  def html_markup_none(text); end
+
+  def html_markup_org(text); end
+
+  def html_markup_pre(text); end
+
+  def html_markup_rdoc(text); end
+
+  def html_markup_ruby(source); end
+
+  def html_markup_text(text); end
+
+  def html_markup_textile(text); end
+
+  def html_markup_textile_strict(text); end
+
+  def html_syntax_highlight(source, type=T.unsafe(nil)); end
+
+  def html_syntax_highlight_plain(source); end
+
+  def htmlify(text, markup=T.unsafe(nil)); end
+
+  def htmlify_line(*args); end
+
+  def insert_include(text, markup=T.unsafe(nil)); end
+
+  def link_file(filename, title=T.unsafe(nil), anchor=T.unsafe(nil)); end
+
+  def link_include_file(file); end
+
+  def link_include_object(obj); end
+
+  def link_object(obj, title=T.unsafe(nil), anchor=T.unsafe(nil), relative=T.unsafe(nil)); end
+
+  def link_url(url, title=T.unsafe(nil), params=T.unsafe(nil)); end
+
+  def mtime(_file); end
+
+  def mtime_url(obj, anchor=T.unsafe(nil), relative=T.unsafe(nil)); end
+
+  def resolve_links(text); end
+
+  def signature(meth, link=T.unsafe(nil), show_extras=T.unsafe(nil), full_attr_name=T.unsafe(nil)); end
+
+  def signature_types(meth, link=T.unsafe(nil)); end
+
+  def url_for(obj, anchor=T.unsafe(nil), relative=T.unsafe(nil)); end
+
+  def url_for_file(filename, anchor=T.unsafe(nil)); end
+
+  def url_for_frameset(); end
+
+  def url_for_index(); end
+
+  def url_for_list(type); end
+
+  def url_for_main(); end
+  ASCIIDOC_ATTRIBUTES = ::T.let(nil, ::T.untyped)
+  URLMATCH = ::T.let(nil, ::T.untyped)
+end
+
+module YARD::Templates::Helpers::HtmlHelper
+  def self.urlencode(text); end
+end
+
+module YARD::Templates::Helpers::HtmlSyntaxHighlightHelper
+  include ::YARD::Templates::Helpers::ModuleHelper
+  def html_syntax_highlight_ruby(source); end
+end
+
+module YARD::Templates::Helpers::HtmlSyntaxHighlightHelper
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkdown
+  def fix_typewriter(html); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkdown
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup
+  def from_path(); end
+
+  def from_path=(from_path); end
+
+  def initialize(text); end
+
+  def to_html(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP
+  def add_html(tag, name); end
+
+  def add_regexp_handling(pattern, name); end
+
+  def add_word_pair(start, stop, name); end
+
+  def attribute_manager(); end
+
+  def convert(input, formatter); end
+
+  def initialize(attribute_manager=T.unsafe(nil)); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::AttrChanger
+  def turn_off(); end
+
+  def turn_off=(_); end
+
+  def turn_on(); end
+
+  def turn_on=(_); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::AttrChanger
+  def self.[](*_); end
+
+  def self.members(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::AttrSpan
+  def [](n); end
+
+  def initialize(length); end
+
+  def set_attrs(start, length, bits); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::AttrSpan
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::AttributeManager
+  def add_html(tag, name); end
+
+  def add_regexp_handling(pattern, name); end
+
+  def add_word_pair(start, stop, name); end
+
+  def attribute(turn_on, turn_off); end
+
+  def attributes(); end
+
+  def change_attribute(current, new); end
+
+  def changed_attribute_by_name(current_set, new_set); end
+
+  def convert_attrs(str, attrs); end
+
+  def convert_html(str, attrs); end
+
+  def convert_regexp_handlings(str, attrs); end
+
+  def copy_string(start_pos, end_pos); end
+
+  def display_attributes(); end
+
+  def flow(str); end
+
+  def html_tags(); end
+
+  def mask_protected_sequences(); end
+
+  def matching_word_pairs(); end
+
+  def protectable(); end
+
+  def regexp_handlings(); end
+
+  def split_into_flow(); end
+
+  def unmask_protected_sequences(); end
+
+  def word_pair_map(); end
+  A_PROTECT = ::T.let(nil, ::T.untyped)
+  NULL = ::T.let(nil, ::T.untyped)
+  PROTECT_ATTR = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::AttributeManager
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Attributes
+  def as_string(bitmap); end
+
+  def bitmap_for(name); end
+
+  def each_name_of(bitmap); end
+
+  def regexp_handling(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Attributes
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::BlankLine
+  def accept(visitor); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::BlankLine
+  def self.new(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::BlockQuote
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::BlockQuote
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Document
+  include ::Enumerable
+  def <<(part); end
+
+  def ==(other); end
+
+  def accept(visitor); end
+
+  def concat(parts); end
+
+  def each(&block); end
+
+  def empty?(); end
+
+  def file(); end
+
+  def file=(location); end
+
+  def initialize(*parts); end
+
+  def merge(other); end
+
+  def merged?(); end
+
+  def omit_headings_below(); end
+
+  def omit_headings_below=(omit_headings_below); end
+
+  def parts(); end
+
+  def push(*parts); end
+
+  def table_of_contents(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Document
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Formatter
+  def accept_document(document); end
+
+  def add_regexp_handling_RDOCLINK(); end
+
+  def add_regexp_handling_TIDYLINK(); end
+
+  def add_tag(name, start, stop); end
+
+  def annotate(tag); end
+
+  def convert(content); end
+
+  def convert_flow(flow); end
+
+  def convert_regexp_handling(target); end
+
+  def convert_string(string); end
+
+  def ignore(*node); end
+
+  def in_tt?(); end
+
+  def initialize(options, markup=T.unsafe(nil)); end
+
+  def off_tags(res, item); end
+
+  def on_tags(res, item); end
+
+  def parse_url(url); end
+
+  def tt?(tag); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Formatter::InlineTag
+  def bit(); end
+
+  def bit=(_); end
+
+  def off(); end
+
+  def off=(_); end
+
+  def on(); end
+
+  def on=(_); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Formatter::InlineTag
+  def self.[](*_); end
+
+  def self.members(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Formatter
+  def self.gen_relative_url(path, target); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::HardBreak
+  def ==(other); end
+
+  def accept(visitor); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::HardBreak
+  def self.new(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Heading
+  def accept(visitor); end
+
+  def aref(); end
+
+  def label(context=T.unsafe(nil)); end
+
+  def level(); end
+
+  def level=(_); end
+
+  def plain_html(); end
+
+  def text(); end
+
+  def text=(_); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Heading
+  def self.[](*_); end
+
+  def self.members(); end
+
+  def self.to_html(); end
+
+  def self.to_label(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Include
+  def ==(other); end
+
+  def file(); end
+
+  def include_path(); end
+
+  def initialize(file, include_path); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Include
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::IndentedParagraph
+  def indent(); end
+
+  def initialize(indent, *parts); end
+
+  def text(hard_break=T.unsafe(nil)); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::IndentedParagraph
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::List
+  def <<(item); end
+
+  def ==(other); end
+
+  def accept(visitor); end
+
+  def empty?(); end
+
+  def initialize(type=T.unsafe(nil), *items); end
+
+  def items(); end
+
+  def last(); end
+
+  def push(*items); end
+
+  def type(); end
+
+  def type=(type); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::List
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ListItem
+  def <<(part); end
+
+  def ==(other); end
+
+  def accept(visitor); end
+
+  def empty?(); end
+
+  def initialize(label=T.unsafe(nil), *parts); end
+
+  def label(); end
+
+  def label=(label); end
+
+  def length(); end
+
+  def parts(); end
+
+  def push(*parts); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ListItem
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Paragraph
+  def text(hard_break=T.unsafe(nil)); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Paragraph
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Parser
+  include ::RDoc::Text
+  def build_heading(level); end
+
+  def build_list(margin); end
+
+  def build_paragraph(margin); end
+
+  def build_verbatim(margin); end
+
+  def char_pos(byte_offset); end
+
+  def debug(); end
+
+  def debug=(debug); end
+
+  def get(); end
+
+  def parse(parent, indent=T.unsafe(nil)); end
+
+  def parse_text(parent, indent); end
+
+  def peek_token(); end
+
+  def setup_scanner(input); end
+
+  def skip(token_type, error=T.unsafe(nil)); end
+
+  def token_pos(byte_offset); end
+
+  def tokenize(input); end
+
+  def tokens(); end
+
+  def unget(); end
+  LIST_TOKENS = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Parser::Error
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Parser::Error
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Parser::ParseError
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Parser::ParseError
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Parser
+  def self.parse(str); end
+
+  def self.tokenize(str); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::PreProcess
+  def find_include_file(name); end
+
+  def handle(text, code_object=T.unsafe(nil), &block); end
+
+  def handle_directive(prefix, directive, param, code_object=T.unsafe(nil), encoding=T.unsafe(nil)); end
+
+  def include_file(name, indent, encoding); end
+
+  def initialize(input_file_name, include_path); end
+
+  def options(); end
+
+  def options=(options); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::PreProcess
+  def self.post_process(&block); end
+
+  def self.post_processors(); end
+
+  def self.register(directive, &block); end
+
+  def self.registered(); end
+
+  def self.reset(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Raw
+  def <<(text); end
+
+  def ==(other); end
+
+  def accept(visitor); end
+
+  def initialize(*parts); end
+
+  def merge(other); end
+
+  def parts(); end
+
+  def push(*texts); end
+
+  def text(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Raw
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::RegexpHandling
+  def ==(o); end
+
+  def initialize(type, text); end
+
+  def text(); end
+
+  def text=(text); end
+
+  def type(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::RegexpHandling
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Rule
+  def accept(visitor); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Rule
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToAnsi
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToAnsi
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToBs
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToBs
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToHtml
+  include ::RDoc::Text
+  def accept_blank_line(blank_line); end
+
+  def accept_block_quote(block_quote); end
+
+  def accept_heading(heading); end
+
+  def accept_list_end(list); end
+
+  def accept_list_item_end(list_item); end
+
+  def accept_list_item_start(list_item); end
+
+  def accept_list_start(list); end
+
+  def accept_paragraph(paragraph); end
+
+  def accept_raw(raw); end
+
+  def accept_rule(rule); end
+
+  def accept_verbatim(verbatim); end
+
+  def code_object(); end
+
+  def code_object=(code_object); end
+
+  def convert_string(text); end
+
+  def end_accepting(); end
+
+  def from_path(); end
+
+  def from_path=(from_path); end
+
+  def gen_url(url, text); end
+
+  def handle_RDOCLINK(url); end
+
+  def handle_regexp_HARD_BREAK(target); end
+
+  def handle_regexp_HYPERLINK(target); end
+
+  def handle_regexp_RDOCLINK(target); end
+
+  def handle_regexp_TIDYLINK(target); end
+
+  def html_list_name(list_type, open_tag); end
+
+  def in_list_entry(); end
+
+  def init_tags(); end
+
+  def list(); end
+
+  def list_end_for(list_type); end
+
+  def list_item_start(list_item, list_type); end
+
+  def parseable?(text); end
+
+  def res(); end
+
+  def start_accepting(); end
+
+  def to_html(item); end
+  LIST_TYPE_TO_HTML = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToHtml
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToHtmlCrossref
+  def context(); end
+
+  def context=(context); end
+
+  def cross_reference(name, text=T.unsafe(nil), code=T.unsafe(nil)); end
+
+  def handle_regexp_CROSSREF(target); end
+
+  def initialize(options, from_path, context, markup=T.unsafe(nil)); end
+
+  def link(name, text, code=T.unsafe(nil)); end
+
+  def show_hash(); end
+
+  def show_hash=(show_hash); end
+  ALL_CROSSREF_REGEXP = ::T.let(nil, ::T.untyped)
+  CLASS_REGEXP_STR = ::T.let(nil, ::T.untyped)
+  CROSSREF_REGEXP = ::T.let(nil, ::T.untyped)
+  METHOD_REGEXP_STR = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToHtmlCrossref
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToHtmlSnippet
+  def accept_raw(*node); end
+
+  def accept_rule(*node); end
+
+  def add_paragraph(); end
+
+  def character_limit(); end
+
+  def characters(); end
+
+  def handle_regexp_CROSSREF(target); end
+
+  def initialize(options, characters=T.unsafe(nil), paragraphs=T.unsafe(nil), markup=T.unsafe(nil)); end
+
+  def mask(); end
+
+  def paragraph_limit(); end
+
+  def paragraphs(); end
+
+  def truncate(text); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToHtmlSnippet
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToJoinedParagraph
+  def accept_block_quote(*node); end
+
+  def accept_heading(*node); end
+
+  def accept_list_end(*node); end
+
+  def accept_list_item_end(*node); end
+
+  def accept_list_item_start(*node); end
+
+  def accept_list_start(*node); end
+
+  def accept_paragraph(paragraph); end
+
+  def accept_raw(*node); end
+
+  def accept_rule(*node); end
+
+  def accept_verbatim(*node); end
+
+  def end_accepting(); end
+
+  def initialize(); end
+
+  def start_accepting(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToJoinedParagraph
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToLabel
+  def accept_blank_line(*node); end
+
+  def accept_block_quote(*node); end
+
+  def accept_heading(*node); end
+
+  def accept_list_end(*node); end
+
+  def accept_list_item_end(*node); end
+
+  def accept_list_item_start(*node); end
+
+  def accept_list_start(*node); end
+
+  def accept_paragraph(*node); end
+
+  def accept_raw(*node); end
+
+  def accept_rule(*node); end
+
+  def accept_verbatim(*node); end
+
+  def convert(text); end
+
+  def end_accepting(*node); end
+
+  def handle_regexp_CROSSREF(target); end
+
+  def handle_regexp_HARD_BREAK(*node); end
+
+  def handle_regexp_TIDYLINK(target); end
+
+  def initialize(markup=T.unsafe(nil)); end
+
+  def res(); end
+
+  def start_accepting(*node); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToLabel
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToMarkdown
+  def gen_url(url, text); end
+
+  def handle_rdoc_link(url); end
+
+  def handle_regexp_RDOCLINK(target); end
+
+  def handle_regexp_TIDYLINK(target); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToMarkdown
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToRdoc
+  def accept_blank_line(blank_line); end
+
+  def accept_block_quote(block_quote); end
+
+  def accept_heading(heading); end
+
+  def accept_indented_paragraph(paragraph); end
+
+  def accept_list_end(list); end
+
+  def accept_list_item_end(list_item); end
+
+  def accept_list_item_start(list_item); end
+
+  def accept_list_start(list); end
+
+  def accept_paragraph(paragraph); end
+
+  def accept_raw(raw); end
+
+  def accept_rule(rule); end
+
+  def accept_verbatim(verbatim); end
+
+  def attributes(text); end
+
+  def end_accepting(); end
+
+  def handle_regexp_HARD_BREAK(target); end
+
+  def handle_regexp_SUPPRESSED_CROSSREF(target); end
+
+  def indent(); end
+
+  def indent=(indent); end
+
+  def init_tags(); end
+
+  def initialize(markup=T.unsafe(nil)); end
+
+  def list_index(); end
+
+  def list_type(); end
+
+  def list_width(); end
+
+  def prefix(); end
+
+  def res(); end
+
+  def start_accepting(); end
+
+  def use_prefix(); end
+
+  def width(); end
+
+  def width=(width); end
+
+  def wrap(text); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToRdoc
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToTableOfContents
+  def accept_blank_line(*node); end
+
+  def accept_block_quote(*node); end
+
+  def accept_heading(heading); end
+
+  def accept_list_end(*node); end
+
+  def accept_list_end_bullet(*node); end
+
+  def accept_list_item_end(*node); end
+
+  def accept_list_item_start(*node); end
+
+  def accept_list_start(*node); end
+
+  def accept_paragraph(*node); end
+
+  def accept_raw(*node); end
+
+  def accept_rule(*node); end
+
+  def accept_verbatim(*node); end
+
+  def end_accepting(); end
+
+  def initialize(); end
+
+  def omit_headings_below(); end
+
+  def omit_headings_below=(omit_headings_below); end
+
+  def res(); end
+
+  def start_accepting(); end
+
+  def suppressed?(heading); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToTableOfContents
+  def self.to_toc(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToTest
+  def accept_blank_line(blank_line); end
+
+  def accept_heading(heading); end
+
+  def accept_list_end(list); end
+
+  def accept_list_item_end(list_item); end
+
+  def accept_list_item_start(list_item); end
+
+  def accept_list_start(list); end
+
+  def accept_paragraph(paragraph); end
+
+  def accept_raw(raw); end
+
+  def accept_rule(rule); end
+
+  def accept_verbatim(verbatim); end
+
+  def end_accepting(); end
+
+  def start_accepting(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToTest
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToTtOnly
+  def accept_blank_line(markup_item); end
+
+  def accept_block_quote(block_quote); end
+
+  def accept_heading(markup_item); end
+
+  def accept_list_end(list); end
+
+  def accept_list_item_end(markup_item); end
+
+  def accept_list_item_start(list_item); end
+
+  def accept_list_start(list); end
+
+  def accept_paragraph(paragraph); end
+
+  def accept_raw(markup_item); end
+
+  def accept_rule(markup_item); end
+
+  def accept_verbatim(markup_item); end
+
+  def do_nothing(markup_item); end
+
+  def end_accepting(); end
+
+  def initialize(markup=T.unsafe(nil)); end
+
+  def list_type(); end
+
+  def res(); end
+
+  def start_accepting(); end
+
+  def tt_sections(text); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::ToTtOnly
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Verbatim
+  def format(); end
+
+  def format=(format); end
+
+  def normalize(); end
+
+  def ruby?(); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP::Verbatim
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP
+  def self.parse(str); end
+end
+
+class YARD::Templates::Helpers::Markup::RDocMarkup
+end
+
+module YARD::Templates::Helpers::MarkupHelper
+  def load_markup_provider(type=T.unsafe(nil)); end
+
+  def markup_class(type=T.unsafe(nil)); end
+
+  def markup_file_contents(contents); end
+
+  def markup_for_file(contents, filename); end
+
+  def markup_provider(type=T.unsafe(nil)); end
+  MARKUP_EXTENSIONS = ::T.let(nil, ::T.untyped)
+  MARKUP_FILE_SHEBANG = ::T.let(nil, ::T.untyped)
+  MARKUP_PROVIDERS = ::T.let(nil, ::T.untyped)
+end
+
+module YARD::Templates::Helpers::MarkupHelper
+  def self.clear_markup_cache(); end
+
+  def self.markup_cache(); end
+
+  def self.markup_cache=(markup_cache); end
+end
+
+module YARD::Templates::Helpers::MethodHelper
+  def format_args(object); end
+
+  def format_block(object); end
+
+  def format_code(object, _show_lines=T.unsafe(nil)); end
+
+  def format_constant(value); end
+
+  def format_lines(object); end
+
+  def format_return_types(object); end
+end
+
+module YARD::Templates::Helpers::MethodHelper
+end
+
+module YARD::Templates::Helpers::ModuleHelper
+  def prune_method_listing(list, hide_attributes=T.unsafe(nil)); end
+end
+
+module YARD::Templates::Helpers::ModuleHelper
+end
+
+module YARD::Templates::Helpers::TextHelper
+  def align_right(text, spacer=T.unsafe(nil), col=T.unsafe(nil)); end
+
+  def h(text); end
+
+  def hr(col=T.unsafe(nil), sep=T.unsafe(nil)); end
+
+  def indent(text, len=T.unsafe(nil)); end
+
+  def signature(meth); end
+
+  def title_align_right(text, col=T.unsafe(nil)); end
+
+  def wrap(text, col=T.unsafe(nil)); end
+end
+
+module YARD::Templates::Helpers::TextHelper
+end
+
+module YARD::Templates::Helpers::UMLHelper
+  def format_path(object); end
+
+  def h(text); end
+
+  def tidy(data); end
+
+  def uml_visibility(object); end
+end
+
+module YARD::Templates::Helpers::UMLHelper
+end
+
+class YARD::Templates::Section
+  def <<(*args); end
+
+  def ==(other); end
+
+  def [](*args); end
+
+  def any(item); end
+
+  def eql?(other); end
+
+  def initialize(name, *args); end
+
+  def name(); end
+
+  def name=(name); end
+
+  def place(*args); end
+
+  def push(*args); end
+
+  def unshift(*args); end
+end
+
+class YARD::Templates::Section
+end
+
+module YARD::Templates::Template
+  include ::YARD::Templates::ErbCache
+  include ::YARD::Templates::Helpers::BaseHelper
+  include ::YARD::Templates::Helpers::MethodHelper
+  def T(*path); end
+
+  def class(); end
+
+  def class=(_); end
+
+  def erb(section, &block); end
+
+  def erb_file_for(section); end
+
+  def erb_with(content, filename=T.unsafe(nil)); end
+
+  def file(basename, allow_inherited=T.unsafe(nil)); end
+
+  def init(); end
+
+  def initialize(opts=T.unsafe(nil)); end
+
+  def inspect(); end
+
+  def options(); end
+
+  def options=(value); end
+
+  def run(opts=T.unsafe(nil), sects=T.unsafe(nil), start_at=T.unsafe(nil), break_first=T.unsafe(nil), &block); end
+
+  def section(); end
+
+  def section=(section); end
+
+  def sections(*args); end
+
+  def superb(sect=T.unsafe(nil), &block); end
+
+  def yieldall(opts=T.unsafe(nil), &block); end
+end
+
+module YARD::Templates::Template::ClassMethods
+  def S(*args); end
+
+  def T(*path); end
+
+  def find_file(basename); end
+
+  def find_nth_file(basename, index=T.unsafe(nil)); end
+
+  def full_path(); end
+
+  def full_path=(full_path); end
+
+  def full_paths(); end
+
+  def initialize(path, full_paths); end
+
+  def is_a?(klass); end
+
+  def new(*args); end
+
+  def path(); end
+
+  def path=(path); end
+
+  def reset_full_paths(); end
+
+  def run(*args); end
+end
+
+module YARD::Templates::Template::ClassMethods
+end
+
+module YARD::Templates::Template
+  def self.extra_includes(); end
+
+  def self.extra_includes=(extra_includes); end
+
+  def self.include_extra(template, options); end
+
+  def self.included(klass); end
+end
+
+class YARD::Verifier
+  def add_expressions(*expressions); end
+
+  def call(object); end
+
+  def expressions(); end
+
+  def expressions=(value); end
+
+  def initialize(*expressions); end
+
+  def method_missing(sym, *args, &block); end
+
+  def o(); end
+
+  def object(); end
+
+  def run(list); end
+  NILCLASS_METHODS = ::T.let(nil, ::T.untyped)
+end
+
+class YARD::Verifier
+end
+
 module Zeitwerk::ExplicitNamespace
   extend ::Zeitwerk::RealModName
 end
@@ -19204,9 +24994,6 @@ end
 
 module Zip::NullInputStream
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-end
-
-class Zip::StreamableStream
 end
 
 Zip::ZipCompressionMethodError = Zip::CompressionMethodError
@@ -19405,6 +25192,7 @@ class Zlib::GzipReader
 end
 
 class Zlib::GzipReader
+  def self.open(*_); end
 end
 
 class Zlib::GzipWriter
@@ -19428,6 +25216,7 @@ class Zlib::GzipWriter
 end
 
 class Zlib::GzipWriter
+  def self.open(*_); end
 end
 
 class Zlib::Inflate

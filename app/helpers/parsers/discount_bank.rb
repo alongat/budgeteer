@@ -12,7 +12,7 @@ module Parsers
     @name_column = 2
     @flip_amount = false
 
-    sig {params(excel_sheet: Roo::Excelx).returns(T::Boolean)}
+    sig { params(excel_sheet: Roo::Excelx).returns(T::Boolean) }
     def self.can_parse?(excel_sheet)
       excel_sheet.cell('A', 1) == 'תנועות אחרונות'
     end

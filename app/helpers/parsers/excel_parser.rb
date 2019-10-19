@@ -7,7 +7,7 @@ module Parsers
     extend T::Sig
     @flip_amount = true
 
-    sig {params(excel_file: Roo::Excelx).returns(T::Array[T.nilable(T::Array[String])])}
+    sig { params(excel_file: Roo::Excelx).returns(T::Array[T.nilable(T::Array[String])]) }
     def self.parse(excel_file)
       sheet = excel_file.sheet(0)
       num_of_rows = sheet.last_row
@@ -25,8 +25,13 @@ module Parsers
       csv_lines
     end
 
+    sig { params(name: String).returns(String) }
     def self.clean_name(name)
       name.gsub(/'|"|,/, '')
+    end
+
+    def self.date(_)
+      raise 'Not implemented!'
     end
   end
 end

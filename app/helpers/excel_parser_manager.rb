@@ -9,7 +9,7 @@ class ExcelParserManager
   extend T::Sig
   PARSERS = Parsers::ExcelParser.descendants
 
-  sig { params(in_dir: String, out_dir: String).returns(T::Boolean) }
+  sig { params(in_dir: String, out_dir: String).void }
   def self.do_the_trick(in_dir, out_dir)
     Dir.foreach(in_dir) do |filename|
       next unless filename.include?('.xls')
@@ -18,11 +18,9 @@ class ExcelParserManager
         create_csvs_from_xls(in_dir + '/' + filename, csv)
       end
     end
-
-    true
   end
 
-  sig { params(file_location: String, csv: T.untyped).returns(T::Boolean) }
+  sig { params(file_location: String, csv: T.untyped).void }
   def self.create_csvs_from_xls(file_location, csv)
     raise 'No parsers found' if PARSERS.blank?
 
@@ -32,16 +30,15 @@ class ExcelParserManager
     parser = PARSERS.find { |p| p.can_parse?(sheet) }
     if parser.nil?
       Rails.logger.info 'Found no parsers...'
-      return false
+      return
     end
 
     Rails.logger.info "Parsing file using #{parser.name}"
     csv_parsed_lines = parser.parse(xlsx)
     csv_parsed_lines.each { |l| csv << l }
-
-    true
   end
 
+  sig { params(out_dir: String, file: String).returns(String) }
   def self.build_csv_filename(out_dir, file)
     out_dir + '/' + file.sub('.xlsx', '.csv')
   end
