@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# typed: true
+# typed: false
 
 # TODO: check why parsers are not loaded eagerly
 Dir[File.join(__dir__, 'parsers', '*.rb')].each { |file| require file }

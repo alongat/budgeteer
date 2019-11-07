@@ -11,6 +11,94 @@ module AbstractController::Rendering
   DEFAULT_PROTECTED_INSTANCE_VARIABLES = ::T.let(nil, ::T.untyped)
 end
 
+class Account
+  def after_add_for_mtransactions(); end
+
+  def after_add_for_mtransactions=(val); end
+
+  def after_add_for_mtransactions?(); end
+
+  def after_remove_for_mtransactions(); end
+
+  def after_remove_for_mtransactions=(val); end
+
+  def after_remove_for_mtransactions?(); end
+
+  def autosave_associated_records_for_mtransactions(*args); end
+
+  def before_add_for_mtransactions(); end
+
+  def before_add_for_mtransactions=(val); end
+
+  def before_add_for_mtransactions?(); end
+
+  def before_remove_for_mtransactions(); end
+
+  def before_remove_for_mtransactions=(val); end
+
+  def before_remove_for_mtransactions?(); end
+
+  def validate_associated_records_for_mtransactions(*args); end
+end
+
+class Account::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Account::GeneratedRelationMethods
+end
+
+class Account::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Account::GeneratedRelationMethods
+end
+
+class Account::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Account::GeneratedRelationMethods
+end
+
+module Account::GeneratedAssociationMethods
+  def mtransaction_ids(); end
+
+  def mtransaction_ids=(ids); end
+end
+
+module Account::GeneratedAttributeMethods
+  extend ::Mutex_m
+end
+
+module Account::GeneratedRelationMethods
+end
+
+module Account::GeneratedRelationMethods
+  extend ::Mutex_m
+end
+
+class Account
+  def self.after_add_for_mtransactions(); end
+
+  def self.after_add_for_mtransactions=(val); end
+
+  def self.after_add_for_mtransactions?(); end
+
+  def self.after_remove_for_mtransactions(); end
+
+  def self.after_remove_for_mtransactions=(val); end
+
+  def self.after_remove_for_mtransactions?(); end
+
+  def self.before_add_for_mtransactions(); end
+
+  def self.before_add_for_mtransactions=(val); end
+
+  def self.before_add_for_mtransactions?(); end
+
+  def self.before_remove_for_mtransactions(); end
+
+  def self.before_remove_for_mtransactions=(val); end
+
+  def self.before_remove_for_mtransactions?(); end
+end
+
 module ActionCable
   INTERNAL = ::T.let(nil, ::T.untyped)
 end
@@ -1117,6 +1205,10 @@ module ActionMailbox::InboundEmail::GeneratedAttributeMethods
   extend ::Mutex_m
 end
 
+module ActionMailbox::InboundEmail::GeneratedRelationMethods
+  extend ::Mutex_m
+end
+
 class ActionMailbox::Router
   def add_route(address, to:); end
 
@@ -1421,6 +1513,10 @@ module ActionText::PlainTextConversion
 end
 
 module ActionText::RichText::GeneratedAttributeMethods
+  extend ::Mutex_m
+end
+
+module ActionText::RichText::GeneratedRelationMethods
   extend ::Mutex_m
 end
 
@@ -2112,51 +2208,6 @@ class ActiveRecord::ConnectionAdapters::AbstractAdapter
   SIMPLE_INT = ::T.let(nil, ::T.untyped)
 end
 
-class ActiveRecord::ConnectionAdapters::Column
-  def ==(other); end
-
-  def bigint?(); end
-
-  def collation(); end
-
-  def comment(); end
-
-  def default(); end
-
-  def default_function(); end
-
-  def encode_with(coder); end
-
-  def eql?(other); end
-
-  def has_default?(); end
-
-  def human_name(); end
-
-  def init_with(coder); end
-
-  def initialize(name, default, sql_type_metadata=T.unsafe(nil), null=T.unsafe(nil), default_function=T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), **_); end
-
-  def limit(*args, &block); end
-
-  def name(); end
-
-  def null(); end
-
-  def precision(*args, &block); end
-
-  def scale(*args, &block); end
-
-  def sql_type(*args, &block); end
-
-  def sql_type_metadata(); end
-
-  def type(*args, &block); end
-end
-
-class ActiveRecord::ConnectionAdapters::Column
-end
-
 class ActiveRecord::ConnectionAdapters::SQLite3Adapter
   ADAPTER_NAME = ::T.let(nil, ::T.untyped)
   COLLATE_REGEX = ::T.let(nil, ::T.untyped)
@@ -2191,32 +2242,12 @@ class ActiveRecord::FixtureSet
   MAX_ID = ::T.let(nil, ::T.untyped)
 end
 
-class ActiveRecord::InternalMetadata
-  include ::ActiveRecord::InternalMetadata::GeneratedAttributeMethods
-  include ::ActiveRecord::InternalMetadata::GeneratedAssociationMethods
-end
-
-module ActiveRecord::InternalMetadata::GeneratedAssociationMethods
-end
-
-module ActiveRecord::InternalMetadata::GeneratedAssociationMethods
-end
-
-module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
-end
-
 module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   extend ::Mutex_m
 end
 
-class ActiveRecord::InternalMetadata
-  def self.[](key); end
-
-  def self.[]=(key, value); end
-
-  def self.create_table(); end
-
-  def self.drop_table(); end
+module ActiveRecord::InternalMetadata::GeneratedRelationMethods
+  extend ::Mutex_m
 end
 
 class ActiveRecord::LogSubscriber
@@ -2413,86 +2444,6 @@ end
 class ActiveRecord::Migration::CommandRecorder
 end
 
-class ActiveRecord::Migration::Compatibility::V4_2
-  def index_exists?(table_name, column_name, options=T.unsafe(nil)); end
-
-  def remove_index(table_name, options=T.unsafe(nil)); end
-end
-
-module ActiveRecord::Migration::Compatibility::V4_2::TableDefinition
-  def belongs_to(*_, **options); end
-
-  def references(*_, **options); end
-
-  def timestamps(**options); end
-end
-
-module ActiveRecord::Migration::Compatibility::V4_2::TableDefinition
-end
-
-class ActiveRecord::Migration::Compatibility::V4_2
-end
-
-class ActiveRecord::Migration::Compatibility::V5_0
-  def add_belongs_to(table_name, ref_name, **options); end
-
-  def add_column(table_name, column_name, type, options=T.unsafe(nil)); end
-
-  def add_reference(table_name, ref_name, **options); end
-
-  def create_join_table(table_1, table_2, column_options: T.unsafe(nil), **options); end
-end
-
-module ActiveRecord::Migration::Compatibility::V5_0::TableDefinition
-  def belongs_to(*args, **options); end
-
-  def primary_key(name, type=T.unsafe(nil), **options); end
-
-  def references(*args, **options); end
-end
-
-module ActiveRecord::Migration::Compatibility::V5_0::TableDefinition
-end
-
-class ActiveRecord::Migration::Compatibility::V5_0
-end
-
-class ActiveRecord::Migration::Compatibility::V5_1
-  def change_column(table_name, column_name, type, options=T.unsafe(nil)); end
-
-  def create_table(table_name, options=T.unsafe(nil)); end
-end
-
-class ActiveRecord::Migration::Compatibility::V5_2
-  def add_timestamps(table_name, **options); end
-
-  def change_table(table_name, **options); end
-
-  def create_join_table(table_1, table_2, **options); end
-end
-
-module ActiveRecord::Migration::Compatibility::V5_2::CommandRecorder
-  def invert_change_column_comment(args); end
-
-  def invert_change_table_comment(args); end
-
-  def invert_transaction(args, &block); end
-end
-
-module ActiveRecord::Migration::Compatibility::V5_2::CommandRecorder
-end
-
-module ActiveRecord::Migration::Compatibility::V5_2::TableDefinition
-  def timestamps(**options); end
-end
-
-module ActiveRecord::Migration::Compatibility::V5_2::TableDefinition
-end
-
-module ActiveRecord::Migration::Compatibility
-  def self.find(version); end
-end
-
 class ActiveRecord::Migrator
   MIGRATOR_SALT = ::T.let(nil, ::T.untyped)
 end
@@ -2533,14 +2484,6 @@ class ActiveRecord::Relation
   VALUE_METHODS = ::T.let(nil, ::T.untyped)
 end
 
-class ActiveRecord::Relation::Merger
-  NORMAL_VALUES = ::T.let(nil, ::T.untyped)
-end
-
-class ActiveRecord::Relation::WhereClause
-  ARRAY_WITH_EMPTY_STRING = ::T.let(nil, ::T.untyped)
-end
-
 class ActiveRecord::Schema
   def define(info, &block); end
 end
@@ -2549,71 +2492,8 @@ module ActiveRecord::SchemaMigration::GeneratedAttributeMethods
   extend ::Mutex_m
 end
 
-class ActiveRecord::StatementCache
-  def execute(params, connection, &block); end
-
-  def initialize(query_builder, bind_map, klass); end
-end
-
-class ActiveRecord::StatementCache::BindMap
-  def bind(values); end
-
-  def initialize(bound_attributes); end
-end
-
-class ActiveRecord::StatementCache::BindMap
-end
-
-class ActiveRecord::StatementCache::Params
-  def bind(); end
-end
-
-class ActiveRecord::StatementCache::Params
-end
-
-class ActiveRecord::StatementCache::PartialQuery
-  def initialize(values); end
-end
-
-class ActiveRecord::StatementCache::PartialQuery
-end
-
-class ActiveRecord::StatementCache::PartialQueryCollector
-  def <<(str); end
-
-  def add_bind(obj); end
-
-  def value(); end
-end
-
-class ActiveRecord::StatementCache::PartialQueryCollector
-end
-
-class ActiveRecord::StatementCache::Query
-  def initialize(sql); end
-
-  def sql_for(binds, connection); end
-end
-
-class ActiveRecord::StatementCache::Query
-end
-
-class ActiveRecord::StatementCache::Substitute
-end
-
-class ActiveRecord::StatementCache::Substitute
-end
-
-class ActiveRecord::StatementCache
-  def self.create(connection, callable=T.unsafe(nil), &block); end
-
-  def self.partial_query(values); end
-
-  def self.partial_query_collector(); end
-
-  def self.query(sql); end
-
-  def self.unsupported_value?(value); end
+module ActiveRecord::SchemaMigration::GeneratedRelationMethods
+  extend ::Mutex_m
 end
 
 module ActiveRecord::Tasks::DatabaseTasks
@@ -2809,7 +2689,15 @@ module ActiveStorage::Attachment::GeneratedAttributeMethods
   extend ::Mutex_m
 end
 
+module ActiveStorage::Attachment::GeneratedRelationMethods
+  extend ::Mutex_m
+end
+
 module ActiveStorage::Blob::GeneratedAttributeMethods
+  extend ::Mutex_m
+end
+
+module ActiveStorage::Blob::GeneratedRelationMethods
   extend ::Mutex_m
 end
 
@@ -3209,6 +3097,30 @@ class ApplicationRecord
   include ::ApplicationRecord::GeneratedAssociationMethods
 end
 
+class ApplicationRecord::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRecord::GeneratedRelationMethods
+end
+
+class ApplicationRecord::ActiveRecord_AssociationRelation
+end
+
+class ApplicationRecord::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRecord::GeneratedRelationMethods
+end
+
+class ApplicationRecord::ActiveRecord_Associations_CollectionProxy
+end
+
+class ApplicationRecord::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRecord::GeneratedRelationMethods
+end
+
+class ApplicationRecord::ActiveRecord_Relation
+end
+
 module ApplicationRecord::GeneratedAssociationMethods
 end
 
@@ -3219,6 +3131,13 @@ module ApplicationRecord::GeneratedAttributeMethods
 end
 
 module ApplicationRecord::GeneratedAttributeMethods
+  extend ::Mutex_m
+end
+
+module ApplicationRecord::GeneratedRelationMethods
+end
+
+module ApplicationRecord::GeneratedRelationMethods
   extend ::Mutex_m
 end
 
@@ -5214,6 +5133,146 @@ module Capybara
   extend ::Capybara::DSL
 end
 
+class Category
+  def after_add_for_categories_mtransactions(); end
+
+  def after_add_for_categories_mtransactions=(val); end
+
+  def after_add_for_categories_mtransactions?(); end
+
+  def after_add_for_mtransactions(); end
+
+  def after_add_for_mtransactions=(val); end
+
+  def after_add_for_mtransactions?(); end
+
+  def after_remove_for_categories_mtransactions(); end
+
+  def after_remove_for_categories_mtransactions=(val); end
+
+  def after_remove_for_categories_mtransactions?(); end
+
+  def after_remove_for_mtransactions(); end
+
+  def after_remove_for_mtransactions=(val); end
+
+  def after_remove_for_mtransactions?(); end
+
+  def autosave_associated_records_for_categories_mtransactions(*args); end
+
+  def autosave_associated_records_for_mtransactions(*args); end
+
+  def before_add_for_categories_mtransactions(); end
+
+  def before_add_for_categories_mtransactions=(val); end
+
+  def before_add_for_categories_mtransactions?(); end
+
+  def before_add_for_mtransactions(); end
+
+  def before_add_for_mtransactions=(val); end
+
+  def before_add_for_mtransactions?(); end
+
+  def before_remove_for_categories_mtransactions(); end
+
+  def before_remove_for_categories_mtransactions=(val); end
+
+  def before_remove_for_categories_mtransactions?(); end
+
+  def before_remove_for_mtransactions(); end
+
+  def before_remove_for_mtransactions=(val); end
+
+  def before_remove_for_mtransactions?(); end
+
+  def validate_associated_records_for_categories_mtransactions(*args); end
+
+  def validate_associated_records_for_mtransactions(*args); end
+end
+
+class Category::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Category::GeneratedRelationMethods
+end
+
+class Category::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Category::GeneratedRelationMethods
+end
+
+class Category::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Category::GeneratedRelationMethods
+end
+
+module Category::GeneratedAssociationMethods
+  def mtransaction_ids(); end
+
+  def mtransaction_ids=(ids); end
+end
+
+module Category::GeneratedAttributeMethods
+  extend ::Mutex_m
+end
+
+module Category::GeneratedRelationMethods
+end
+
+module Category::GeneratedRelationMethods
+  extend ::Mutex_m
+end
+
+class Category
+  def self.after_add_for_categories_mtransactions(); end
+
+  def self.after_add_for_categories_mtransactions=(val); end
+
+  def self.after_add_for_categories_mtransactions?(); end
+
+  def self.after_add_for_mtransactions(); end
+
+  def self.after_add_for_mtransactions=(val); end
+
+  def self.after_add_for_mtransactions?(); end
+
+  def self.after_remove_for_categories_mtransactions(); end
+
+  def self.after_remove_for_categories_mtransactions=(val); end
+
+  def self.after_remove_for_categories_mtransactions?(); end
+
+  def self.after_remove_for_mtransactions(); end
+
+  def self.after_remove_for_mtransactions=(val); end
+
+  def self.after_remove_for_mtransactions?(); end
+
+  def self.before_add_for_categories_mtransactions(); end
+
+  def self.before_add_for_categories_mtransactions=(val); end
+
+  def self.before_add_for_categories_mtransactions?(); end
+
+  def self.before_add_for_mtransactions(); end
+
+  def self.before_add_for_mtransactions=(val); end
+
+  def self.before_add_for_mtransactions?(); end
+
+  def self.before_remove_for_categories_mtransactions(); end
+
+  def self.before_remove_for_categories_mtransactions=(val); end
+
+  def self.before_remove_for_categories_mtransactions?(); end
+
+  def self.before_remove_for_mtransactions(); end
+
+  def self.before_remove_for_mtransactions=(val); end
+
+  def self.before_remove_for_mtransactions?(); end
+end
+
 module ChildProcess
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -6660,9 +6719,9 @@ class Hash
 end
 
 class Hash
-  def self.from_trusted_xml(xml); end
-
   def self.try_convert(_); end
+
+  def self.zip(keys, values); end
 end
 
 HashWithIndifferentAccess = ActiveSupport::HashWithIndifferentAccess
@@ -7961,6 +8020,11 @@ module IRB
   def self.version(); end
 end
 
+module ITypeAssert
+  extend ::T::Private::Abstract::Hooks
+  extend ::T::InterfaceWrapper::Helpers
+end
+
 class Integer
   include ::JSON::Ext::Generator::GeneratorMethods::Integer
   include ::ActiveSupport::NumericWithFormat
@@ -8974,6 +9038,46 @@ module MonitorMixin
   def self.extend_object(obj); end
 end
 
+class Mtransaction
+  def autosave_associated_records_for_account(*args); end
+end
+
+class Mtransaction::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Mtransaction::GeneratedRelationMethods
+end
+
+class Mtransaction::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Mtransaction::GeneratedRelationMethods
+end
+
+class Mtransaction::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Mtransaction::GeneratedRelationMethods
+end
+
+module Mtransaction::GeneratedAssociationMethods
+  def build_account(*args, &block); end
+
+  def create_account(*args, &block); end
+
+  def create_account!(*args, &block); end
+
+  def reload_account(); end
+end
+
+module Mtransaction::GeneratedAttributeMethods
+  extend ::Mutex_m
+end
+
+module Mtransaction::GeneratedRelationMethods
+end
+
+module Mtransaction::GeneratedRelationMethods
+  extend ::Mutex_m
+end
+
 module Mutex_m
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -9846,6 +9950,28 @@ end
 
 module OpenSSL
   def self.fips_mode(); end
+end
+
+module Parlour
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Parlour::Debugging::Tree
+  INDENT_SPACES = ::T.let(nil, ::T.untyped)
+end
+
+class Parlour::Plugin
+  extend ::T::Private::Abstract::Hooks
+  extend ::T::InterfaceWrapper::Helpers
+end
+
+class Parlour::RbiGenerator::Parameter
+  PREFIXES = ::T.let(nil, ::T.untyped)
+end
+
+class Parlour::RbiGenerator::RbiObject
+  extend ::T::Private::Abstract::Hooks
+  extend ::T::InterfaceWrapper::Helpers
 end
 
 ParseError = Racc::ParseError
@@ -17343,6 +17469,10 @@ module Skiptrace
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
+module SmarterCSV
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
 class Socket
   AF_CCITT = ::T.let(nil, ::T.untyped)
   AF_CHAOS = ::T.let(nil, ::T.untyped)
@@ -20310,6 +20440,17 @@ class Sorbet::Private::TodoRBI
   def self.output_file(); end
 end
 
+SorbetRails::ModelPlugins::Base::Parameter = Parlour::RbiGenerator::Parameter
+
+module SorbetRails::ModelUtils
+  extend ::T::Private::Abstract::Hooks
+  extend ::T::InterfaceWrapper::Helpers
+end
+
+module SorbetRails
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
 class SortedSet
   def initialize(*args, &block); end
 end
@@ -21416,6 +21557,51 @@ class TracePoint
   def instruction_sequence(); end
 
   def parameters(); end
+end
+
+class TransactionFile
+  def autosave_associated_records_for_file_attachment(); end
+
+  def autosave_associated_records_for_file_blob(); end
+end
+
+class TransactionFile::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::TransactionFile::GeneratedRelationMethods
+end
+
+class TransactionFile::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::TransactionFile::GeneratedRelationMethods
+end
+
+class TransactionFile::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::TransactionFile::GeneratedRelationMethods
+end
+
+module TransactionFile::GeneratedAssociationMethods
+  def build_file_attachment(*args, &block); end
+
+  def create_file_attachment(*args, &block); end
+
+  def create_file_attachment!(*args, &block); end
+
+  def reload_file_attachment(); end
+
+  def reload_file_blob(); end
+end
+
+module TransactionFile::GeneratedAttributeMethods
+  extend ::Mutex_m
+end
+
+module TransactionFile::GeneratedRelationMethods
+  def with_attached_file(*args, &block); end
+end
+
+module TransactionFile::GeneratedRelationMethods
+  extend ::Mutex_m
 end
 
 class TrueClass

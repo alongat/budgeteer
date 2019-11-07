@@ -703,6 +703,12 @@ end
 class ActiveRecord::ExplainRegistry
   def self.collect?(*args, &block); end
 end
+class ActiveRecord::Scoping::ScopeRegistry
+  def self.value_for(*args, &block); end
+end
+class ActiveRecord::InternalMetadata < ActiveRecord::Base
+  def self.default_scope_override; end
+end
 class ActiveSupport::TestCase < Minitest::Test
   def config; end
   def config=(val); end

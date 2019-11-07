@@ -1,12 +1,13 @@
 # frozen_string_literal: true
-# typed: true
+# typed: false
 
 class ParseIncomingDataJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    incoming_file_location = args[:file_location]
-    file_source = args[:source]
+    ap args
+    incoming_file_location = args[0][:file_location]
+    file_source = args[0][:source]
 
     parsed_file = ExcelParserManager.parse_file(incoming_file_location)
 

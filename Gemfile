@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'awesome_print', '~> 1.8.0'
 gem 'roo', '~> 2.8.0'
+gem 'sorbet-rails'
 gem 'sorbet-runtime'
 gem 'smarter_csv'
 

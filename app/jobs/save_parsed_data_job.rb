@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-# typed: true
+# typed: false
 
 class SaveParsedDataJob < ApplicationJob
   queue_as :default

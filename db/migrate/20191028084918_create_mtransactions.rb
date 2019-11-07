@@ -1,3 +1,4 @@
+# typed: true
 class CreateMtransactions < ActiveRecord::Migration[6.0]
   def change
     create_table :mtransactions do |t|
