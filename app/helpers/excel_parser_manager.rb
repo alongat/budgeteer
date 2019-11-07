@@ -20,12 +20,14 @@ class ExcelParserManager
     end
   end
 
-  sig { params(file: String).returns(CSV) }
-  def self.parse_file(file)
-    output_file = CSV.open(build_csv_filename(Rails.root.join('tmp'), file), mode: 'w', encoding: 'utf-8')
-    create_csvs_from_xls(file, output_file)
+  sig { params(input_file_path: String).returns(String) }
+  def self.parse_file(input_file_path)
+    output_file_path = build_csv_filename(Rails.root.join('tmp').to_s, "#{SecureRandom.hex(32)}.csv")
+    output_file = CSV.open(output_file_path, 'w', encoding: 'utf-8')
+    create_csvs_from_xls(input_file_path, output_file)
+    output_file.close
 
-    output_file
+    output_file_path
   end
 
   sig { params(file_location: String, csv: CSV).void }
@@ -42,7 +44,7 @@ class ExcelParserManager
     end
 
     Rails.logger.info "Parsing file using #{parser.name}"
-    csv << 'date, place, amount' # TODO: do it natively with CSV/SmartCSV
+    csv << %w(date place amount) # TODO: do it natively with CSV/SmartCSV
     csv_parsed_lines = parser.parse(xlsx)
     csv_parsed_lines.each { |l| csv << l }
   end

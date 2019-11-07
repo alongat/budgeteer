@@ -5,13 +5,13 @@ class ParseIncomingDataJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    ap args
-    incoming_file_location = args[0][:file_location]
+    input_filename = args[0][:file_location] # TODO take filename
     file_source = args[0][:source]
 
-    parsed_file = ExcelParserManager.parse_file(incoming_file_location)
+    parsed_file_path = ExcelParserManager.parse_file(input_filename)
 
-    tf = TransactionFile.create!(filename: incoming_file_location, source: file_source)
-    tf.attach(io: parsed_file, filename: "#{file_source.downcase}_#{incoming_file_location.downcase}.csv")
+    tf = TransactionFile.create!(filename: input_filename, source: file_source)
+    tf.file.attach(io:  File.open(parsed_file_path),
+                   filename: "#{file_source.downcase}_#{input_filename.downcase}.csv")
   end
 end
