@@ -2,16 +2,16 @@ require "application_system_test_case"
 
 class TransactionsTest < ApplicationSystemTestCase
   setup do
-    @transaction = transactions(:one)
+    @mtransaction = transactions(:one)
   end
 
   test "visiting the index" do
-    visit transactions_url
+    visit mmtransactions_url
     assert_selector "h1", text: "Transactions"
   end
 
   test "creating a Transaction" do
-    visit transactions_url
+    visit mmtransactions_url
     click_on "New Transaction"
 
     click_on "Create Transaction"
@@ -21,7 +21,7 @@ class TransactionsTest < ApplicationSystemTestCase
   end
 
   test "updating a Transaction" do
-    visit transactions_url
+    visit mmtransactions_url
     click_on "Edit", match: :first
 
     click_on "Update Transaction"
@@ -31,7 +31,7 @@ class TransactionsTest < ApplicationSystemTestCase
   end
 
   test "destroying a Transaction" do
-    visit transactions_url
+    visit mmtransactions_url
     page.accept_confirm do
       click_on "Destroy", match: :first
     end

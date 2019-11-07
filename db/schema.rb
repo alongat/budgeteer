@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_084918) do
+ActiveRecord::Schema.define(version: 2019_11_07_111942) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
@@ -18,7 +18,20 @@ ActiveRecord::Schema.define(version: 2019_10_28_084918) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories_mtransactions", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "mtransaction_id", null: false
+    t.index "\"mtransactions_id\"", name: "index_categories_mtransactions_on_mtransactions_id"
+    t.index ["category_id"], name: "index_categories_mtransactions_on_category_id"
+  end
+
+  create_table "mtransactions", force: :cascade do |t|
     t.datetime "date", null: false
     t.float "amount", null: false
     t.string "place", null: false
@@ -26,8 +39,16 @@ ActiveRecord::Schema.define(version: 2019_10_28_084918) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "account_id"
-    t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index ["account_id"], name: "index_mtransactions_on_account_id"
   end
 
-  add_foreign_key "transactions", "accounts"
+  create_table "transaction_files", force: :cascade do |t|
+    t.string "filename", null: false
+    t.string "source", null: false
+    t.boolean "save", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "mtransactions", "accounts"
 end

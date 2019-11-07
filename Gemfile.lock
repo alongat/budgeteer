@@ -182,6 +182,7 @@ GEM
     selenium-webdriver (3.142.6)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    smarter_csv (1.2.6)
     solargraph (0.37.2)
       backport (~> 1.1)
       bundler (>= 1.17.2)
@@ -257,6 +258,7 @@ DEPENDENCIES
   roo (~> 2.8.0)
   sass-rails (~> 5)
   selenium-webdriver
+  smarter_csv
   solargraph
   sorbet
   sorbet-runtime

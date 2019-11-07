@@ -2,47 +2,47 @@ require 'test_helper'
 
 class TransactionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @transaction = transactions(:one)
+    @mtransaction = transactions(:one)
   end
 
   test "should get index" do
-    get transactions_url
+    get mmtransactions_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_transaction_url
+    get new_mtransaction_url
     assert_response :success
   end
 
   test "should create transaction" do
     assert_difference('Transaction.count') do
-      post transactions_url, params: { transaction: {  } }
+      post mmtransactions_url, params: {mtransaction: {  } }
     end
 
-    assert_redirected_to transaction_url(Transaction.last)
+    assert_redirected_to mtransaction_url(Mtransaction.last)
   end
 
   test "should show transaction" do
-    get transaction_url(@transaction)
+    get mtransaction_url(@mtransaction)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_transaction_url(@transaction)
+    get edit_mtransaction_url(@mtransaction)
     assert_response :success
   end
 
   test "should update transaction" do
-    patch transaction_url(@transaction), params: { transaction: {  } }
-    assert_redirected_to transaction_url(@transaction)
+    patch mtransaction_url(@mtransaction), params: {mtransaction: {  } }
+    assert_redirected_to mtransaction_url(@mtransaction)
   end
 
   test "should destroy transaction" do
     assert_difference('Transaction.count', -1) do
-      delete transaction_url(@transaction)
+      delete mtransaction_url(@mtransaction)
     end
 
-    assert_redirected_to transactions_url
+    assert_redirected_to mmtransactions_url
   end
 end
