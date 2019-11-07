@@ -14,7 +14,7 @@ module SmarterCSV
   def self.process(input, options = nil, &block); end
 end
 class Hash
-  def self.from_trusted_xml(xml); end
+  def self.try_convert(arg0); end
 end
 class SmarterCSV::SmarterCSVException < StandardError
 end

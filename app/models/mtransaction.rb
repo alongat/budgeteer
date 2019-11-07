@@ -1,11 +1,9 @@
-# typed: true
+# typed: false
 # frozen_string_literal: true
 
 class Mtransaction< ApplicationRecord
   belongs_to :account
-  after_create :assign_category
+  belongs_to :location
 
-  def assign_category
-
-  end
+  has_many :categories
 end

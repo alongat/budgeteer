@@ -6,5 +6,7 @@ class CreateCategories < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    Category.create!(name: '_UNKNOWN_')
   end
 end

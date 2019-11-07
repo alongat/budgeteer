@@ -44,7 +44,7 @@ class ExcelParserManager
     end
 
     Rails.logger.info "Parsing file using #{parser.name}"
-    csv << %w(date place amount) # TODO: do it natively with CSV/SmartCSV
+    csv << %w(date location amount) # TODO: do it natively with CSV/SmartCSV
     csv_parsed_lines = parser.parse(xlsx)
     csv_parsed_lines.each { |l| csv << l }
   end

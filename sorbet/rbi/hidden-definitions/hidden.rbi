@@ -18,13 +18,27 @@ class Account
 
   def after_add_for_mtransactions?(); end
 
+  def after_add_for_transaction_files(); end
+
+  def after_add_for_transaction_files=(val); end
+
+  def after_add_for_transaction_files?(); end
+
   def after_remove_for_mtransactions(); end
 
   def after_remove_for_mtransactions=(val); end
 
   def after_remove_for_mtransactions?(); end
 
+  def after_remove_for_transaction_files(); end
+
+  def after_remove_for_transaction_files=(val); end
+
+  def after_remove_for_transaction_files?(); end
+
   def autosave_associated_records_for_mtransactions(*args); end
+
+  def autosave_associated_records_for_transaction_files(*args); end
 
   def before_add_for_mtransactions(); end
 
@@ -32,13 +46,27 @@ class Account
 
   def before_add_for_mtransactions?(); end
 
+  def before_add_for_transaction_files(); end
+
+  def before_add_for_transaction_files=(val); end
+
+  def before_add_for_transaction_files?(); end
+
   def before_remove_for_mtransactions(); end
 
   def before_remove_for_mtransactions=(val); end
 
   def before_remove_for_mtransactions?(); end
 
+  def before_remove_for_transaction_files(); end
+
+  def before_remove_for_transaction_files=(val); end
+
+  def before_remove_for_transaction_files?(); end
+
   def validate_associated_records_for_mtransactions(*args); end
+
+  def validate_associated_records_for_transaction_files(*args); end
 end
 
 class Account::ActiveRecord_AssociationRelation
@@ -60,6 +88,14 @@ module Account::GeneratedAssociationMethods
   def mtransaction_ids(); end
 
   def mtransaction_ids=(ids); end
+
+  def transaction_file_ids(); end
+
+  def transaction_file_ids=(ids); end
+
+  def transaction_files(); end
+
+  def transaction_files=(value); end
 end
 
 module Account::GeneratedAttributeMethods
@@ -80,11 +116,23 @@ class Account
 
   def self.after_add_for_mtransactions?(); end
 
+  def self.after_add_for_transaction_files(); end
+
+  def self.after_add_for_transaction_files=(val); end
+
+  def self.after_add_for_transaction_files?(); end
+
   def self.after_remove_for_mtransactions(); end
 
   def self.after_remove_for_mtransactions=(val); end
 
   def self.after_remove_for_mtransactions?(); end
+
+  def self.after_remove_for_transaction_files(); end
+
+  def self.after_remove_for_transaction_files=(val); end
+
+  def self.after_remove_for_transaction_files?(); end
 
   def self.before_add_for_mtransactions(); end
 
@@ -92,11 +140,23 @@ class Account
 
   def self.before_add_for_mtransactions?(); end
 
+  def self.before_add_for_transaction_files(); end
+
+  def self.before_add_for_transaction_files=(val); end
+
+  def self.before_add_for_transaction_files?(); end
+
   def self.before_remove_for_mtransactions(); end
 
   def self.before_remove_for_mtransactions=(val); end
 
   def self.before_remove_for_mtransactions?(); end
+
+  def self.before_remove_for_transaction_files(); end
+
+  def self.before_remove_for_transaction_files=(val); end
+
+  def self.before_remove_for_transaction_files?(); end
 end
 
 module ActionCable
@@ -1059,7 +1119,9 @@ class ActionDispatch::SystemTestCase
   include ::Capybara::Minitest::Assertions
   include ::ActionDispatch::SystemTesting::TestHelpers::SetupAndTeardown
   include ::ActionDispatch::SystemTesting::TestHelpers::ScreenshotHelper
-  include ::ActionDispatch::SystemTesting::TestHelpers::UndefMethods
+  def initialize(*_); end
+
+  def method_missing(method, *args, &block); end
 end
 
 class ActionDispatch::SystemTestCase
@@ -1095,14 +1157,6 @@ module ActionDispatch::SystemTesting::TestHelpers::SetupAndTeardown
 end
 
 module ActionDispatch::SystemTesting::TestHelpers::SetupAndTeardown
-end
-
-module ActionDispatch::SystemTesting::TestHelpers::UndefMethods
-  METHODS = ::T.let(nil, ::T.untyped)
-end
-
-module ActionDispatch::SystemTesting::TestHelpers::UndefMethods
-  extend ::ActiveSupport::Concern
 end
 
 class ActionDispatch::TestRequest
@@ -1779,6 +1833,9 @@ class ActionView::Template::Inline
   Finalizer = ::T.let(nil, ::T.untyped)
 end
 
+class ActionView::Template::LegacyTemplate
+end
+
 class ActionView::Template::Sources::File
   def initialize(filename); end
 end
@@ -2238,10 +2295,6 @@ module ActiveRecord::FinderMethods
   ONE_AS_ONE = ::T.let(nil, ::T.untyped)
 end
 
-class ActiveRecord::FixtureSet
-  MAX_ID = ::T.let(nil, ::T.untyped)
-end
-
 module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   extend ::Mutex_m
 end
@@ -2577,6 +2630,46 @@ class ActiveRecord::Tasks::SQLiteDatabaseTasks
 end
 
 class ActiveRecord::Tasks::SQLiteDatabaseTasks
+end
+
+module ActiveRecord::TestDatabases
+end
+
+module ActiveRecord::TestDatabases
+  def self.create_and_load_schema(i, env_name:); end
+end
+
+module ActiveRecord::TestFixtures
+  def after_teardown(); end
+
+  def before_setup(); end
+
+  def enlist_fixture_connections(); end
+
+  def run_in_transaction?(); end
+
+  def setup_fixtures(config=T.unsafe(nil)); end
+
+  def teardown_fixtures(); end
+end
+
+module ActiveRecord::TestFixtures::ClassMethods
+  def fixtures(*fixture_set_names); end
+
+  def set_fixture_class(class_names=T.unsafe(nil)); end
+
+  def setup_fixture_accessors(fixture_set_names=T.unsafe(nil)); end
+
+  def uses_transaction(*methods); end
+
+  def uses_transaction?(method); end
+end
+
+module ActiveRecord::TestFixtures::ClassMethods
+end
+
+module ActiveRecord::TestFixtures
+  extend ::ActiveSupport::Concern
 end
 
 module ActiveRecord::Transactions
@@ -2964,7 +3057,6 @@ class ActiveSupport::Subscriber
 end
 
 class ActiveSupport::TestCase
-  include ::Minitest::Parallel::Test
   include ::ActiveSupport::Testing::SetupAndTeardown
 end
 
@@ -3180,6 +3272,7 @@ class Array
   def to_csv(**options); end
 
   def to_h(); end
+
 end
 
 class Array
@@ -4258,8 +4351,6 @@ module CGI::HtmlExtension
 end
 
 class CSV
-  def <<(row); end
-
   def add_row(row); end
 
   def binmode(*args, &block); end
@@ -4666,8 +4757,6 @@ end
 class CSV
   extend ::Forwardable
   def self.filter(input=T.unsafe(nil), output=T.unsafe(nil), **options); end
-
-  def self.generate(str=T.unsafe(nil), **options); end
 
   def self.generate_line(row, **options); end
 
@@ -6343,6 +6432,7 @@ end
 
 module Exception2MessageMapper
   def bind(cl); end
+
 end
 
 Exception2MessageMapper::E2MM = Exception2MessageMapper
@@ -6470,6 +6560,8 @@ class File::Stat
 end
 
 class File
+  def self.atomic_write(file_name, temp_dir=T.unsafe(nil)); end
+
   def self.exists?(_); end
 
   def self.lutime(*_); end
@@ -6687,8 +6779,6 @@ class Hash
 
   def default_proc=(default_proc); end
 
-  def dig(*_); end
-
   def fetch_values(*_); end
 
   def filter!(); end
@@ -6719,8 +6809,6 @@ class Hash
 end
 
 class Hash
-  def self.try_convert(_); end
-
   def self.zip(keys, values); end
 end
 
@@ -7274,8 +7362,6 @@ class IO
   def self.foreach(*_); end
 
   def self.open(*_); end
-
-  def self.pipe(*_); end
 end
 
 class IPAddr
@@ -8020,11 +8106,6 @@ module IRB
   def self.version(); end
 end
 
-module ITypeAssert
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-end
-
 class Integer
   include ::JSON::Ext::Generator::GeneratorMethods::Integer
   include ::ActiveSupport::NumericWithFormat
@@ -8456,6 +8537,9 @@ end
 
 class Mail::Multibyte::Unicode::UnicodeDatabase
   ATTRIBUTES = ::T.let(nil, ::T.untyped)
+end
+
+class Mail::PartsList
 end
 
 class Mail::ReceivedField
@@ -9039,7 +9123,37 @@ module MonitorMixin
 end
 
 class Mtransaction
+  def after_add_for_categories(); end
+
+  def after_add_for_categories=(val); end
+
+  def after_add_for_categories?(); end
+
+  def after_remove_for_categories(); end
+
+  def after_remove_for_categories=(val); end
+
+  def after_remove_for_categories?(); end
+
   def autosave_associated_records_for_account(*args); end
+
+  def autosave_associated_records_for_categories(*args); end
+
+  def autosave_associated_records_for_location(*args); end
+
+  def before_add_for_categories(); end
+
+  def before_add_for_categories=(val); end
+
+  def before_add_for_categories?(); end
+
+  def before_remove_for_categories(); end
+
+  def before_remove_for_categories=(val); end
+
+  def before_remove_for_categories?(); end
+
+  def validate_associated_records_for_categories(*args); end
 end
 
 class Mtransaction::ActiveRecord_AssociationRelation
@@ -9060,11 +9174,31 @@ end
 module Mtransaction::GeneratedAssociationMethods
   def build_account(*args, &block); end
 
+  def build_location(*args, &block); end
+
+  def categories(); end
+
+  def categories=(value); end
+
+  def category_ids(); end
+
+  def category_ids=(ids); end
+
   def create_account(*args, &block); end
 
   def create_account!(*args, &block); end
 
+  def create_location(*args, &block); end
+
+  def create_location!(*args, &block); end
+
+  def location(); end
+
+  def location=(value); end
+
   def reload_account(); end
+
+  def reload_location(); end
 end
 
 module Mtransaction::GeneratedAttributeMethods
@@ -9076,6 +9210,32 @@ end
 
 module Mtransaction::GeneratedRelationMethods
   extend ::Mutex_m
+end
+
+class Mtransaction
+  def self.after_add_for_categories(); end
+
+  def self.after_add_for_categories=(val); end
+
+  def self.after_add_for_categories?(); end
+
+  def self.after_remove_for_categories(); end
+
+  def self.after_remove_for_categories=(val); end
+
+  def self.after_remove_for_categories?(); end
+
+  def self.before_add_for_categories(); end
+
+  def self.before_add_for_categories=(val); end
+
+  def self.before_add_for_categories?(); end
+
+  def self.before_remove_for_categories(); end
+
+  def self.before_remove_for_categories=(val); end
+
+  def self.before_remove_for_categories?(); end
 end
 
 module Mutex_m
@@ -9122,6 +9282,8 @@ class Net::HTTP
   ENVIRONMENT_VARIABLE_IS_MULTIUSER_SAFE = ::T.let(nil, ::T.untyped)
 end
 
+Net::HTTP::ProxyMod = Net::HTTP::ProxyDelta
+
 class Net::HTTPAlreadyReported
   HAS_BODY = ::T.let(nil, ::T.untyped)
 end
@@ -9129,9 +9291,13 @@ end
 class Net::HTTPAlreadyReported
 end
 
-Net::HTTPClientError::EXCEPTION_TYPE = Net::HTTPServerException
+class Net::HTTPClientError
+end
 
-Net::HTTPClientErrorCode = Net::HTTPClientError
+Net::HTTPClientErrorCode::EXCEPTION_TYPE = Net::HTTPServerException
+
+class Net::HTTPClientError
+end
 
 Net::HTTPClientException = Net::HTTPServerException
 
@@ -9205,9 +9371,13 @@ end
 class Net::HTTPRangeNotSatisfiable
 end
 
-Net::HTTPRedirection::EXCEPTION_TYPE = Net::HTTPRetriableError
+class Net::HTTPRedirection
+end
 
-Net::HTTPRedirectionCode = Net::HTTPRedirection
+Net::HTTPRedirectionCode::EXCEPTION_TYPE = Net::HTTPRetriableError
+
+class Net::HTTPRedirection
+end
 
 class Net::HTTPRequestTimeout
   HAS_BODY = ::T.let(nil, ::T.untyped)
@@ -9222,23 +9392,23 @@ Net::HTTPResponceReceiver = Net::HTTPResponse
 
 Net::HTTPRetriableCode = Net::HTTPRedirection
 
-Net::HTTPServerError::EXCEPTION_TYPE = Net::HTTPFatalError
-
-Net::HTTPServerErrorCode = Net::HTTPServerError
-
-class Net::HTTP
+class Net::HTTPServerError
 end
 
-Net::HTTPSession::ProxyDelta = Net::HTTP::ProxyDelta
+Net::HTTPServerErrorCode::EXCEPTION_TYPE = Net::HTTPFatalError
 
-Net::HTTPSession::ProxyMod = Net::HTTP::ProxyDelta
-
-class Net::HTTP
+class Net::HTTPServerError
 end
 
-Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
+Net::HTTPSession = Net::HTTP
 
-Net::HTTPSuccessCode = Net::HTTPSuccess
+class Net::HTTPSuccess
+end
+
+Net::HTTPSuccessCode::EXCEPTION_TYPE = Net::HTTPError
+
+class Net::HTTPSuccess
+end
 
 class Net::HTTPURITooLong
   HAS_BODY = ::T.let(nil, ::T.untyped)
@@ -9258,6 +9428,7 @@ end
 
 class Net::IMAP
   def open_timeout(); end
+
   RESPONSE_ERRORS = ::T.let(nil, ::T.untyped)
 end
 
@@ -9960,18 +10131,8 @@ module Parlour::Debugging::Tree
   INDENT_SPACES = ::T.let(nil, ::T.untyped)
 end
 
-class Parlour::Plugin
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-end
-
 class Parlour::RbiGenerator::Parameter
   PREFIXES = ::T.let(nil, ::T.untyped)
-end
-
-class Parlour::RbiGenerator::RbiObject
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
 end
 
 ParseError = Racc::ParseError
@@ -13806,6 +13967,7 @@ end
 
 module Random::Formatter
   def alphanumeric(n=T.unsafe(nil)); end
+
   ALPHANUMERIC = ::T.let(nil, ::T.untyped)
 end
 
@@ -20442,11 +20604,6 @@ end
 
 SorbetRails::ModelPlugins::Base::Parameter = Parlour::RbiGenerator::Parameter
 
-module SorbetRails::ModelUtils
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-end
-
 module SorbetRails
   extend ::T::Private::Methods::SingletonMethodHooks
 end
@@ -20752,8 +20909,6 @@ class String
   def shellescape(); end
 
   def shellsplit(); end
-
-  def strip_indent(); end
 
   def succ!(); end
 
@@ -21604,6 +21759,227 @@ module TransactionFile::GeneratedRelationMethods
   extend ::Mutex_m
 end
 
+class TransactionLocation
+  include ::TransactionLocation::GeneratedAttributeMethods
+  include ::TransactionLocation::GeneratedAssociationMethods
+  def after_add_for_categories(); end
+
+  def after_add_for_categories=(val); end
+
+  def after_add_for_categories?(); end
+
+  def after_add_for_categories_transactionlocations(); end
+
+  def after_add_for_categories_transactionlocations=(val); end
+
+  def after_add_for_categories_transactionlocations?(); end
+
+  def after_add_for_mtransactions(); end
+
+  def after_add_for_mtransactions=(val); end
+
+  def after_add_for_mtransactions?(); end
+
+  def after_remove_for_categories(); end
+
+  def after_remove_for_categories=(val); end
+
+  def after_remove_for_categories?(); end
+
+  def after_remove_for_categories_transactionlocations(); end
+
+  def after_remove_for_categories_transactionlocations=(val); end
+
+  def after_remove_for_categories_transactionlocations?(); end
+
+  def after_remove_for_mtransactions(); end
+
+  def after_remove_for_mtransactions=(val); end
+
+  def after_remove_for_mtransactions?(); end
+
+  def autosave_associated_records_for_categories(*args); end
+
+  def autosave_associated_records_for_categories_transactionlocations(*args); end
+
+  def autosave_associated_records_for_mtransactions(*args); end
+
+  def before_add_for_categories(); end
+
+  def before_add_for_categories=(val); end
+
+  def before_add_for_categories?(); end
+
+  def before_add_for_categories_transactionlocations(); end
+
+  def before_add_for_categories_transactionlocations=(val); end
+
+  def before_add_for_categories_transactionlocations?(); end
+
+  def before_add_for_mtransactions(); end
+
+  def before_add_for_mtransactions=(val); end
+
+  def before_add_for_mtransactions?(); end
+
+  def before_remove_for_categories(); end
+
+  def before_remove_for_categories=(val); end
+
+  def before_remove_for_categories?(); end
+
+  def before_remove_for_categories_transactionlocations(); end
+
+  def before_remove_for_categories_transactionlocations=(val); end
+
+  def before_remove_for_categories_transactionlocations?(); end
+
+  def before_remove_for_mtransactions(); end
+
+  def before_remove_for_mtransactions=(val); end
+
+  def before_remove_for_mtransactions?(); end
+
+  def validate_associated_records_for_categories(*args); end
+
+  def validate_associated_records_for_categories_transactionlocations(*args); end
+
+  def validate_associated_records_for_mtransactions(*args); end
+end
+
+class TransactionLocation::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::TransactionLocation::GeneratedRelationMethods
+end
+
+class TransactionLocation::ActiveRecord_AssociationRelation
+end
+
+class TransactionLocation::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::TransactionLocation::GeneratedRelationMethods
+end
+
+class TransactionLocation::ActiveRecord_Associations_CollectionProxy
+end
+
+class TransactionLocation::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::TransactionLocation::GeneratedRelationMethods
+end
+
+class TransactionLocation::ActiveRecord_Relation
+end
+
+module TransactionLocation::GeneratedAssociationMethods
+  def categories(); end
+
+  def categories=(value); end
+
+  def category_ids(); end
+
+  def category_ids=(ids); end
+
+  def mtransaction_ids(); end
+
+  def mtransaction_ids=(ids); end
+
+  def mtransactions(); end
+
+  def mtransactions=(value); end
+end
+
+module TransactionLocation::GeneratedAssociationMethods
+end
+
+module TransactionLocation::GeneratedAttributeMethods
+end
+
+module TransactionLocation::GeneratedAttributeMethods
+  extend ::Mutex_m
+end
+
+module TransactionLocation::GeneratedRelationMethods
+end
+
+module TransactionLocation::GeneratedRelationMethods
+  extend ::Mutex_m
+end
+
+class TransactionLocation
+  def self.after_add_for_categories(); end
+
+  def self.after_add_for_categories=(val); end
+
+  def self.after_add_for_categories?(); end
+
+  def self.after_add_for_categories_transactionlocations(); end
+
+  def self.after_add_for_categories_transactionlocations=(val); end
+
+  def self.after_add_for_categories_transactionlocations?(); end
+
+  def self.after_add_for_mtransactions(); end
+
+  def self.after_add_for_mtransactions=(val); end
+
+  def self.after_add_for_mtransactions?(); end
+
+  def self.after_remove_for_categories(); end
+
+  def self.after_remove_for_categories=(val); end
+
+  def self.after_remove_for_categories?(); end
+
+  def self.after_remove_for_categories_transactionlocations(); end
+
+  def self.after_remove_for_categories_transactionlocations=(val); end
+
+  def self.after_remove_for_categories_transactionlocations?(); end
+
+  def self.after_remove_for_mtransactions(); end
+
+  def self.after_remove_for_mtransactions=(val); end
+
+  def self.after_remove_for_mtransactions?(); end
+
+  def self.before_add_for_categories(); end
+
+  def self.before_add_for_categories=(val); end
+
+  def self.before_add_for_categories?(); end
+
+  def self.before_add_for_categories_transactionlocations(); end
+
+  def self.before_add_for_categories_transactionlocations=(val); end
+
+  def self.before_add_for_categories_transactionlocations?(); end
+
+  def self.before_add_for_mtransactions(); end
+
+  def self.before_add_for_mtransactions=(val); end
+
+  def self.before_add_for_mtransactions?(); end
+
+  def self.before_remove_for_categories(); end
+
+  def self.before_remove_for_categories=(val); end
+
+  def self.before_remove_for_categories?(); end
+
+  def self.before_remove_for_categories_transactionlocations(); end
+
+  def self.before_remove_for_categories_transactionlocations=(val); end
+
+  def self.before_remove_for_categories_transactionlocations?(); end
+
+  def self.before_remove_for_mtransactions(); end
+
+  def self.before_remove_for_mtransactions=(val); end
+
+  def self.before_remove_for_mtransactions?(); end
+end
+
 class TrueClass
   include ::JSON::Ext::Generator::GeneratorMethods::TrueClass
 end
@@ -21778,6 +22154,7 @@ module URI
   def self.encode_www_form_component(str, enc=T.unsafe(nil)); end
 
   def self.get_encoding(label); end
+
 end
 
 class UnboundMethod
@@ -25180,6 +25557,9 @@ end
 
 module Zip::NullInputStream
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
+end
+
+class Zip::StreamableStream
 end
 
 Zip::ZipCompressionMethodError = Zip::CompressionMethodError

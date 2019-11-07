@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activerecord/all/activerecord.rbi
 #
-# activerecord-6.0.0
+# activerecord-6.0.1
 module Arel
   def self.arel_node?(value); end
   def self.fetch_attribute(value); end
@@ -1442,6 +1442,7 @@ class ActiveRecord::ConnectionAdapters::AbstractAdapter
   def discard!; end
   def disconnect!; end
   def enable_extension(name); end
+  def exec_insert_all(*arg0); end
   def expire; end
   def extensions; end
   def extract_limit(sql_type); end
@@ -1465,6 +1466,7 @@ class ActiveRecord::ConnectionAdapters::AbstractAdapter
   def pool=(arg0); end
   def prefetch_primary_key?(table_name = nil); end
   def prepared_statements; end
+  def prepared_statements_disabled_cache; end
   def preventing_writes?; end
   def raw_connection; end
   def reconnect!; end
@@ -1499,6 +1501,7 @@ class ActiveRecord::ConnectionAdapters::AbstractAdapter
   def supports_bulk_alter?; end
   def supports_comments?; end
   def supports_comments_in_create?; end
+  def supports_common_table_expressions?; end
   def supports_datetime_with_precision?; end
   def supports_ddl_transactions?; end
   def supports_explain?; end
@@ -1642,6 +1645,7 @@ module ActiveRecord::ConnectionAdapters::DatabaseStatements
   def enable_lazy_transactions!(*args, &block); end
   def exec_delete(sql, name = nil, binds = nil); end
   def exec_insert(sql, name = nil, binds = nil, pk = nil, sequence_name = nil); end
+  def exec_insert_all(sql, name); end
   def exec_query(sql, name = nil, binds = nil, prepare: nil); end
   def exec_rollback_db_transaction; end
   def exec_update(sql, name = nil, binds = nil); end
@@ -2139,6 +2143,7 @@ end
 class ActiveRecord::Scoping::ScopeRegistry
   def initialize; end
   def raise_invalid_scope_type!(scope_type); end
+  def self.value_for(*args, &block); end
   def set_value_for(scope_type, model, value); end
   def value_for(scope_type, model, skip_inherited_scope = nil); end
   extend ActiveSupport::PerThreadRegistry
@@ -2448,6 +2453,7 @@ class ActiveRecord::ExplainRegistry
   def queries; end
   def queries=(arg0); end
   def reset; end
+  def self.collect?(*args, &block); end
   extend ActiveSupport::PerThreadRegistry
 end
 class ActiveRecord::ExplainSubscriber
@@ -2597,7 +2603,7 @@ module ActiveRecord::ConnectionHandling
   def clear_query_caches_for_current_thread; end
   def clear_reloadable_connections!(*args, &block); end
   def connected?; end
-  def connected_to(database: nil, role: nil, &blk); end
+  def connected_to(database: nil, role: nil, prevent_writes: nil, &blk); end
   def connected_to?(role:); end
   def connection; end
   def connection_config; end
@@ -2934,6 +2940,9 @@ module ActiveRecord::Core::ClassMethods
   def relation; end
   def table_metadata; end
   def type_caster; end
+end
+class ActiveRecord::Core::InspectionMask < Anonymous_Delegator_13
+  def pretty_print(pp); end
 end
 class ActiveRecord::ConnectionTimeoutError < ActiveRecord::ConnectionNotEstablished
 end
@@ -3372,7 +3381,7 @@ module ActiveRecord::Locking::Optimistic::ClassMethods
   def reset_locking_column; end
   def update_counters(id, counters); end
 end
-class ActiveRecord::Locking::LockingType < Anonymous_Delegator_13
+class ActiveRecord::Locking::LockingType < Anonymous_Delegator_14
   def deserialize(value); end
   def encode_with(coder); end
   def init_with(coder); end
@@ -3437,7 +3446,7 @@ end
 module ActiveRecord::AttributeMethods::TimeZoneConversion
   extend ActiveSupport::Concern
 end
-class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter < Anonymous_Delegator_14
+class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter < Anonymous_Delegator_15
   def cast(value); end
   def convert_time_to_time_zone(value); end
   def deserialize(value); end
@@ -3597,6 +3606,7 @@ module ActiveRecord::AutosaveAssociation
   def association_valid?(reflection, record, index = nil); end
   def before_save_collection_association; end
   def changed_for_autosave?; end
+  def custom_validation_context?; end
   def destroyed_by_association; end
   def destroyed_by_association=(reflection); end
   def mark_for_destruction; end
@@ -4125,6 +4135,7 @@ class ActiveRecord::ConnectionAdapters::SQLite3Adapter < ActiveRecord::Connectio
   def requires_reloading?; end
   def self.database_exists?(config); end
   def self.represent_boolean_as_integer=(value); end
+  def supports_common_table_expressions?; end
   def supports_datetime_with_precision?; end
   def supports_ddl_transactions?; end
   def supports_explain?; end
@@ -4503,6 +4514,7 @@ module ActiveRecord::QueryMethods
   def reverse_sql_order(order_query); end
   def rewhere(conditions); end
   def select(*fields); end
+  def select_association_list(associations); end
   def select_values; end
   def select_values=(value); end
   def skip_preloading!; end
@@ -5112,12 +5124,12 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
 end
 class ActiveRecord::AssociationRelation < ActiveRecord::Relation
   def ==(other); end
-  def build(*args, &block); end
-  def create!(*args, &block); end
-  def create(*args, &block); end
+  def build(attributes = nil, &block); end
+  def create!(attributes = nil, &block); end
+  def create(attributes = nil, &block); end
   def exec_queries; end
   def initialize(klass, association); end
-  def new(*args, &block); end
+  def new(attributes = nil, &block); end
   def proxy_association; end
 end
 class ActiveRecord::Associations::Builder::CollectionAssociation < ActiveRecord::Associations::Builder::Association
@@ -5347,6 +5359,7 @@ class ActiveRecord::Associations::Association
   def reset_scope; end
   def scope; end
   def scope_for_create; end
+  def scoping(relation, &block); end
   def set_inverse_instance(record); end
   def set_inverse_instance_from_queries(record); end
   def set_owner_attributes(record); end
@@ -5529,6 +5542,7 @@ class ActiveRecord::Associations::JoinDependency
   def alias_tracker; end
   def aliases; end
   def apply_column_aliases(relation); end
+  def base_klass; end
   def build(associations, base_klass); end
   def construct(ar_parent, parent, row, seen, model_cache); end
   def construct_model(record, node, row, model_cache, id); end
@@ -5771,6 +5785,7 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
   def self._validators; end
   def self.attribute_type_decorations; end
   def self.create_table; end
+  def self.default_scope_override; end
   def self.defined_enums; end
   def self.drop_table; end
   def self.primary_key; end
@@ -5975,142 +5990,4 @@ class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation < ActiveRe
   extend ActiveRecord::Delegation::ClassSpecificRelation::ClassMethods
   include ActiveRecord::Delegation::ClassSpecificRelation
   include ActiveRecord::SchemaMigration::GeneratedRelationMethods
-end
-module ActiveRecord::TestDatabases
-  def self.create_and_load_schema(i, env_name:); end
-end
-class ActiveRecord::FixtureSet
-  def [](x); end
-  def []=(k, v); end
-  def all_loaded_fixtures; end
-  def all_loaded_fixtures=(obj); end
-  def config; end
-  def each(&block); end
-  def fixtures; end
-  def initialize(_, name, class_name, path, config = nil); end
-  def model_class; end
-  def model_class=(class_name); end
-  def name; end
-  def read_fixture_files(path); end
-  def self.all_loaded_fixtures; end
-  def self.all_loaded_fixtures=(obj); end
-  def self.cache_fixtures(connection, fixtures_map); end
-  def self.cache_for_connection(connection); end
-  def self.cached_fixtures(connection, keys_to_fetch = nil); end
-  def self.context_class; end
-  def self.create_fixtures(fixtures_directory, fixture_set_names, class_names = nil, config = nil, &block); end
-  def self.default_fixture_model_name(fixture_set_name, config = nil); end
-  def self.default_fixture_table_name(fixture_set_name, config = nil); end
-  def self.fixture_is_cached?(connection, table_name); end
-  def self.identify(label, column_type = nil); end
-  def self.insert(fixture_sets, connection); end
-  def self.instantiate_all_loaded_fixtures(object, load_instances = nil); end
-  def self.instantiate_fixtures(object, fixture_set, load_instances = nil); end
-  def self.read_and_insert(fixtures_directory, fixture_files, class_names, connection); end
-  def self.reset_cache; end
-  def self.update_all_loaded_fixtures(fixtures_map); end
-  def size; end
-  def table_name; end
-  def table_rows; end
-  def yaml_file_path(path); end
-end
-class ActiveRecord::FixtureSet::File
-  def config_row; end
-  def each(&block); end
-  def initialize(file); end
-  def model_class; end
-  def prepare_erb(content); end
-  def raw_rows; end
-  def render(content); end
-  def rows; end
-  def self.open(file); end
-  def validate(data); end
-  include Enumerable
-end
-class ActiveRecord::FixtureSet::RenderContext
-  def self.create_subclass; end
-end
-class ActiveRecord::FixtureSet::TableRow
-  def add_join_records(association); end
-  def fill_row_model_attributes; end
-  def fill_timestamps; end
-  def generate_primary_key; end
-  def initialize(fixture, table_rows:, label:, now:); end
-  def interpolate_label; end
-  def model_class; end
-  def model_metadata; end
-  def reflection_class; end
-  def resolve_enums; end
-  def resolve_sti_reflections; end
-  def to_hash; end
-end
-class ActiveRecord::FixtureSet::TableRow::ReflectionProxy
-  def initialize(association); end
-  def join_table; end
-  def name; end
-  def primary_key_type; end
-end
-class ActiveRecord::FixtureSet::TableRow::HasManyThroughProxy < ActiveRecord::FixtureSet::TableRow::ReflectionProxy
-  def join_table; end
-  def lhs_key; end
-  def rhs_key; end
-end
-class ActiveRecord::FixtureSet::ModelMetadata
-  def has_primary_key_column?; end
-  def inheritance_column_name; end
-  def initialize(model_class); end
-  def primary_key_name; end
-  def primary_key_type; end
-  def timestamp_column_names; end
-end
-class ActiveRecord::FixtureSet::TableRows
-  def build_table_rows_from(table_name, fixtures, config); end
-  def initialize(table_name, model_class:, fixtures:, config:); end
-  def model_class; end
-  def model_metadata; end
-  def tables; end
-  def to_hash; end
-end
-module ActiveRecord::TestFixtures
-  def after_teardown; end
-  def before_setup; end
-  def enlist_fixture_connections; end
-  def instantiate_fixtures; end
-  def load_fixtures(config); end
-  def load_instances?; end
-  def run_in_transaction?; end
-  def setup_fixtures(config = nil); end
-  def setup_shared_connection_pool; end
-  def teardown_fixtures; end
-  extend ActiveSupport::Concern
-end
-module ActiveRecord::TestFixtures::ClassMethods
-  def fixtures(*fixture_set_names); end
-  def set_fixture_class(class_names = nil); end
-  def setup_fixture_accessors(fixture_set_names = nil); end
-  def uses_transaction(*methods); end
-  def uses_transaction?(method); end
-end
-class ActiveRecord::FixtureClassNotFound < ActiveRecord::ActiveRecordError
-end
-class ActiveRecord::FixtureSet::ClassCache
-  def [](fs_name); end
-  def default_fixture_model(fs_name, config); end
-  def initialize(class_names, config); end
-  def insert_class(class_names, name, klass); end
-end
-class ActiveRecord::Fixture
-  def [](key); end
-  def class_name; end
-  def each; end
-  def find; end
-  def fixture; end
-  def initialize(fixture, model_class); end
-  def model_class; end
-  def to_hash; end
-  include Enumerable
-end
-class ActiveRecord::Fixture::FixtureError < StandardError
-end
-class ActiveRecord::Fixture::FormatError < ActiveRecord::Fixture::FixtureError
 end

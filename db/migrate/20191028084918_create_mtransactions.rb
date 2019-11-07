@@ -4,7 +4,6 @@ class CreateMtransactions < ActiveRecord::Migration[6.0]
     create_table :mtransactions do |t|
       t.datetime :date, null: false
       t.float :amount, null: false
-      t.string :place, null: false
       t.string :note
 
       t.timestamps

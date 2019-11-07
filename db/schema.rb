@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_07_183615) do
+ActiveRecord::Schema.define(version: 2019_11_07_190501) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
@@ -45,22 +45,29 @@ ActiveRecord::Schema.define(version: 2019_11_07_183615) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "categories_mtransactions", id: false, force: :cascade do |t|
+  create_table "categories_locations", id: false, force: :cascade do |t|
     t.integer "category_id", null: false
-    t.integer "mtransaction_id", null: false
-    t.index "\"mtransactions_id\"", name: "index_categories_mtransactions_on_mtransactions_id"
-    t.index ["category_id"], name: "index_categories_mtransactions_on_category_id"
+    t.integer "location_id", null: false
+    t.index "\"locations_id\"", name: "index_categories_locations_on_locations_id"
+    t.index ["category_id"], name: "index_categories_locations_on_category_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "mtransactions", force: :cascade do |t|
     t.datetime "date", null: false
     t.float "amount", null: false
-    t.string "place", null: false
     t.string "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "account_id"
+    t.integer "location_id"
     t.index ["account_id"], name: "index_mtransactions_on_account_id"
+    t.index ["location_id"], name: "index_mtransactions_on_location_id"
   end
 
   create_table "transaction_files", force: :cascade do |t|
@@ -69,8 +76,12 @@ ActiveRecord::Schema.define(version: 2019_11_07_183615) do
     t.boolean "saved", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_transaction_files_on_account_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "mtransactions", "accounts"
+  add_foreign_key "mtransactions", "locations"
+  add_foreign_key "transaction_files", "accounts"
 end
