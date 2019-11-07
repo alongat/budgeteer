@@ -108,6 +108,9 @@ GEM
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     parallel (1.17.0)
+    parlour (0.8.1)
+      rainbow (~> 3.0.0)
+      sorbet-runtime
     parser (2.6.4.1)
       ast (~> 2.4.0)
     public_suffix (4.0.1)
@@ -182,6 +185,7 @@ GEM
     selenium-webdriver (3.142.6)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    smarter_csv (1.2.6)
     solargraph (0.37.2)
       backport (~> 1.1)
       bundler (>= 1.17.2)
@@ -196,6 +200,8 @@ GEM
       yard (~> 0.9)
     sorbet (0.4.4891)
       sorbet-static (= 0.4.4891)
+    sorbet-rails (0.5.8.1)
+      parlour (~> 0.8.0)
     sorbet-runtime (0.4.4891)
     sorbet-static (0.4.4891-universal-darwin-14)
     spring (2.1.0)
@@ -257,8 +263,10 @@ DEPENDENCIES
   roo (~> 2.8.0)
   sass-rails (~> 5)
   selenium-webdriver
+  smarter_csv
   solargraph
   sorbet
+  sorbet-rails
   sorbet-runtime
   spring
   spring-watcher-listen (~> 2.0.0)
