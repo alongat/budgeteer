@@ -11,7 +11,7 @@ class ParseIncomingDataJob < ApplicationJob
     parsed_file_path = ExcelParserManager.parse_file(input_filename)
 
     tf = TransactionFile.create!(filename: input_filename, source: file_source)
-    tf.file.attach(io:  File.open(parsed_file_path),
+    tf.file.attach(io: File.open(parsed_file_path),
                    filename: "#{file_source.downcase}_#{input_filename.downcase}.csv")
   end
 end
