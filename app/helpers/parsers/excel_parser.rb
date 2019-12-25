@@ -17,10 +17,12 @@ module Parsers
         amount = sheet_row[@amount_column].to_s.gsub(/,|₪|\s/, '').to_f
         date = calculated_date || sheet_row[@date_column].to_s
         amount = -amount if @flip_amount
-        next if amount.zero?
+        name = clean_name(sheet_row[@name_column].to_s)
+        next if amount.zero? || name.blank?
+        next if date.match?(/[a-zA-Z]/)
 
-        [date.to_s, clean_name(sheet_row[@name_column].to_s), amount.to_s]
-      end
+        [date.to_s, name, amount.to_s]
+      end.compact
 
       csv_lines
     end

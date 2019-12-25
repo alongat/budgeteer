@@ -1,9 +1,9 @@
 # typed: false
 # frozen_string_literal: true
 
-class Mtransaction< ApplicationRecord
+class Mtransaction < ApplicationRecord
   belongs_to :account
   belongs_to :location
 
-  has_many :categories
+  has_many :categories, through: :location
 end

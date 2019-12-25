@@ -30,9 +30,10 @@ module Parsers
         (@start_row..num_of_rows).each do |row|
           sheet_row = sheet.pow(row)
           amount = sheet_row[@amount_column].to_s.gsub(/,|₪|\s/, '').to_f
-          next if amount.zero?
+          name = clean_name(sheet_row[@name_column].to_s)
+          next if amount.zero? || name.blank?
 
-          csv_lines << [date, clean_name(sheet_row[@name_column].to_s), -amount]
+          csv_lines << [date, name, -amount]
         end
       end
 
