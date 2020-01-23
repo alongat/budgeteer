@@ -9,6 +9,6 @@ class CreateTransactionFiles < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_reference :transaction_files, :account, foreign_key: true
+    add_reference :transaction_files, :account, foreign_key: true, index: true
   end
 end

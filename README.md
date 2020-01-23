@@ -1,7 +1,7 @@
 # README
 
 TODO:
-1. write load data task + example on generating new env
+1. write load data task + example on generating new env - DONE
 2. support account-transfer-transactions
 3. Fix encoding and handle hebrew - DONE
 4. automate download of excel files 
@@ -19,7 +19,7 @@ TODO:
 Quick setup:
 1. ParseIncomingDataJob.perform_now(source: :bank, file_location: './tmp/in/ZZZZZ.xlsx'
 2. SaveParsedDataJob.perform_now
-3. 
+3. . 
 
 Data model:
 Account - Holds diffrent managed accounts, from Credit Cards, Cash and Savings Account

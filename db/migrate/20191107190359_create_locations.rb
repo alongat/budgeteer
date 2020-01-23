@@ -6,6 +6,6 @@ class CreateLocations < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_reference :mtransactions, :location, foreign_key: true
+    add_reference :mtransactions, :location, foreign_key: true, index: true
   end
 end

@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_07_190501) do
+ActiveRecord::Schema.define(version: 2019_12_28_171937) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
+    t.float "base_amount", default: 0.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -78,6 +79,18 @@ ActiveRecord::Schema.define(version: 2019_11_07_190501) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "account_id"
     t.index ["account_id"], name: "index_transaction_files_on_account_id"
+  end
+
+  create_table "transfer_transactions", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.float "amount", null: false
+    t.string "note"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "from_account_id", default: 0, null: false
+    t.integer "to_account_id", default: 0, null: false
+    t.index ["from_account_id"], name: "index_transfer_transactions_on_from_account_id"
+    t.index ["to_account_id"], name: "index_transfer_transactions_on_to_account_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
