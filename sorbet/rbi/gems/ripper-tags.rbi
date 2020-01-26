@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/ripper-tags/all/ripper-tags.rbi
 #
-# ripper-tags-0.7.0
+# ripper-tags-0.8.1
 module RipperTags
   def self.default_options; end
   def self.formatter_for(options); end
@@ -193,11 +193,17 @@ class RipperTags::EmacsFormatter < RipperTags::DefaultFormatter
   def format(tag, name_field = nil); end
   def format_section_header(filename, data); end
   def include_qualified_names?; end
-  def initialize(*arg0); end
   def start_file_section(filename, io); end
   def supported_flags; end
   def with_output; end
   def write(tag, io); end
+  def write_section(filename, data, io); end
+end
+class RipperTags::EmacsAppendFormatter
+  def initialize(fmt); end
+  def parse_tag_file; end
+  def with_output; end
+  def write(tag, out); end
 end
 class RipperTags::VimFormatter < RipperTags::DefaultFormatter
   def display_class(tag); end
@@ -212,6 +218,12 @@ class RipperTags::VimFormatter < RipperTags::DefaultFormatter
   def include_qualified_names?; end
   def supported_fields; end
   def supported_flags; end
+  def with_output; end
+  def write(tag, out); end
+  def write_line(line); end
+end
+class RipperTags::VimAppendFormatter
+  def initialize(fmt); end
   def with_output; end
   def write(tag, out); end
 end

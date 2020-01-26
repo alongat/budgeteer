@@ -1,3 +1,4 @@
+# typed: true
 class CreateTransferTransactions < ActiveRecord::Migration[6.0]
   def change
     create_table :transfer_transactions do |t|

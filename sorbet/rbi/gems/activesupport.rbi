@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activesupport/all/activesupport.rbi
 #
-# activesupport-6.0.1
+# activesupport-6.0.2.1
 class Hash
   def _deep_transform_keys_in_object!(object, &block); end
   def _deep_transform_keys_in_object(object, &block); end
@@ -35,7 +35,7 @@ class Hash
   def reverse_merge!(other_hash); end
   def reverse_merge(other_hash); end
   def reverse_update(other_hash); end
-  def self.from_trusted_xml(xml); end
+  def self.[](*arg0); end
   def self.from_xml(xml, disallowed_types = nil); end
   def slice!(*keys); end
   def stringify_keys!; end
@@ -140,7 +140,6 @@ end
 class Module::DelegationError < NoMethodError
 end
 class ActiveSupport::Deprecation
-  def self.allocate; end
   def self.behavior(*args, &block); end
   def self.behavior=(arg); end
   def self.debug(*args, &block); end
@@ -152,8 +151,6 @@ class ActiveSupport::Deprecation
   def self.gem_name(*args, &block); end
   def self.gem_name=(arg); end
   def self.initialize(*args, &block); end
-  def self.instance; end
-  def self.new(*arg0); end
   def self.silence(*args, &block); end
   def self.silenced(*args, &block); end
   def self.silenced=(arg); end
@@ -331,7 +328,7 @@ class Array
   def inquiry; end
   def second; end
   def second_to_last; end
-  def self.wrap(object); end
+  def self.[](*arg0); end
   def split(value = nil); end
   def third; end
   def third_to_last; end
@@ -2147,8 +2144,8 @@ module ActiveSupport::NumericWithFormat
   def to_s(format = nil, options = nil); end
 end
 class File < IO
-  def self.join(*arg0); end
-  def self.probe_stat_in(dir); end
+  def self.link(arg0, arg1); end
+  def self.symlink(arg0, arg1); end
 end
 module ActiveSupport::RangeWithFormat
   def to_default_s(format = nil); end

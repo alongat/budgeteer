@@ -1,13 +1,6 @@
-# typed: false
-# frozen_string_literal: true
-
+# typed: strict
 class Category < ApplicationRecord
-  DEFAULT_CATEGORY = '_UNKNOWN_'
+  has_many :tags
 
-  has_and_belongs_to_many :locations
-  has_many :mtransactions, through: :locations
-
-  def self.default_category
-    Category.find_by_name(DEFAULT_CATEGORY)
-  end
+  enum type: %i(shopping grocries eating_out transportation vacations housing_and_living_expenses entertainment)
 end

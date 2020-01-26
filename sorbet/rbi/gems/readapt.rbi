@@ -7,56 +7,58 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/readapt/all/readapt.rbi
 #
-# readapt-0.7.1
+# readapt-0.8.1
 module Readapt
   def self.normalize_path(arg0); end
 end
-class Readapt::Breakpoint
-  def condition; end
-  def initialize(source, line, condition); end
-  def line; end
-  def source; end
+module Readapt::Breakpoints
+  def self.clear; end
+  def self.delete(arg0); end
+  def self.match(arg0, arg1); end
+  def self.set(arg0, arg1); end
 end
-class Readapt::Location
+class Readapt::Frame < Data
+  def evaluate(code); end
   def file; end
-  def initialize(file, line); end
+  def frame_binding; end
+  def initialize(arg0, arg1, arg2); end
   def line; end
-  def match?(other); end
+  def local(sym); end
+  def local_id; end
+  def locals; end
 end
-class Readapt::Thread
+class Readapt::Thread < Data
   def control; end
   def control=(arg0); end
   def frames; end
   def id; end
-  def initialize(id); end
   def name; end
-end
-class Readapt::Thread::NullThread < Readapt::Thread
-  def initialize; end
-end
-class Readapt::Frame
-  def evaluate(code); end
-  def initialize(location, binding_id); end
-  def local(sym); end
-  def local_id; end
-  def locals; end
-  def location; end
+  def object; end
+  def self.all; end
+  def self.find(arg0); end
+  def self.include?(arg0); end
 end
 module Readapt::Monitor
   def self.pause(arg0); end
   def self.start(arg0); end
   def self.stop; end
 end
+class Readapt::Breakpoint
+  def condition; end
+  def hit_condition; end
+  def hit_cursor; end
+  def hit_cursor=(arg0); end
+  def initialize(source, line, condition, hit_condition); end
+  def line; end
+  def source; end
+end
 class Readapt::Snapshot
-  def binding_id; end
   def control; end
   def control=(arg0); end
-  def depth; end
   def event; end
   def file; end
-  def initialize(thread_id, binding_id, file, line, method_name, event, depth); end
+  def initialize(thread_id, file, line, event); end
   def line; end
-  def method_name; end
   def thread_id; end
 end
 module Readapt::Finder
@@ -81,7 +83,7 @@ class Readapt::Debugger
   def run; end
   def self.run(&block); end
   def send_event(event, data, wait = nil); end
-  def set_breakpoint(source, line, condition); end
+  def set_breakpoint(source, line, condition, hitcount); end
   def set_original_args; end
   def set_program_args; end
   def shutdown; end
@@ -122,6 +124,8 @@ class Readapt::Message::Threads < Readapt::Message::Base
   def run; end
 end
 class Readapt::Message::StackTrace < Readapt::Message::Base
+  def frame_code(file, line); end
+  def read_file(file); end
   def run; end
 end
 class Readapt::Message::Scopes < Readapt::Message::Base
@@ -183,12 +187,6 @@ class Readapt::DataReader
   def prepare_to_parse_message; end
   def receive(data); end
   def set_message_handler(&block); end
-end
-module Readapt::Breakpoints
-  def self.clear; end
-  def self.delete(arg0); end
-  def self.match(arg0, arg1); end
-  def self.set(arg0, arg1); end
 end
 class Readapt::Shell < Thor
 end

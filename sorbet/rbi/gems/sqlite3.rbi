@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/sqlite3/all/sqlite3.rbi
 #
-# sqlite3-1.4.1
+# sqlite3-1.4.2
 class SQLite3::Database
   def authorizer(&block); end
   def authorizer=(arg0); end
@@ -29,7 +29,6 @@ class SQLite3::Database
   def define_aggregator2(arg0, arg1); end
   def define_function(arg0); end
   def define_function_with_flags(arg0, arg1); end
-  def enable_load_extension(arg0); end
   def encoding; end
   def errcode; end
   def errmsg; end
@@ -45,7 +44,6 @@ class SQLite3::Database
   def initialize(file, options = nil, zvfs = nil); end
   def interrupt; end
   def last_insert_row_id; end
-  def load_extension(arg0); end
   def make_type_translator(should_translate); end
   def open16(arg0); end
   def open_v2(arg0, arg1, arg2); end

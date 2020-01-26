@@ -1,3 +1,4 @@
+# typed: true
 module StringsHelper
   extend T::Sig
 

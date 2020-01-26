@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actionpack/all/actionpack.rbi
 #
-# actionpack-6.0.1
+# actionpack-6.0.2.1
 module ActionPack
   def self.gem_version; end
   def self.version; end
@@ -801,7 +801,6 @@ class Mime::AllType < Mime::Type
   def html?; end
   def initialize; end
   def self.allocate; end
-  def self.instance; end
   def self.new(*arg0); end
   extend Singleton::SingletonClassMethods
   include Singleton
@@ -812,7 +811,6 @@ class Mime::NullType
   def ref; end
   def respond_to_missing?(method, _); end
   def self.allocate; end
-  def self.instance; end
   def self.new(*arg0); end
   extend Singleton::SingletonClassMethods
   include Singleton
@@ -1706,7 +1704,14 @@ class ActionDispatch::Session::AbstractStore < Rack::Session::Abstract::Persiste
   include ActionDispatch::Session::SessionObject
   include ActionDispatch::Session::StaleSessionCheck
 end
-class ActionDispatch::Session::CookieStore < ActionDispatch::Session::AbstractStore
+class ActionDispatch::Session::AbstractSecureStore < Rack::Session::Abstract::PersistedSecure
+  def generate_sid; end
+  def set_cookie(request, session_id, cookie); end
+  include ActionDispatch::Session::Compatibility
+  include ActionDispatch::Session::SessionObject
+  include ActionDispatch::Session::StaleSessionCheck
+end
+class ActionDispatch::Session::CookieStore < ActionDispatch::Session::AbstractSecureStore
   def cookie_jar(request); end
   def delete_session(req, session_id, options); end
   def extract_session_id(req); end
@@ -1717,6 +1722,10 @@ class ActionDispatch::Session::CookieStore < ActionDispatch::Session::AbstractSt
   def set_cookie(request, session_id, cookie); end
   def unpacked_cookie_data(req); end
   def write_session(req, sid, session_data, options); end
+end
+class ActionDispatch::Session::CookieStore::SessionId < Anonymous_Delegator_2
+  def cookie_value; end
+  def initialize(session_id, cookie_value = nil); end
 end
 class ActionDispatch::Flash
   def self.new(app); end
@@ -1778,7 +1787,7 @@ module ActionController::ParamsWrapper
   def process_action(*args); end
   extend ActiveSupport::Concern
 end
-class Anonymous_Struct_2 < Struct
+class Anonymous_Struct_3 < Struct
   def exclude; end
   def exclude=(_); end
   def format; end
@@ -1796,7 +1805,7 @@ class Anonymous_Struct_2 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class ActionController::ParamsWrapper::Options < Anonymous_Struct_2
+class ActionController::ParamsWrapper::Options < Anonymous_Struct_3
   def _default_wrap_model; end
   def include; end
   def initialize(name, format, include, exclude, klass, model); end
@@ -1897,7 +1906,7 @@ class ActionDispatch::Response
   include MonitorMixin
   include Rack::Response::Helpers
 end
-class ActionDispatch::Response::Header < Anonymous_Delegator_3
+class ActionDispatch::Response::Header < Anonymous_Delegator_4
   def []=(k, v); end
   def initialize(response, header); end
   def merge(other); end
@@ -2626,7 +2635,7 @@ class ActionController::API < ActionController::Metal
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker
   extend ActiveSupport::Rescuable::ClassMethods
-  extend Anonymous_Module_4
+  extend Anonymous_Module_5
   include AbstractController::Callbacks
   include AbstractController::Callbacks
   include AbstractController::Helpers
@@ -2666,7 +2675,7 @@ class ActionController::API < ActionController::Metal
   include Turbolinks::Controller
   include Turbolinks::Redirection
 end
-module Anonymous_Module_4
+module Anonymous_Module_5
   def inherited(klass); end
 end
 module ActionView::RoutingUrlFor
@@ -2872,7 +2881,7 @@ class ActionController::Base < ActionController::Metal
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker
   extend ActiveSupport::Rescuable::ClassMethods
-  extend Anonymous_Module_5
+  extend Anonymous_Module_6
   include AbstractController::AssetPaths
   include AbstractController::Caching
   include AbstractController::Caching::Fragments
@@ -2935,7 +2944,7 @@ class ActionController::Base < ActionController::Metal
   include Turbolinks::Controller
   include Turbolinks::Redirection
 end
-module Anonymous_Module_5
+module Anonymous_Module_6
   def inherited(klass); end
 end
 module ActionController::Live

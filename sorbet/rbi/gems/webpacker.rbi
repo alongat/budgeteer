@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/webpacker/all/webpacker.rbi
 #
-# webpacker-4.0.7
+# webpacker-4.2.2
 class Webpacker::Instance
   def commands; end
   def compiler; end
@@ -47,6 +47,7 @@ class Webpacker::Configuration
   def extensions; end
   def extract_css?; end
   def fetch(key); end
+  def globbed_path_with_extensions(path); end
   def initialize(root_path:, config_path:, env:); end
   def load; end
   def public_manifest_path; end
@@ -57,6 +58,7 @@ class Webpacker::Configuration
   def root_path; end
   def source_entry_path; end
   def source_path; end
+  def source_path_globbed; end
   def webpack_compile_output?; end
 end
 class Webpacker::Manifest
@@ -108,12 +110,16 @@ class Webpacker::Compiler
 end
 class Webpacker::Commands
   def bootstrap; end
+  def clean(count = nil); end
   def clobber; end
   def compile; end
   def compiler(*args, &block); end
   def config(*args, &block); end
+  def current_version; end
   def initialize(webpacker); end
+  def logger(*args, &block); end
   def manifest(*args, &block); end
+  def versions; end
 end
 class Webpacker::DevServer
   def config; end
@@ -137,9 +143,11 @@ module Webpacker::Helper
   def asset_pack_path(name, **options); end
   def asset_pack_url(name, **options); end
   def current_webpacker_instance; end
+  def favicon_pack_tag(name, **options); end
   def image_pack_tag(name, **options); end
   def javascript_pack_tag(*names, **options); end
   def javascript_packs_with_chunks_tag(*names, **options); end
+  def preload_pack_asset(name, **options); end
   def resolve_path_to_image(name); end
   def sources_from_manifest_entries(names, type:); end
   def sources_from_manifest_entrypoints(names, type:); end
@@ -153,18 +161,19 @@ class Webpacker::DevServerProxy < Rack::Proxy
   def initialize(app = nil, opts = nil); end
   def perform_request(env); end
   def public_output_uri_path; end
-  def rewrite_response(response); end
 end
 class Webpacker::Engine < Rails::Engine
 end
 module Webpacker
   def bootstrap(*args, &block); end
+  def clean(*args, &block); end
   def clobber(*args, &block); end
   def commands(*args, &block); end
   def compile(*args, &block); end
   def compiler(*args, &block); end
   def config(*args, &block); end
   def dev_server(*args, &block); end
+  def ensure_log_goes_to_stdout; end
   def env(*args, &block); end
   def instance; end
   def instance=(instance); end

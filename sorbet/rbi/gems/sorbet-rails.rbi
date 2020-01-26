@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/sorbet-rails/all/sorbet-rails.rbi
 #
-# sorbet-rails-0.5.8.1
+# sorbet-rails-0.5.9.1
 module SorbetRails
   def self.config(&blk); end
   def self.configure(*args, &blk); end
@@ -217,7 +217,6 @@ class ActiveRecordOverrides
   def get_enum_call(klass, enum_sym); end
   def initialize; end
   def self.allocate; end
-  def self.instance; end
   def self.new(*arg0); end
   def store_enum_call(klass, kwargs); end
   extend Singleton::SingletonClassMethods

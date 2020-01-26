@@ -10,5 +10,6 @@ class CreateMtransactions < ActiveRecord::Migration[6.0]
     end
 
     add_reference :mtransactions, :account, foreign_key: true, index: true
+    add_index :mtransactions, :date
   end
 end

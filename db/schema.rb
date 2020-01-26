@@ -1,3 +1,4 @@
+# typed: strict
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_28_171937) do
+ActiveRecord::Schema.define(version: 2020_01_26_144848) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
@@ -41,22 +42,22 @@ ActiveRecord::Schema.define(version: 2019_12_28_171937) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name", null: false
+    t.integer "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "categories_locations", id: false, force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "location_id", null: false
-    t.index "\"locations_id\"", name: "index_categories_locations_on_locations_id"
-    t.index ["category_id"], name: "index_categories_locations_on_category_id"
   end
 
   create_table "locations", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "locations_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id", null: false
+    t.integer "location_id", null: false
+    t.index "\"locations_id\"", name: "index_locations_tags_on_locations_id"
+    t.index ["tag_id"], name: "index_locations_tags_on_tag_id"
   end
 
   create_table "mtransactions", force: :cascade do |t|
@@ -68,7 +69,16 @@ ActiveRecord::Schema.define(version: 2019_12_28_171937) do
     t.integer "account_id"
     t.integer "location_id"
     t.index ["account_id"], name: "index_mtransactions_on_account_id"
+    t.index ["date"], name: "index_mtransactions_on_date"
     t.index ["location_id"], name: "index_mtransactions_on_location_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_tags_on_category_id"
   end
 
   create_table "transaction_files", force: :cascade do |t|
@@ -96,5 +106,6 @@ ActiveRecord::Schema.define(version: 2019_12_28_171937) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "mtransactions", "accounts"
   add_foreign_key "mtransactions", "locations"
+  add_foreign_key "tags", "categories"
   add_foreign_key "transaction_files", "accounts"
 end

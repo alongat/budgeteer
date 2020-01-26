@@ -4,7 +4,7 @@ namespace :env_generators do
     # Create base accounts
     ['Bank Discount', 'MAX Credit Card',
      'CAL Credit Card', 'Savings'].each { |x|
-      Account.first_or_create_by!(name: x)
+      Account.find_or_create_by!(name: x)
     }
 
     # Load base categories and locations

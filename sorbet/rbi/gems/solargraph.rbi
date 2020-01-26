@@ -7,59 +7,9 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/solargraph/all/solargraph.rbi
 #
-# solargraph-0.37.2
+# solargraph-0.38.0
 module Solargraph
   def self.logger; end
-end
-class Solargraph::DomainDirective < YARD::Tags::Directive
-  def call; end
-end
-class YARD::Tags::Library
-  def domain_directive(tag, parser); end
-  def override_directive(tag, parser); end
-  def return_single_parameter_tag(text); end
-  def return_value_parameter_tag(text); end
-  def type_tag(text); end
-  def yieldparam_single_parameter_tag(text); end
-  def yieldpublic_tag(text); end
-  def yieldself_tag(text); end
-end
-class Solargraph::YardMap
-  def add_gem_dependencies(spec); end
-  def cache; end
-  def change(new_requires, new_gemset); end
-  def core_pins; end
-  def gemset; end
-  def initialize(required: nil, gemset: nil, with_dependencies: nil); end
-  def load_yardoc(y); end
-  def path_pin(path); end
-  def pins; end
-  def process_requires; end
-  def process_stdlib(required_namespaces); end
-  def process_yardoc(y, spec = nil); end
-  def recurse_namespace_object(ns); end
-  def require_reference(path); end
-  def required; end
-  def spec_for_require(path); end
-  def unresolved_requires; end
-  def with_dependencies=(arg0); end
-  def with_dependencies?; end
-  def yardoc_file_for_spec(spec); end
-  def yardocs; end
-end
-module Solargraph::YardMap::CoreDocs
-  def self.available; end
-  def self.best_download(current = nil); end
-  def self.best_match; end
-  def self.cache_dir; end
-  def self.clear; end
-  def self.download(version); end
-  def self.install_archive(filename); end
-  def self.require_minimum; end
-  def self.valid?(ver); end
-  def self.versions; end
-  def self.yardoc_file(ver = nil); end
-  def self.yardoc_stdlib_file(ver = nil); end
 end
 class Solargraph::InvalidOffsetError < RangeError
 end
