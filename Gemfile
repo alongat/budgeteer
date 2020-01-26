@@ -31,6 +31,7 @@ gem 'sorbet-runtime'
 gem 'smarter_csv', '~> 1.2.0'
 gem 'string-direction', '~> 1.2.0'
 gem 'groupdate', '~> 4.3.0'
+gem 'selenium-webdriver'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -59,7 +60,6 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end

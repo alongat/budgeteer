@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-# typed: false
+# typed: true
 
 class ParseIncomingDataJob < ApplicationJob
   queue_as :default

@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 class Location < ApplicationRecord
   has_many :mtransactions
   has_and_belongs_to_many :categories
