@@ -1,4 +1,3 @@
-# typed: strict
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -42,9 +41,10 @@ ActiveRecord::Schema.define(version: 2020_01_26_144848) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.integer "type"
+    t.integer "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "locations", force: :cascade do |t|
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2020_01_26_144848) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "category_id"
+    t.integer "category_id", default: 1
     t.index ["category_id"], name: "index_tags_on_category_id"
   end
 

@@ -15,4 +15,12 @@ class Tag < ApplicationRecord
   def self.tags_without_categories
     Tag.where(category_id: null)
   end
+
+  def assign_category!(required_name)
+    c = Category.find_by(name: required_name)
+    raise "Category not found!" unless c.present?
+
+    self.category = c
+    save!
+  end
 end
