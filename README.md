@@ -1,6 +1,7 @@
 # README
 
 TODO:
+0. Parses should handle CSVs + Do TODOs in Scrapers + add scraper for MAX
 1. write load data task + example on generating new env - DONE
 2. support account-transfer-transactions
 3. Fix encoding and handle hebrew - DONE
