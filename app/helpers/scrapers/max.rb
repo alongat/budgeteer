@@ -3,16 +3,12 @@
 # typed: true
 
 module Scrapers
-  class VisaCal < Scraper
+  class Max < Scraper
 		extend T::Sig
-		ACCOUNT_NAME = 'CAL Credit Card'
-		DATE_SCOPE_ELEMENT = 'ctl00_FormAreaNoBorder_FormArea_clndrDebitDateScope'
-		DATE_LIST_ELEMENT = "#{DATE_SCOPE_ELEMENT}_OptionList"
-		SHOW_BUTTON_ELEMENT = 'ctl00_FormAreaNoBorder_FormArea_ctlSubmitRequest'
-		DOWNLOAD_EXCEL_BUTTON = 'ctl00_FormAreaNoBorder_FormArea_ctlMainToolBar_btnExcel'
+		ACCOUNT_NAME = 'MAX Credit Card'
 		CAL_START_URL = 'https://services.cal-online.co.il/card-holders/Screens/AccountManagement/HomePage.aspx'
 		CAL_TRANSACTIONSֹֹ_PAGE = 'https://services.cal-online.co.il/Card-Holders/Screens/Transactions/Transactions.aspx'
-
+		# https://onlinelcapi.max.co.il/api/registered/transactionDetails/getTransactionsAndGraphs?filterData={%22userIndex%22:-1,%22cardIndex%22:-1,%22monthView%22:true,%22date%22:%222020-01-01%22,%22dates%22:{%22startDate%22:%220%22,%22endDate%22:%220%22}}&firstCallCardIndex=-1&v=V3.29-HF.7.7
 		def login(driver)
 			driver.get(CAL_START_URL)
 			wait = Selenium::WebDriver::Wait.new(:timeout => 10)
@@ -48,7 +44,7 @@ module Scrapers
 			Dir.each_child(directory) do |filename| 
 				tf = TransactionFile.create!(filename: filename, source: ACCOUNT_NAME)
 				tf.files.attach(io: File.open("#{directory}/#{filename}"),
-												filename: filename, parsed: false, saved: false)
+												filename: filename, parsed: false)
 			
 			end
 		end

@@ -20,22 +20,22 @@ class ExcelParserManager
     end
   end
 
-  sig { params(input_file_path: String).returns(String) }
-  def self.parse_file(input_file_path)
+  sig { params(file_to_parse: ActiveStorage::Attached::One).returns(String) }
+  def self.parse_file(file_to_parse)
     output_file_path = build_csv_filename(Rails.root.join('tmp').to_s, "#{SecureRandom.hex(32)}.csv")
     output_file = CSV.open(output_file_path, 'w', encoding: 'utf-8')
-    create_csvs_from_xls(input_file_path, output_file)
+    create_csvs_from_xls(file_to_parse, output_file)
     output_file.close
 
     output_file_path
   end
 
-  sig { params(file_location: String, csv: CSV).void }
-  def self.create_csvs_from_xls(file_location, csv)
+  sig { params(file_to_parse: ActiveStorage::Attached::One, csv: CSV).void }
+  def self.create_csvs_from_xls(file_to_parse, csv)
     raise 'No parsers found' if PARSERS.blank?
 
-    Rails.logger.info "Reading #{file_location}"
-    xlsx = Roo::Spreadsheet.open(file_location)
+    Rails.logger.info "Reading #{file_to_parse}"
+    xlsx = Roo::Spreadsheet.open(file_to_parse)
     sheet = xlsx.sheet(0)
     parser = PARSERS.find { |p| p.can_parse?(sheet) }
     if parser.nil?

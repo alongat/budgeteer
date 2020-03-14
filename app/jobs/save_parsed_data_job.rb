@@ -5,7 +5,7 @@ class SaveParsedDataJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    TransactionFile.where(saved: false).find_each do |tf|
+    TransactionFile.where(saved: false, parsed: true).find_each do |tf|
       account = Account.find_or_create_by(name: tf.source)
 
       # TODO: need to add? options = { :key_mapping => {:unwanted_row => nil, :old_row_name => :new_name}}

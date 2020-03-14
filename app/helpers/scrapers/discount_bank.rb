@@ -12,22 +12,29 @@ module Scrapers
 		def login(driver)
 			driver.get(DISCOUNT_LOGIN_URL)
 			wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-			wait.until { driver.title.start_with? "כניסה לחשבונות שלי" }
-			driver.find_element(id: 'tzId').send_keys(ENV['DISCOUNT_ID'])
+			sleep(2)
+			driver.find_element(id: 'tzId').send_keys(ENV['DISCOUNT_ACCOUNT_ID'])
 			driver.find_element(id: 'tzPassword').send_keys(ENV['DISCOUNT_PASSWORD'])
-			driver.find_element(id: 'aidnum').send_keys(ENV['DISCOUNT_ACCOUNT_ID'])
+			driver.find_element(id: 'aidnum').send_keys(ENV['DISCOUNT_ID'])
 			driver.find_element(xpath: "//*[@class='sendBtn ng-isolate-scope']").click
 		end
 
-		def download_xls_files(driver) 
+		def download_and_save_parsed_data(driver, from_date, to_date) 
 			query = "ByDate?FromDate=#{from_date.strftime('%Y%m%d')}&ToDate=#{to_date.strftime('%Y%m%d')}"
 			driver.get("#{DISCOUNT_TRANSACTIONS_URL}#{query}")
-			ap JSON.parse driver.find_element(xpath: "//*").text
-			# TODO: parse as CSV and save to active storage
-			# tf = TransactionFile.create!(filename: filename, source: ACCOUNT_NAME)
-			# tf.original_file.attach(io: File.open("#{directory}/#{filename}"),
-			# filename: filename)
-			5
+			json_result = JSON.parse driver.find_element(xpath: "//*").text
+			ap json_result 
+			file = CSV.open(Rails.root.join('tmp').to_s + "/#{SecureRandom.hex(32)}.csv", 'w', encoding: 'utf-8') do |csv|
+				json_result.dig('CurrentAccountLastTransactions', 'OperationEntry').each  do |t|
+					csv << [t['ValueDate'], t['OperationDescriptionToDisplay'], t['OperationAmount']]
+				end  
+			end
+			
+			filename = "discount_bank_#{from_date.strftime('%Y%m%d')}_#{to_date.strftime('%Y%m%d')}.csv"
+			tf = TransactionFile.create!(filename: filename, source: ACCOUNT_NAME, parsed: true)
+			tf.files.attach(io: file, filename: filename)
+			
+			1
 		end
 
 		def scrape(from_date=1.month.ago, to_date=Time.now)
@@ -41,13 +48,10 @@ module Scrapers
 			Rails.logger.info 'Login successful!'
 
 			sleep(3)
-			count = download_xls_files(driver)
-			Rails.logger.info "Downloaded #{count} files! hurray!"
+			count = download_and_save_parsed_data(driver, from_date, to_date)
+			Rails.logger.info "Downloaded and Saved to ActiveStorage! hurray!"
 
-			Rails.logger.info 'Saving files to ActiveStorage.'
-			driver.quit
+			# driver.quit
 		end
   end
 end
-
-
